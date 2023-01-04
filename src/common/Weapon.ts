@@ -12,6 +12,5 @@ setTick(async () => {
     AnimateGameplayCamZoom(1.0, 0.8);
     DisableControlAction(0, 36, true);
     DisableControlAction(0, 22, true);
-    SetWeaponsNoAutoreload(true);
   }
 });

@@ -13,6 +13,10 @@ async function clientUpdate(): Promise<void> {
 
     SetCanAttackFriendly(PlayerPedId(), true, true);
     NetworkSetFriendlyFireOption(true);
+    SetWeaponsNoAutoreload(true);
+    SetWeaponsNoAutoswap(true);
+    DisableIdleCamera(true);
+    SetFlashLightKeepOnWhileMoving(true);
 
     emit(
       'cS.Credits',
