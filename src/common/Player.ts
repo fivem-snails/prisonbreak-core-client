@@ -1,5 +1,3 @@
-setTick(async () => {
-  await Delay(10000);
-  
-  SetPedMaxHealth(PlayerPedId(), 300);
+on('playerSpawned', () => {
+  SetPedMaxHealth(PlayerPedId(), 400);
 });
