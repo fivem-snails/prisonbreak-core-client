@@ -1,3 +1,6 @@
+const Delay = (ms: number): Promise<void> =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
 let hasSpawned: boolean = false;
 
 async function clientSpawn(): Promise<void> {
@@ -6,7 +9,7 @@ async function clientSpawn(): Promise<void> {
 
 async function clientUpdate(): Promise<void> {
   if (hasSpawned) {
-    await setDelay(10000);
+    await Delay(10000);
 
     SetCanAttackFriendly(PlayerPedId(), true, true);
     NetworkSetFriendlyFireOption(true);
