@@ -1,5 +1,4 @@
 body {
-  background-color: rgba(0, 0, 0, 0.9);
   overflow: hidden;
 }
 
@@ -28,9 +27,9 @@ body {
   margin-top: 11rem;
   margin-left: 1rem;
   font-size: 2em;
-  color: #f93a3a;
+  color: #ff6262;
   padding: 0.2rem;
-  border: solid 0.1rem #f93a3a;
+  border: solid 0.1rem #c8c8c8;
 }
 .spawnmanager .spawns .police-department {
   display: flex;
@@ -42,7 +41,7 @@ body {
   font-size: 2em;
   color: #78c4ff;
   padding: 0.2rem;
-  border: solid 0.1rem #78c4ff;
+  border: solid 0.1rem #c8c8c8;
 }
 .spawnmanager .spawns .docks {
   display: flex;
@@ -54,7 +53,7 @@ body {
   font-size: 2em;
   color: #91b6ff;
   padding: 0.2rem;
-  border: solid 0.1rem #91b6ff;
+  border: solid 0.1rem #c8c8c8;
 }
 .spawnmanager .spawns .burger {
   display: flex;
@@ -66,7 +65,7 @@ body {
   font-size: 2em;
   color: #ffaa85;
   padding: 0.2rem;
-  border: solid 0.1rem #ffaa85;
+  border: solid 0.1rem #c8c8c8;
 }
 .spawnmanager .spawns .airfield {
   display: flex;
