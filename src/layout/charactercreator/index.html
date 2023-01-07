@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="css/index.css" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
   </head>
   <body>
-    <form class="form">
+    <form
+      action="https://alta-core-front/allowRegistration"
+      method="post"
+      class="form"
+    >
       <div class="header">
         <h1 class="title">Create an RP character</h1>
       </div>
@@ -18,7 +22,8 @@
         <input
           class="textbox"
           type="text"
-          id="first-name"
+          name="firstname"
+          id="firstname"
           placeholder="First name"
           required
         />
@@ -28,7 +33,19 @@
         <input
           class="textbox"
           type="text"
-          id="last-name"
+          name="secondname"
+          id="secondname"
+          placeholder="Second name"
+          required
+        />
+      </div>
+
+      <div class="field">
+        <input
+          class="textbox"
+          type="text"
+          name="lastname"
+          id="lastname"
           placeholder="Last name"
           required
         />
@@ -38,7 +55,8 @@
         <input
           class="textbox"
           type="date"
-          id="birthDate"
+          name="birthdate"
+          id="birthdate"
           min="2000-01-01"
           max="2025-01-01"
           required
@@ -46,8 +64,10 @@
       </div>
 
       <div class="field">
-        <button class="button">Register</button>
+        <button class="button" type="submit">Register</button>
       </div>
     </form>
+
+    <script src="js/index.js"></script>
   </body>
 </html>

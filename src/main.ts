@@ -46,3 +46,39 @@ clientSpawn();
 
 // player has now spawned
 clientUpdate();
+
+onNet('showRegisterForm', () => {
+  SetNuiFocus(true, true);
+  SendNuiMessage(
+    JSON.stringify({
+      form: true,
+    }),
+  );
+});
+
+RegisterRawNuiCallback('allowRegistration', (data: any) => {
+  SetNuiFocus(false, false);
+  SendNuiMessage(
+    JSON.stringify({
+      form: false,
+    }),
+  );
+
+  const formDataString = JSON.stringify(data.body)
+    .replace(/[{}"']/g, '')
+    .replace(/:/g, '=')
+    .replace(/,/g, '&');
+// 
+  const formDataRegex = /^firstname=(.+)&secondname=(.+)&lastname=(.+)&birthdate=(.+)$/;
+  let [, firstname, secondname, lastname, birthdate] = formDataRegex.exec(
+    formDataString,
+  ) || ['', '', '', ''];
+
+  emitNet(
+    'captureRegisterFormData',
+    firstname,
+    secondname,
+    lastname,
+    birthdate,
+  );
+});
