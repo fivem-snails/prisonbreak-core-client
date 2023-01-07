@@ -3,13 +3,14 @@ game 'gta5'
 
 data_file 'DLC_POP_GROUPS' 'popgroups.ymt'
 
-ui_page 'src/layout/spawnmanager2/index.html'
+ui_page 'src/layout/charactercreator/index.html'
 
 files {
-    'src/layout/spawnmanager2/index.html', 
-    'src/layout/spawnmanager2/css/index.css',
-    'src/layout/spawnmanager2/images/background.jpg',
-    'src/layout/spawnmanager2/images/map.jpg',
+    'src/layout/charactercreator/index.html', 
+    'src/layout/charactercreator/favicon.ico',
+    'src/layout/charactercreator/css/index.css',
+    'src/layout/charactercreator/js/index.js',
+    'src/layout/charactercreator/assets/background-min.jpg'
 }
 
 client_scripts {
