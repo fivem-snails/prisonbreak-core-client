@@ -1,5 +1,6 @@
-const Delay = (ms: number): Promise<void> =>
-  new Promise((resolve) => setTimeout(resolve, ms));
+async function waitDelay(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 let hasSpawned: boolean = false;
 
@@ -9,7 +10,7 @@ async function clientSpawn(): Promise<void> {
 
 async function clientUpdate(): Promise<void> {
   if (hasSpawned) {
-    await Delay(10000);
+    await waitDelay(10000);
 
     SetCanAttackFriendly(PlayerPedId(), true, true);
     NetworkSetFriendlyFireOption(true);
@@ -31,20 +32,16 @@ async function clientUpdate(): Promise<void> {
     const source = GetPlayerServerId(PlayerId());
     const coords = GetEntityCoords(PlayerPedId(), false);
 
-    console.log('Source: ' + source);
-    console.log('Coords: ' + coords);
+    console.log(`Source: ${source}`);
+    console.log(`Coords: ${coords}`);
+    console.log(`Hi. ^2${GetPlayerName(-1)}^7`);
 
     emitNet('validateClient', source, coords);
   }
 }
 
-// player has not yet spawned
 clientUpdate();
-
-// player spawns
 clientSpawn();
-
-// player has now spawned
 clientUpdate();
 
 onNet('showRegisterForm', () => {
@@ -56,7 +53,7 @@ onNet('showRegisterForm', () => {
   );
 });
 
-RegisterRawNuiCallback('allowRegistration', (data: any) => {
+RegisterRawNuiCallback('allowRegistration', async (data: any) => {
   SetNuiFocus(false, false);
   SendNuiMessage(
     JSON.stringify({
@@ -68,8 +65,9 @@ RegisterRawNuiCallback('allowRegistration', (data: any) => {
     .replace(/[{}"']/g, '')
     .replace(/:/g, '=')
     .replace(/,/g, '&');
-// 
-  const formDataRegex = /^firstname=(.+)&secondname=(.+)&lastname=(.+)&birthdate=(.+)$/;
+  //
+  const formDataRegex =
+    /^firstname=(.+)&secondname=(.+)&lastname=(.+)&birthdate=(.+)$/;
   let [, firstname, secondname, lastname, birthdate] = formDataRegex.exec(
     formDataString,
   ) || ['', '', '', ''];
@@ -81,4 +79,9 @@ RegisterRawNuiCallback('allowRegistration', (data: any) => {
     lastname,
     birthdate,
   );
+
+  await waitDelay(2000);
+  const source = GetPlayerServerId(PlayerId());
+
+  emitNet('validateClient', source);
 });
