@@ -1,8 +1,8 @@
+let hasSpawned: boolean = false;
+
 async function waitDelay(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-let hasSpawned: boolean = false;
 
 async function clientSpawn(): Promise<void> {
   hasSpawned = true;
@@ -34,7 +34,6 @@ async function clientUpdate(): Promise<void> {
 
     console.log(`Source: ${source}`);
     console.log(`Coords: ${coords}`);
-    console.log(`Hi. ^2${GetPlayerName(-1)}^7`);
 
     emitNet('validateClient', source, coords);
   }
@@ -66,19 +65,12 @@ RegisterRawNuiCallback('allowRegistration', async (data: any) => {
     .replace(/:/g, '=')
     .replace(/,/g, '&');
   //
-  const formDataRegex =
-    /^firstname=(.+)&secondname=(.+)&lastname=(.+)&birthdate=(.+)$/;
-  let [, firstname, secondname, lastname, birthdate] = formDataRegex.exec(
+  const formDataRegex = /^firstname=(.+)&lastname=(.+)&birthdate=(.+)$/;
+  let [, firstname, lastname, birthdate] = formDataRegex.exec(
     formDataString,
   ) || ['', '', '', ''];
 
-  emitNet(
-    'captureRegisterFormData',
-    firstname,
-    secondname,
-    lastname,
-    birthdate,
-  );
+  emitNet('captureRegisterFormData', firstname, lastname, birthdate);
 
   await waitDelay(2000);
   const source = GetPlayerServerId(PlayerId());
