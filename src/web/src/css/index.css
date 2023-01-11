@@ -6,22 +6,8 @@ html {
 }
 
 body {
-  color: #f0f0f0;
-
-  background-image: url("../assets/background-min.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-#root {
-  top: 0;
-  position: fixed;
-  height: 100vh;
-  width: 100%;
-  background: #270a0a69;
 }
 
 * {

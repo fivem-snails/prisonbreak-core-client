@@ -47,29 +47,21 @@ onNet('showRegisterForm', () => {
   SetNuiFocus(true, true);
   SendNuiMessage(
     JSON.stringify({
-      form: true,
+      enable: true,
     }),
   );
 });
 
-RegisterRawNuiCallback('allowRegistration', async (data: any) => {
+RegisterRawNuiCallback('registerCharacter', async (data: any) => {
   SetNuiFocus(false, false);
   SendNuiMessage(
     JSON.stringify({
-      form: false,
+      enable: false,
     }),
   );
 
-  const formDataString = JSON.stringify(data.body)
-    .replace(/[{}"']/g, '')
-    .replace(/:/g, '=')
-    .replace(/,/g, '&');
-  //
-  const formDataRegex = /^firstname=(.+)&lastname=(.+)&birthdate=(.+)$/;
-  let [, firstname, lastname, birthdate] = formDataRegex.exec(
-    formDataString,
-  ) || ['', '', '', ''];
-
+  const jsonData = JSON.parse(data.body);
+  const {firstname, lastname, birthdate} = jsonData;
   emitNet('captureRegisterFormData', firstname, lastname, birthdate);
 
   await waitDelay(2000);

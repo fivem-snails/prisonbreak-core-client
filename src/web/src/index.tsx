@@ -5,8 +5,18 @@ import Register from './Register';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
-root.render(
-  <StrictMode>
-    <Register />
-  </StrictMode>,
-);
+// window.postMessage({enable: true}, '*');
+window.addEventListener('message', (event) => {
+  const data = event.data;
+  console.log(JSON.stringify(data));
+
+  if (data.enable === true) {
+    root.render(
+      <StrictMode>
+        <Register />
+      </StrictMode>,
+    );
+  } else if (data.enable === false) {
+    root.render('');
+  }
+});
