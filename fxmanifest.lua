@@ -1,18 +1,17 @@
 fx_version 'cerulean'
 game 'gta5'
 
-data_file 'DLC_POP_GROUPS' 'popgroups.ymt'
-
-ui_page 'src/layout/charactercreator/index.html'
+ui_page 'src/web/build/index.html'
 
 files {
-    'src/layout/charactercreator/index.html', 
-    'src/layout/charactercreator/favicon.ico',
-    'src/layout/charactercreator/css/index.css',
-    'src/layout/charactercreator/js/index.js',
-    'src/layout/charactercreator/assets/background-min.jpg'
+    'src/web/build/index.html',
+    'src/web/build/static/css/*.css', 
+    'src/web/build/static/js/*.js',
+    'src/web/build/static/media/background-min.233fbcbd59b1173cb8aa.jpg'
 }
 
 client_scripts {
     'dist/**.js'
 }
+
+data_file 'DLC_POP_GROUPS' 'popgroups.ymt'
