@@ -35,7 +35,7 @@ async function clientUpdate(): Promise<void> {
     console.log(`Source: ${source}`);
     console.log(`Coords: ${coords}`);
 
-    emitNet('validateClient', source, coords);
+    emitNet('refresh', source);
   }
 }
 
@@ -43,7 +43,7 @@ clientUpdate();
 clientSpawn();
 clientUpdate();
 
-onNet('showRegisterForm', () => {
+onNet('openRegisterForm', () => {
   SetNuiFocus(true, true);
   SendNuiMessage(
     JSON.stringify({
@@ -62,10 +62,10 @@ RegisterRawNuiCallback('registerCharacter', async (data: any) => {
 
   const jsonData = JSON.parse(data.body);
   const {firstname, lastname, birthdate} = jsonData;
-  emitNet('captureRegisterFormData', firstname, lastname, birthdate);
+  emitNet('registerFormData', firstname, lastname, birthdate);
 
   await waitDelay(2000);
   const source = GetPlayerServerId(PlayerId());
 
-  emitNet('validateClient', source);
+  emitNet('refresh', source);
 });
