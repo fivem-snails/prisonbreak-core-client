@@ -1,5 +1,5 @@
 on('playerSpawned', () => {
-  SetPedMaxHealth(PlayerPedId(), 400);
+  SetPedMaxHealth(PlayerPedId(), 600);
 });
 
 // let isCrouching = false;
