@@ -4,6 +4,7 @@ import {BsFillPersonBadgeFill} from 'react-icons/bs';
 import {HiOutlineArrowRight} from 'react-icons/hi';
 import {FaDiscord} from 'react-icons/fa';
 import './css/Register.css';
+import Field from './components/Field';
 
 interface RegisterProps {}
 
@@ -24,13 +25,11 @@ const Register: FC<RegisterProps> = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const response = await fetch('https://alta-core-front/registerCharacter', {
+    await fetch('https://alta-core-front/registerCharacter', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {'Content-Type': 'application/json'},
     });
-
-    console.log(await response.json());
   };
 
   return (
@@ -48,55 +47,39 @@ const Register: FC<RegisterProps> = () => {
           </p>
         </section>
 
-        <section className="field">
-          <label htmlFor="firstname">Firstname</label>
+        <Field
+          labelFor="firstname"
+          label="Firstname"
+          icon={<BsFillPersonBadgeFill />}
+          id="firstname"
+          type="text"
+          placeholder="John"
+          value={formData.firstname}
+          onchange={handleChange}
+        />
 
-          <div className="input-wrapper">
-            <BsFillPersonBadgeFill />
-            <input
-              className="input"
-              id="firstname"
-              type="text"
-              placeholder="John"
-              required={true}
-              value={formData.firstname}
-              onChange={handleChange}
-            />
-          </div>
-        </section>
+        <Field
+          labelFor="lastname"
+          label="Lastname"
+          icon={<BsFillPersonBadgeFill />}
+          id="lastname"
+          type="text"
+          placeholder="Phee"
+          value={formData.lastname}
+          onchange={handleChange}
+        />
 
-        <section className="field">
-          <label htmlFor="lastname">Lastname</label>
-
-          <div className="input-wrapper">
-            <BsFillPersonBadgeFill />
-            <input
-              className="input"
-              id="lastname"
-              type="text"
-              placeholder="Phee"
-              required={true}
-              value={formData.lastname}
-              onChange={handleChange}
-            />
-          </div>
-        </section>
-
-        <section className="field">
-          <label htmlFor="birthdate">Birthdate</label>
-          <div className="input-wrapper">
-            <input
-              className="input"
-              id="birthdate"
-              type="date"
-              min="1980-01-01"
-              max={format(subYears(new Date(), 19), 'yyyy-MM-dd')}
-              required={true}
-              value={formData.birthdate}
-              onChange={handleChange}
-            />
-          </div>
-        </section>
+        <Field
+          labelFor="birthdate"
+          label="Birthdate"
+          icon={<BsFillPersonBadgeFill />}
+          id="birthdate"
+          type="date"
+          min="1980-01-01"
+          max={format(subYears(new Date(), 19), 'yyyy-MM-dd')}
+          value={formData.birthdate}
+          onchange={handleChange}
+        />
 
         <section className="footer">
           <button className="button" type="submit">
