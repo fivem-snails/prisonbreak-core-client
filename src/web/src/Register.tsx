@@ -25,7 +25,7 @@ const Register: FC<RegisterProps> = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await fetch('https://alta-core-front/registerCharacter', {
+    await fetch('https://alta-core-front/register', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {'Content-Type': 'application/json'},
@@ -33,7 +33,7 @@ const Register: FC<RegisterProps> = () => {
   };
 
   return (
-    <div className="character-creator animate__animated animate__fadeInDown">
+    <div className="register animate__animated animate__fadeInDown">
       <form
         className="form animate__animated animate__fadeIn"
         onSubmit={handleSubmit}
