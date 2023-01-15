@@ -1,14 +1,16 @@
-let hasSpawned: boolean = false;
+let hasSpawned = false;
 
-async function waitDelay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+const waitDelay = (ms: number): Promise<void> => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};
 
-async function clientSpawn(): Promise<void> {
+const clientSpawn = async (): Promise<void> => {
   hasSpawned = true;
-}
+};
 
-async function clientUpdate(): Promise<void> {
+const clientUpdate = async (): Promise<void> => {
   if (hasSpawned) {
     await waitDelay(10000);
 
@@ -29,43 +31,81 @@ async function clientUpdate(): Promise<void> {
       true,
     );
 
-    const source = GetPlayerServerId(PlayerId());
-    const coords = GetEntityCoords(PlayerPedId(), false);
+    const source: number = GetPlayerServerId(PlayerId());
+    const coords: number[] = GetEntityCoords(PlayerPedId(), false);
 
     console.log(`Source: ${source}`);
     console.log(`Coords: ${coords}`);
 
     emitNet('refresh', source);
   }
-}
+};
 
 clientUpdate();
 clientSpawn();
 clientUpdate();
 
-onNet('openRegisterForm', () => {
+onNet('openRegister', () => {
   SetNuiFocus(true, true);
   SendNuiMessage(
     JSON.stringify({
-      enable: true,
+      showRegister: true,
     }),
   );
 });
 
-RegisterRawNuiCallback('registerCharacter', async (data: any) => {
+onNet('die', () => {
+  SetEntityHealth(PlayerPedId(), 0);
+  SendNuiMessage(
+    JSON.stringify({
+      showDeathscreen: true,
+    }),
+  );
+});
+
+interface RegisterData {
+  firstname: string;
+  lastname: string;
+  birthdate: string;
+}
+
+RegisterRawNuiCallback('register', async (data: {body: string}) => {
   SetNuiFocus(false, false);
   SendNuiMessage(
     JSON.stringify({
-      enable: false,
+      showRegister: false,
     }),
   );
 
-  const jsonData = JSON.parse(data.body);
+  const jsonData: RegisterData = JSON.parse(data.body);
   const {firstname, lastname, birthdate} = jsonData;
-  emitNet('registerFormData', firstname, lastname, birthdate);
+
+  emitNet('registerData', firstname, lastname, birthdate);
 
   await waitDelay(2000);
-  const source = GetPlayerServerId(PlayerId());
+  const source: number = GetPlayerServerId(PlayerId());
 
   emitNet('refresh', source);
+});
+
+RegisterRawNuiCallback('spawn', async () => {
+  SetNuiFocus(false, false);
+  SendNuiMessage(
+    JSON.stringify({
+      showDeathscreen: false,
+    }),
+  );
+
+  SetEntityCoordsNoOffset(
+    PlayerPedId(),
+    360.67,
+    -591.66,
+    28.66,
+    false,
+    false,
+    false,
+  );
+  NetworkResurrectLocalPlayer(360.67, -591.66, 28.66, 251.43, true, false);
+  SetPlayerInvincible(PlayerPedId(), false);
+  ClearPedBloodDamage(PlayerPedId());
 });
