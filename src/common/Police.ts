@@ -7,13 +7,14 @@ setTick(async () => {
   SetCreateRandomCops(false);
   SetCreateRandomCopsNotOnScenarios(false);
   SetCreateRandomCopsOnScenarios(false);
-  // ClearAreaOfCops(
-  //   GetEntityCoords(PlayerPedId(), false)[0],
-  //   GetEntityCoords(PlayerPedId(), false)[1],
-  //   GetEntityCoords(PlayerPedId(), false)[2],
-  //   10.0,
-  //   0,
-  // );
+  ClearAreaOfCops(
+    // @ts-ignore
+    GetEntityCoords(PlayerPedId(), false)[0],
+    GetEntityCoords(PlayerPedId(), false)[1],
+    GetEntityCoords(PlayerPedId(), false)[2],
+    10.0,
+    0,
+  );
   StartAudioScene('CHARACTER_CHANGE_IN_SKY_SCENE');
   SetAudioFlag('PoliceScannerDisabled', true);
   SetPlayerWantedLevel(PlayerId(), 0, false);
