@@ -1,6 +1,6 @@
 import {FC, useState, useEffect} from 'react';
 import {BsEmojiDizzy} from 'react-icons/bs';
-import './css/Deathscreen.css';
+import '../css/Deathscreen.css';
 
 interface DeathscreenProps {}
 
@@ -12,7 +12,7 @@ const Deathscreen: FC<DeathscreenProps> = () => {
       if (timeLeft > 0) {
         setTimeLeft(timeLeft - 1);
       } else if (timeLeft === 0) {
-        await fetch('https://alta-core-front/spawn', {
+        await fetch('https://alta-core-front/hideDeathscreen', {
           method: 'POST',
           headers: {'Content-Type': 'application/json'},
         });

@@ -3,8 +3,8 @@ import {format, subYears} from 'date-fns';
 import {BsFillPersonBadgeFill} from 'react-icons/bs';
 import {HiOutlineArrowRight} from 'react-icons/hi';
 import {FaDiscord} from 'react-icons/fa';
-import './css/Register.css';
-import Field from './components/Field';
+import '../css/Register.css';
+import Field from '../components/Field';
 
 interface RegisterProps {}
 
@@ -25,7 +25,7 @@ const Register: FC<RegisterProps> = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    await fetch('https://alta-core-front/register', {
+    await fetch('https://alta-core-front/hideRegisterform', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {'Content-Type': 'application/json'},

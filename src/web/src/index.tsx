@@ -1,23 +1,24 @@
 import {StrictMode} from 'react';
 import {createRoot} from 'react-dom/client';
-import Register from './Register';
-import Spawner from './Spawner';
-import Deathscreen from './Deathscreen';
-import './css/index.css';
+import Register from './pages/Register';
+import Spawner from './pages/Spawner';
+import Deathscreen from './pages/Deathscreen';
+import Hud from './pages/Hud';
+import './index.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
-// window.postMessage({showDeathscreen: true}, '*');
+// window.postMessage({showHud: true, cash: 25000.0}, '*');
 window.addEventListener('message', (event) => {
   const data = event.data;
 
-  if (data.showRegister === true) {
+  if (data.showRegisterform === true) {
     root.render(
       <StrictMode>
         <Register />
       </StrictMode>,
     );
-  } else if (data.showRegister === false) {
+  } else if (data.showRegisterform === false) {
     root.render('');
   }
 
@@ -38,6 +39,16 @@ window.addEventListener('message', (event) => {
       </StrictMode>,
     );
   } else if (data.showDeathscreen === false) {
+    root.render('');
+  }
+
+  if (data.showHud === true) {
+    root.render(
+      <StrictMode>
+        <Hud cash={data.cash} />
+      </StrictMode>,
+    );
+  } else if (data.showHud === false) {
     root.render('');
   }
 });

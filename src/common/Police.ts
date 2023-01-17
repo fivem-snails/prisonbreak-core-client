@@ -1,7 +1,7 @@
 const dispatch = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 setTick(async () => {
-  await waitDelay(5000);
+  await timeout(5000);
   SetGarbageTrucks(false);
   SetRandomBoats(false);
   SetCreateRandomCops(false);
