@@ -1,4 +1,5 @@
 let isClientSpawned: boolean = false;
+let spawnTimeout: number = 10000;
 
 const timeout = (ms: number): Promise<{}> => {
   return new Promise((resolve) => {
@@ -11,12 +12,12 @@ const clientSpawn = (): Promise<void> => {
     return Promise.reject('Client has already spawned');
   }
   isClientSpawned = true;
-  console.log(`Set isClientSpawned(${isClientSpawned})`);
+  console.info(`Set isClientSpawned(${isClientSpawned})`);
   return Promise.resolve();
 };
 
 const clientBehavior = (status: boolean): void => {
-  console.log(`Set clientBehavior(${status})`);
+  console.info(`Set clientBehavior(${status})`);
 
   SetCanAttackFriendly(PlayerPedId(), status, status);
   NetworkSetFriendlyFireOption(status);
@@ -30,8 +31,9 @@ const clientCheck = async (): Promise<void> => {
   if (!isClientSpawned) {
     await clientSpawn();
   }
+
   if (isClientSpawned) {
-    await timeout(10000);
+    await timeout(spawnTimeout);
     clientBehavior(true);
 
     emit(
@@ -44,13 +46,15 @@ const clientCheck = async (): Promise<void> => {
       true,
     );
 
-    const clientServerId: number = GetPlayerServerId(PlayerId());
-    const clientCoords: number[] = GetEntityCoords(PlayerPedId(), false);
+    const client = {
+      serverId: GetPlayerServerId(PlayerId()),
+      coordinates: GetEntityCoords(PlayerPedId(), false),
+    };
 
-    console.log(`clientServerId: ${clientServerId}`);
-    console.log(`clientCoords: ${clientCoords}`);
+    console.info(`clientServerId: ${client.serverId}`);
+    console.info(`clientCoords: ${client.coordinates}`);
 
-    emitNet('refresh', clientServerId);
+    emitNet('refresh', client.serverId);
   }
 };
 
