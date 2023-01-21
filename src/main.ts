@@ -1,5 +1,5 @@
 let isClientSpawned: boolean = false;
-let spawnTimeout: number = 10000;
+let loadTimeout: number = 10000;
 
 const timeout = (ms: number): Promise<{}> => {
   return new Promise((resolve) => {
@@ -33,7 +33,7 @@ const clientCheck = async (): Promise<void> => {
   }
 
   if (isClientSpawned) {
-    await timeout(spawnTimeout);
+    await timeout(loadTimeout);
     clientBehavior(true);
 
     emit(
