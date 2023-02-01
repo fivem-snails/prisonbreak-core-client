@@ -1,24 +1,19 @@
-let isClientSpawned: boolean = false;
+let playerSpawned: boolean = false;
 let loadTimeout: number = 10000;
 
-const timeout = (ms: number): Promise<{}> => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-};
+const timeout = (ms: number): Promise<{}> =>
+  new Promise((resolve) => setTimeout(resolve, ms));
 
-const clientSpawn = (): Promise<void> => {
-  if (isClientSpawned) {
-    return Promise.reject('Client has already spawned');
+const playerSpawn = (): Promise<void> => {
+  if (playerSpawned) {
+    return Promise.reject('Player already spawned');
   }
-  isClientSpawned = true;
-  console.info(`Set isClientSpawned(${isClientSpawned})`);
+
+  playerSpawned = true;
   return Promise.resolve();
 };
 
-const clientBehavior = (status: boolean): void => {
-  console.info(`Set clientBehavior(${status})`);
-
+const playerBehavior = (status: boolean): void => {
   SetCanAttackFriendly(PlayerPedId(), status, status);
   NetworkSetFriendlyFireOption(status);
   SetWeaponsNoAutoreload(status);
@@ -27,14 +22,14 @@ const clientBehavior = (status: boolean): void => {
   SetFlashLightKeepOnWhileMoving(status);
 };
 
-const clientCheck = async (): Promise<void> => {
-  if (!isClientSpawned) {
-    await clientSpawn();
+const playerSpawnCheck = async (): Promise<void> => {
+  if (!playerSpawned) {
+    await playerSpawn();
   }
 
-  if (isClientSpawned) {
+  if (playerSpawned) {
     await timeout(loadTimeout);
-    clientBehavior(true);
+    playerBehavior(true);
 
     emit(
       'cS.Credits',
@@ -46,17 +41,25 @@ const clientCheck = async (): Promise<void> => {
       true,
     );
 
-    const client = {
+    const player = {
       serverId: GetPlayerServerId(PlayerId()),
       coordinates: GetEntityCoords(PlayerPedId(), false),
     };
 
-    console.info(`clientServerId: ${client.serverId}`);
-    console.info(`clientCoords: ${client.coordinates}`);
+    console.info(`Player ServerId: ${player.serverId}`);
+    console.info(`Player Coords: ${player.coordinates}`);
 
-    emitNet('refresh', client.serverId);
+    emitNet('refresh', player.serverId);
   }
 };
 
-clientSpawn();
-clientCheck();
+playerSpawn();
+playerSpawnCheck();
+
+RegisterCommand(
+  'die',
+  (source: number, _args: [string, string]) => {
+    emit('showDeathscreen', source);
+  },
+  false,
+);

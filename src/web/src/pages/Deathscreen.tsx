@@ -1,5 +1,4 @@
 import {FC, useState, useEffect} from 'react';
-import {BsEmojiDizzy} from 'react-icons/bs';
 import '../css/Deathscreen.css';
 
 interface DeathscreenProps {}
@@ -27,18 +26,14 @@ const Deathscreen: FC<DeathscreenProps> = () => {
       <div className="container">
         <div className="text-wrapper">
           <h1 className="text">You are unconscious</h1>
+          {timeLeft === 0 && (
+            <h2 className="respawn-text animate__animated animate__fadeInDown">
+              Press [E] to Respawn
+            </h2>
+          )}
         </div>
         <div className="timer-wrapper">
-          <h2 className="timer">
-            {timeLeft === 0
-              ? 'You will respawn soon'
-              : `${timeLeft} seconds left`}
-            {timeLeft > 0 ? (
-              <div>
-                <BsEmojiDizzy />
-              </div>
-            ) : null}
-          </h2>
+          <div className="timer" style={{width: `${timeLeft}%`}}></div>
         </div>
       </div>
     </div>

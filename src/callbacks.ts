@@ -8,7 +8,7 @@ RegisterRawNuiCallback('hideRegisterform', async (data: {body: string}) => {
   SetNuiFocus(false, false);
   SendNuiMessage(
     JSON.stringify({
-      showRegisterform: false,
+      registerform: false,
     }),
   );
 
@@ -27,20 +27,24 @@ RegisterRawNuiCallback('hideDeathscreen', async () => {
   SetNuiFocus(false, false);
   SendNuiMessage(
     JSON.stringify({
-      showDeathscreen: false,
+      deathscreen: false,
     }),
   );
-
-  SetEntityCoordsNoOffset(
-    PlayerPedId(),
-    360.67,
-    -591.66,
-    28.66,
-    false,
-    false,
-    false,
-  );
-  NetworkResurrectLocalPlayer(360.67, -591.66, 28.66, 251.43, true, false);
-  SetPlayerInvincible(PlayerPedId(), false);
-  ClearPedBloodDamage(PlayerPedId());
+  
+  if (GetEntityHealth(PlayerPedId()) > 1) {
+    return;
+  } else {
+    SetEntityCoordsNoOffset(
+      PlayerPedId(),
+      360.67,
+      -591.66,
+      28.66,
+      false,
+      false,
+      false,
+    );
+    NetworkResurrectLocalPlayer(360.67, -591.66, 28.66, 251.43, true, false);
+    SetPlayerInvincible(PlayerPedId(), false);
+    ClearPedBloodDamage(PlayerPedId());
+  }
 });
