@@ -8,7 +8,7 @@ import './index.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
 
-// window.postMessage({deathscreen: true, cash: 25000.0}, '*');
+// window.postMessage({registerform: true, cash: 25000.0}, '*');
 window.addEventListener('message', (event) => {
   const data = event.data;
 

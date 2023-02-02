@@ -10,9 +10,10 @@ interface RegisterProps {}
 
 const Register: FC<RegisterProps> = () => {
   const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
-    birthdate: '',
+    firstName: '',
+    lastName: '',
+    birthDate: '',
+    createDate: new Date().toLocaleDateString(),
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,10 +52,10 @@ const Register: FC<RegisterProps> = () => {
           labelFor="firstname"
           label="Firstname"
           icon={<BsFillPersonBadgeFill />}
-          id="firstname"
+          id="firstName"
           type="text"
           placeholder="John"
-          value={formData.firstname}
+          value={formData.firstName}
           onchange={handleChange}
         />
 
@@ -62,10 +63,10 @@ const Register: FC<RegisterProps> = () => {
           labelFor="lastname"
           label="Lastname"
           icon={<BsFillPersonBadgeFill />}
-          id="lastname"
+          id="lastName"
           type="text"
           placeholder="Phee"
-          value={formData.lastname}
+          value={formData.lastName}
           onchange={handleChange}
         />
 
@@ -73,11 +74,11 @@ const Register: FC<RegisterProps> = () => {
           labelFor="birthdate"
           label="Birthdate"
           icon={<BsFillPersonBadgeFill />}
-          id="birthdate"
+          id="birthDate"
           type="date"
           min="1980-01-01"
           max={format(subYears(new Date(), 19), 'yyyy-MM-dd')}
-          value={formData.birthdate}
+          value={formData.birthDate}
           onchange={handleChange}
         />
 

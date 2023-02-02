@@ -1,7 +1,8 @@
-interface RegisterData {
-  firstname: string;
-  lastname: string;
-  birthdate: string;
+interface Form {
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  createDate: string;
 }
 
 RegisterRawNuiCallback('hideRegisterform', async (data: {body: string}) => {
@@ -12,14 +13,12 @@ RegisterRawNuiCallback('hideRegisterform', async (data: {body: string}) => {
     }),
   );
 
-  const jsonData: RegisterData = JSON.parse(data.body);
-  const {firstname, lastname, birthdate} = jsonData;
-
-  emitNet('submitRegisterform', firstname, lastname, birthdate);
-
-  await timeout(2000);
   const source: number = GetPlayerServerId(PlayerId());
+  const jsonData: Form = JSON.parse(data.body);
+  const {firstName, lastName, birthDate, createDate} = jsonData;
 
+  emitNet('submitRegisterform', firstName, lastName, birthDate, createDate);
+  await timeout(2000);
   emitNet('refresh', source);
 });
 
