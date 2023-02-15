@@ -7,8 +7,12 @@ import Hud from './pages/Hud';
 import './index.css';
 
 const root = createRoot(document.getElementById('root') as HTMLElement);
+// const formatcash = new Intl.NumberFormat('en-NL', {
+//     currency: 'EUR',
+//     style: 'currency',
+//   }).format(25460);
 
-// window.postMessage({registerform: true, cash: 25000.0}, '*');
+// window.postMessage({moneyhud: true, cash: formatcash}, '*');
 window.addEventListener('message', (event) => {
   const data = event.data;
 

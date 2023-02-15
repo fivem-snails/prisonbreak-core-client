@@ -19,7 +19,7 @@ RegisterRawNuiCallback('hideRegisterform', async (data: {body: string}) => {
 
   emitNet('submitRegisterform', firstName, lastName, birthDate, createDate);
   await timeout(2000);
-  emitNet('refresh', source);
+  emitNet('playerRefresh', source);
 });
 
 RegisterRawNuiCallback('hideDeathscreen', async () => {
@@ -29,7 +29,7 @@ RegisterRawNuiCallback('hideDeathscreen', async () => {
       deathscreen: false,
     }),
   );
-  
+
   if (GetEntityHealth(PlayerPedId()) > 1) {
     return;
   } else {

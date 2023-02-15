@@ -5,7 +5,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #1a1a1ae4;
+
+  background: rgb(0, 0, 0);
+
   width: 100%;
   height: 100vh;
 }
@@ -13,52 +15,44 @@
 .deathscreen .container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 1rem;
-
   flex-direction: column;
+
+  gap: 2rem;
 }
 
-.deathscreen .container .text-wrapper .text {
+.deathscreen .container .text-wrapper .main-text {
   font-family: 'Somerton Dense', sans-serif;
-  font-size: 8em;
+  font-size: 10em;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-shadow: 0 0 0.4rem rgb(255, 51, 51);
+  color: rgb(230, 71, 71);
 
-  text-shadow: 0 0 0.2rem #0b0b0b;
-  color: #e64747b3;
-
-  word-spacing: 0.4rem;
+  word-spacing: 0.8rem;
 }
 
 .deathscreen .container .text-wrapper .respawn-text {
-  font-family: 'Somerton Dense', sans-serif;
-  font-size: 2.5em;
-
   display: flex;
-  align-items: center;
   justify-content: center;
 
-  text-shadow: 0 0 0.2rem #0b0b0b;
-  color: #ececec;
+  font-family: 'Changa One', sans-serif;
+  font-size: 2em;
 
-  word-spacing: 0.4rem;
+  text-shadow: 0 0 0.2rem rgb(0, 0, 0);
+  color: rgb(105, 105, 105);
 }
 
 .deathscreen .container .timer-wrapper {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
 
-  background: #000000a9;
+  background: rgb(107, 28, 28);
   width: 40rem;
 }
 
 .deathscreen .container .timer-wrapper .timer {
+  transition: all 0.5s ease-in-out;
   padding: 0.6rem 0;
+
+  background: rgb(255, 31, 31);
   width: 30%;
-  transition: all 0.4s ease-in-out;
-  background: #e64747b3;
 }

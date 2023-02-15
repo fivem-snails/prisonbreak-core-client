@@ -5,48 +5,56 @@
 
 .hud {
   display: flex;
-  align-items: flex-end;
-  flex-direction: column;
-  gap: 10rem;
-  margin: 2rem auto;
-  max-width: 95%;
+  align-items: flex-start;
+  justify-content: flex-end;
+
+  width: 100%;
+  height: 100vh;
 }
 
 .hud .card {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.5rem 1.2rem;
 
-  border-radius: 0.5rem;
-  transform: skewX(-12deg);
+  margin: 2rem;
+  padding: 0.4rem 2rem;
 
-  background: #272932;
-  box-shadow: -0.5rem 0rem 0.9rem #272932;
+  gap: 1rem;
 
-  color: #cfcfcf;
+  border-top: solid 0.4rem rgb(0, 191, 255);
+
+  background: rgb(41, 41, 41);
+  box-shadow: -0rem 0.4rem 0.6rem rgba(10, 10, 10, 0.5);
 }
 
 .hud .card .icon svg {
-  font-size: 2em;
-  font-weight: normal;
+  margin-top: 0.2rem;
+  width: 2.5rem;
+  height: 2.5rem;
+
+  color: rgb(204, 204, 204);
 }
 
 .hud .card .cash h2 {
   font-family: 'Chalet', sans-serif;
 
-  font-size: 1.6em;
+  font-size: 2em;
   font-weight: normal;
-  color: #ffffff;
+
+  color: rgb(255, 255, 255);
 }
 
-@media screen and (min-width: 2000px) {
+@media screen and (max-width: 2000px) {
+  .hud .card {
+    gap: 0.5rem;
+  }
+  
   .hud .card .icon svg {
-    font-size: 3em;
+    width: 2rem;
+    height: 2rem;
   }
 
   .hud .card .cash h2 {
-    font-size: 2em;
+    font-size: 1.6em;
   }
 }

@@ -1,3 +1,3 @@
-on("playerSpawned", () => {
+on('playerSpawned', () => {
   SetPedMaxHealth(PlayerPedId(), 600);
 });

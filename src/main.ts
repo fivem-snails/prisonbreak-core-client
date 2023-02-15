@@ -49,7 +49,7 @@ const playerSpawnCheck = async (): Promise<void> => {
     console.info(`Player ServerId: ${player.serverId}`);
     console.info(`Player Coords: ${player.coordinates}`);
 
-    emitNet('refresh', player.serverId);
+    emitNet('playerRefresh', player.serverId);
   }
 };
 

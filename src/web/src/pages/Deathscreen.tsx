@@ -22,13 +22,13 @@ const Deathscreen: FC<DeathscreenProps> = () => {
   }, [timeLeft]);
 
   return (
-    <div className="deathscreen animate__animated animate__fadeInDown">
+    <div className="deathscreen animate__animated animate__fadeIn">
       <div className="container">
         <div className="text-wrapper">
-          <h1 className="text">You are unconscious</h1>
+          <h1 className="main-text ">You died</h1>
           {timeLeft === 0 && (
             <h2 className="respawn-text animate__animated animate__fadeInDown">
-              Press [E] to Respawn
+              Respawning...
             </h2>
           )}
         </div>
