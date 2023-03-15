@@ -1,4 +1,4 @@
-setTick(async () => {
+setTick(() => {
   SetPedSuffersCriticalHits(PlayerPedId(), false);
   if (IsPedArmed(PlayerPedId(), 6)) {
     DisableControlAction(1, 140, true);
@@ -7,7 +7,15 @@ setTick(async () => {
   }
 });
 
-setTick(async () => {
+setTick(() => {
+  if (IsPlayerFreeAiming(PlayerId())) {
+    AnimateGameplayCamZoom(1.0, 0.8);
+    DisableControlAction(0, 36, true);
+    DisableControlAction(0, 22, true);
+  }
+});
+
+setTick(() => {
   if (IsPlayerFreeAiming(PlayerId())) {
     AnimateGameplayCamZoom(1.0, 0.8);
     DisableControlAction(0, 36, true);

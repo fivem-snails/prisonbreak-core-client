@@ -1,40 +1,24 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ESNext",
-    "moduleResolution": "node",
-
-    // Script mode  (9)
+    "target": "ES2022",
+    "module": "ES2022",
+    "outDir": "dist",
+    "types": ["@citizenfx/client", "@types/node"],
     "strict": true,
     "alwaysStrict": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
     "strictNullChecks": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "useUnknownInCatchVariables": true,
-
-    // No unused code (4)
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "allowUnusedLabels": false,
-    "allowUnreachableCode": false,
-
-    // No implicit code (2)
     "noImplicitOverride": true,
     "noImplicitReturns": true,
-
-    // Others (6)
     "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": true,
     "noFallthroughCasesInSwitch": true,
-    "exactOptionalPropertyTypes": true,
-    "forceConsistentCasingInFileNames": true,
-    "removeComments": true,
-
-    "outDir": "dist",
-    "types": ["@citizenfx/client"]
+    "exactOptionalPropertyTypes": true
   },
   "include": ["**/**.ts"],
   "exclude": ["node_modules"]
