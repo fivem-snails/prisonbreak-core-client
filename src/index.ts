@@ -1,44 +1,48 @@
-/**
- * Delays execution for a certain amount of time
- * @param ms amount of delay in milliseconds
- * @returns A promise that resolves once delay is complete
- */
-const timeout = (ms: number): Promise<void> => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-};
+let playerSpawned = false;
 
 /**
- * Spawns the player
- * @returns a resolved promise if player hasn't already spawned; an error message otherwise
+ * Delays execution for a certain amount of time
+ * @param ms amount of time in milliseconds
+ * @returns A promise that resolves once delay is complete
  */
-const spawnPlayer = async (): Promise<void> => {
-  if (!playerSpawn) {
-    playerSpawn = true;
-    return Promise.resolve();
-  } else {
-    throw new Error('Player has already spawned');
-  }
+const delay = (ms: number): Promise<void> => {
+    return new Promise((resolve) => {
+        setTimeout(resolve, ms);
+    });
 };
 
 /**
  * Checks if player has spawned by waiting 10 seconds post-spawn
+ * @returns a resolved promise void
  */
-const checkPlayerSpawned = async (): Promise<void> => {
-  try {
-    await spawnPlayer();
-    await timeout(10000);
+async function ensurePlayerSpawned(): Promise<void> {
+    if (playerSpawned) {
+        throw new Error('Player has already spawned');
+    }
 
-    const source = GetPlayerServerId(PlayerId());
-    const coords = GetEntityCoords(PlayerPedId(), false);
-    const name = GetPlayerName(source);
-    const player: Player = { source: source, coords: coords, name: name };
+    playerSpawned = true;
+    await delay(3000);
 
-    // Emit event to welcome player and send player object
-    emit('cS.Credits', `Hi!\nWelcome to `, 'AltaRP', 0.5, 0.5, 40, true);
-    console.info(`Your player tempid: ${player.source}`);
-    console.info(`Your player coords: ${player.coords}`);
+    const localId = GetPlayerIndex();
+    const entityId = PlayerPedId();
+    const playerId = GetPlayerServerId(localId);
+    const fxname = GetPlayerName(localId);
+    const coords = GetEntityCoords(entityId, false);
+    const playerData: PlayerData = Object.freeze({
+        person: {
+            localId: localId,
+            playerId: playerId,
+            fxname: fxname,
+        },
+        coords: {
+            [Position.X]: coords[0] != undefined ? coords[0] : 0,
+            [Position.Y]: coords[1] != undefined ? coords[1] : 0,
+            [Position.Z]: coords[2] != undefined ? coords[2] : 0,
+        },
+    });
+
+    // Debug player data to console
+    console.debug(playerData);
 
     // Modify player default settings
     NetworkSetFriendlyFireOption(true);
@@ -48,20 +52,31 @@ const checkPlayerSpawned = async (): Promise<void> => {
     DisableIdleCamera(true);
     DisplayRadar(true);
 
-    // Check for any missing player properties before refreshing player
-    if (!player.source || !player.coords || !player.name) {
-      throw new Error('Please report this error on discord');
+    // Emit event to welcome player and send player object
+    emit('cS.SplashText', '~b~Welcome to AltaRP~s~.', 10, true);
+
+    // Check for any missing player properties
+    if (!playerData.person ?? !playerData.coords) {
+        throw new Error('PlayerData is missing properties.');
     }
 
     // Emit event to refresh player character
-    emitNet('core-back:refreshPlayer', player.source, player);
-  } catch (err: unknown) {
-    if (err instanceof Error) {
-      console.error(err.message);
-    }
-  }
-};
+    emitNet('core-back:refreshPlayer', playerData.person.playerId, playerData);
+}
 
-// Initiate spawning & checking of player
-let playerSpawn = false;
+async function checkPlayerSpawned(): Promise<void> {
+    try {
+        await ensurePlayerSpawned();
+    } catch (err) {
+        if (err instanceof Error) {
+            console.error(
+                `${err.stack}\n^1Please report this error to AltaRP developers.^7`,
+            );
+        }
+    }
+}
+
+/**
+ * Invoke function
+ */
 checkPlayerSpawned();
