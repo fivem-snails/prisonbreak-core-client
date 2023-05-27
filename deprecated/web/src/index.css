@@ -1,0 +1,18 @@
+.nui {
+    background: linear-gradient(270deg, #0f0f0fb7 -20%, #6ca1a100 100%);
+    height: 100vh;
+    overflow: hidden;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
