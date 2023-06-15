@@ -1,13 +1,7 @@
 let playerSpawned = false;
 
-const Wait = (ms) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-};
-
 const ensurePlayerSpawned = async () => {
-  await Wait(3000);
+  await wait(8000);
 
   const localId = GetPlayerIndex();
   const entityId = PlayerPedId();
@@ -37,7 +31,7 @@ const ensurePlayerSpawned = async () => {
   DisplayRadar(false);
 
   emit('cS.SplashText', '~b~Welcome to AltaRP~s~.', 10, true);
-  emitNet('core-back:refreshPlayer', playerData.playerId, playerData);
+  emitNet('CORE_BACK_REFRESH_PLAYER', playerData.playerId, playerData);
 };
 
 const checkPlayerSpawned = async () => {
