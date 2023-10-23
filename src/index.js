@@ -1,7 +1,13 @@
 let playerSpawned = false;
 
+const delay = (ms) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+};
+
 const ensurePlayerSpawned = async () => {
-  await wait(8000);
+  await delay(1000);
 
   const localId = GetPlayerIndex();
   const entityId = PlayerPedId();
@@ -21,8 +27,6 @@ const ensurePlayerSpawned = async () => {
     },
   };
 
-  console.debug(playerData);
-
   NetworkSetFriendlyFireOption(true);
   SetCanAttackFriendly(PlayerPedId(), true, true);
   SetWeaponsNoAutoreload(true);
@@ -31,7 +35,7 @@ const ensurePlayerSpawned = async () => {
   DisplayRadar(false);
 
   emit('cS.SplashText', '~b~Welcome to AltaRP~s~.', 10, true);
-  emitNet('CORE_BACK_REFRESH_PLAYER', playerData.playerId, playerData);
+  emitNet('alta-core-back:playerRefresh', playerData.playerId, playerData);
 };
 
 const checkPlayerSpawned = async () => {

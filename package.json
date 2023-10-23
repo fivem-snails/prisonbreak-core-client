@@ -1,9 +1,8 @@
 {
   "name": "alta-core-front",
   "version": "1.0.0",
-  "repository": "git@github.com:altafivem/alta-core-front.git",
-  "license": "MIT",
   "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "build": "tsc --watch && yarn lint",
     "test": "eslint src/**/*.ts"

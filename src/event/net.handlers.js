@@ -1,17 +1,24 @@
-onNet('CORE_FRONT_DISPLAY_REGISTER_FORM', (display) => {
-  console.info('Net event triggered <CORE_FRONT_DISPLAY_REGISTER_FORM>');
+onNet('alta-core-front:showRegisterForm', (display) => {
+  console.info('Net event called <core-front:showRegisterForm>');
 
   SetNuiFocus(display, display);
-  SendNuiMessage(JSON.stringify({ DISPLAY_REGISTER_FORM: display }));
+  SendNuiMessage(
+    JSON.stringify({
+      type: 'REGISTERFORM',
+      visible: display,
+      data: [],
+    }),
+  );
 });
 
-onNet('CORE_FRONT_DISPLAY_PLAYER_HUD', (display, player, character) => {
-  console.info('Net event triggered <CORE_FRONT_DISPLAY_PLAYER_HUD>');
+onNet('alta-core-front:showPlayerHud', (display, user) => {
+  console.info('Net event called <core-front:showPlayerHud>');
 
-  console.log(display);
-  console.log(player);
-  console.log(character);
-
-  SetNuiFocus(display, display);
-  SendNuiMessage(JSON.stringify({ DISPLAY_PLAYER_HUD: display }));
+  SendNuiMessage(
+    JSON.stringify({
+      type: 'PLAYERHUD',
+      visible: display,
+      data: user,
+    }),
+  );
 });
