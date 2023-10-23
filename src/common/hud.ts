@@ -1,3 +1,6 @@
+/**
+ * Hide all HUD components except for minimap
+ */
 setTick(() => {
   HideHudComponentThisFrame(3);
   HideHudComponentThisFrame(4);
@@ -6,5 +9,10 @@ setTick(() => {
   HideHudComponentThisFrame(7);
   HideHudComponentThisFrame(8);
   HideHudComponentThisFrame(9);
-  HideHudComponentThisFrame(1); // Wanted Stars
+  HideHudComponentThisFrame(1);
+});
+
+setTick(async () => {
+  await delay(10000);
+  emitNet('Core/characterUpdateHud');
 });

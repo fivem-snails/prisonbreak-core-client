@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "types": ["bun-types", "@citizenfx/client"],
+    "strict": true,
+    "rootDirs": ["src"],
+    "outDir": "dist"
+  },
+  "include": ["**/**.ts"],
+  "exclude": ["node_modules"]
+}
