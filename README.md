@@ -18,5 +18,5 @@ Next you have to build the project
 pnpm build
 ```
 
-Drag the project to your fivem server files
-**https://fivem.net/**
+Drag the project to your resources folder -
+[Setting up server](https://docs.fivem.net/docs/server-manual/setting-up-a-server/)
