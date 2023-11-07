@@ -1,6 +1,6 @@
 # Project
 
-This repository is focused on managing the client-side interactions in a FiveM environment, leveraging the FiveM API. When a user joins the server, the script is triggered and sends an event to the server-side, enabling the server to manage user creation and related processes.
+This repository is focused on managing the client-side interactions in a FiveM framework. When a user joins the server, the script is triggered and sends an event to the server-side, enabling the server to manage user creation and related processes.
 
 ## Setup
 
