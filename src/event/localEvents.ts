@@ -41,6 +41,14 @@ on('baseevents:onPlayerDied', (_killedBy: number, _position: []) => {
   emit('Screens/death', true, 100);
 });
 
+/**
+ * @param {number} killerId
+ * @param {string} weaponHash
+ * @param {boolean} killerInVeh
+ * @param {number} killerVehSeat
+ * @param {string} killerVehName
+ * @param {object} deathCoords
+ */
 on(
   'baseevents:onPlayerKilled',
   (
@@ -55,3 +63,76 @@ on(
     emit('Screens/death', true, 100);
   },
 );
+
+/**
+ * Saves the player's inventory when they disconnect
+ */
+on('Core/setupInventory', async () => {
+  const allowedInventoryWeapons = [
+    {
+      id: 'WEAPON_PISTOL',
+      label: 'Pistol',
+      weight: 10,
+      img: 'https://i.imgur.com/1aXZvJ3.png',
+    },
+    {
+      id: 'WEAPON_COMBATPISTOL',
+      label: 'Combat Pistol',
+      weight: 10,
+      img: 'https://i.imgur.com/1aXZvJ3.png',
+    },
+  ];
+
+  const inventory = [];
+
+  /**
+   * Sets allowed weapons in the inventory array
+   */
+  for (const allowedWeapon of allowedInventoryWeapons) {
+    const weapon = HasPedGotWeapon(
+      PlayerPedId(),
+      GetHashKey(allowedWeapon.id),
+      false,
+    );
+
+    if (!weapon) {
+      continue;
+    }
+
+    const ammo = GetAmmoInPedWeapon(
+      PlayerPedId(),
+      GetHashKey(allowedWeapon.id),
+    );
+
+    inventory.push({
+      type: 'WEAPON',
+      id: allowedWeapon.id,
+      label: allowedWeapon.label,
+      amount: ammo,
+      weight: allowedWeapon.weight,
+      img: allowedWeapon.img,
+    });
+  }
+
+  const localId: number = GetPlayerIndex();
+  const src: number = GetPlayerServerId(localId);
+
+  emitNet('Core/saveCharacterInventory', src, inventory);
+});
+
+/**
+ * Set the player's inventory
+ */
+onNet('Core/setCharacterInventory', async (inventory: TInvetory) => {
+  inventory.map((item: TInventoryItem) => {
+    if (item.type === 'WEAPON') {
+      GiveWeaponToPed(
+        PlayerPedId(),
+        GetHashKey(item.id),
+        item.amount,
+        false,
+        true,
+      );
+    }
+  });
+});
