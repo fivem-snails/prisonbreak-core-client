@@ -67,7 +67,7 @@ on(
 /**
  * Saves the player's inventory when they disconnect
  */
-on('Core/setupInventory', async () => {
+on('Core/syncCharacterInventory', async () => {
   const allowedInventoryWeapons = [
     {
       id: 'WEAPON_PISTOL',
