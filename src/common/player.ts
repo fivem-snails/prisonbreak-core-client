@@ -22,8 +22,3 @@ setTick(() => {
     DisableControlAction(0, 22, true);
   }
 });
-
-setTick(async () => {
-  await delay(10000);
-  emit('Core/syncCharacterInventory');
-});

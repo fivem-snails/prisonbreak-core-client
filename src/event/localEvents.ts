@@ -136,3 +136,10 @@ onNet('Core/setCharacterInventory', async (inventory: TInvetory) => {
     }
   });
 });
+
+onNet('Core/startCharacterInventorySyncLoop', () => {
+  setTick(async () => {
+    await delay(500);
+    emit('Core/syncCharacterInventory');
+  });
+});
