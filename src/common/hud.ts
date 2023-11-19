@@ -13,6 +13,6 @@ setTick(() => {
 });
 
 setTick(async () => {
-  await delay(10000);
+  await delay(500);
   emitNet('Core/characterUpdateHud');
 });

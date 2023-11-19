@@ -1,6 +1,6 @@
-type TInvetory = Array<TInventoryItem>;
+type TLoadout = Array<TLoadoutWeapon>;
 
-type TInventoryItem = {
+type TLoadoutWeapon = {
   id: string;
   img: string;
   type: string;

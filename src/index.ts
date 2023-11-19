@@ -37,65 +37,64 @@ async function spawn(): Promise<void> {
   }
 }
 
-delay(1000);
 spawn();
 
-RegisterCommand(
-  'camtest',
-  () => {
-    const cameraPos: number[] = [243.57, -1235.15, 30.0];
-    const camera = CreateCameraWithParams(
-      'DEFAULT_SCRIPTED_CAMERA',
-      cameraPos[0],
-      cameraPos[1],
-      cameraPos[2],
-      0,
-      0,
-      195,
-      90,
-      true,
-      2,
-    );
+// RegisterCommand(
+//   'camtest',
+//   () => {
+//     const cameraPos: number[] = [243.57, -1235.15, 30.0];
+//     const camera = CreateCameraWithParams(
+//       'DEFAULT_SCRIPTED_CAMERA',
+//       cameraPos[0],
+//       cameraPos[1],
+//       cameraPos[2],
+//       0,
+//       0,
+//       195,
+//       90,
+//       true,
+//       2,
+//     );
 
-    SetCamActive(camera, true);
-    SetCamMotionBlurStrength(camera, 0.5);
-    SetCamFov(camera, 40);
-    RenderScriptCams(true, true, 3000, true, false);
+//     SetCamActive(camera, true);
+//     SetCamMotionBlurStrength(camera, 0.5);
+//     SetCamFov(camera, 40);
+//     RenderScriptCams(true, true, 3000, true, false);
 
-    SetTimecycleModifier('scanline_cam_cheap');
-    SetTimecycleModifierStrength(1.5);
-  },
-  false,
-);
+//     SetTimecycleModifier('scanline_cam_cheap');
+//     SetTimecycleModifierStrength(1.5);
+//   },
+//   false,
+// );
 
-RegisterCommand(
-  'camped',
-  () => {
-    const cameraPos: number[] = GetPedBoneCoords(PlayerPedId(), 31086, 0, 0, 0);
-    const camera: number = CreateCameraWithParams(
-      'DEFAULT_SCRIPTED_CAMERA',
-      cameraPos[0],
-      cameraPos[1],
-      cameraPos[2],
-      0,
-      0,
-      195,
-      90,
-      true,
-      2,
-    );
+// RegisterCommand(
+//   'camped',
+//   () => {
+//     const cameraPos: number[] = GetPedBoneCoords(PlayerPedId(), 31086, 0, 0, 0);
+//     const camera: number = CreateCameraWithParams(
+//       'DEFAULT_SCRIPTED_CAMERA',
+//       cameraPos[0],
+//       cameraPos[1],
+//       cameraPos[2],
+//       0,
+//       0,
+//       195,
+//       90,
+//       true,
+//       2,
+//     );
 
-    AttachCamToPedBone(camera, PlayerPedId(), 31086, -0.3, 1.2, -0.0, false);
-    SetCamActive(camera, true);
-    // SetCamMotionBlurStrength(camera, 0.5);
-    // SetCamFov(camera, 40);
-    RenderScriptCams(true, true, 3000, true, false);
-    FreezeEntityPosition(PlayerPedId(), true);
-    // SetTimecycleModifier('scanline_cam_cheap');
-    // SetTimecycleModifierStrength(1.5);
-    // console.log(IsCamActive(camera));
-    // console.log(DoesCamExist(camera));
-    // console.log(GetCamCoord(camera));
-  },
-  false,
-);
+//     AttachCamToPedBone(camera, PlayerPedId(), 31086, -0.3, 1.2, -0.0, false);
+//     SetCamActive(camera, true);
+//     // SetCamMotionBlurStrength(camera, 0.5);
+//     // SetCamFov(camera, 40);
+//     RenderScriptCams(true, true, 3000, true, false);
+//     FreezeEntityPosition(PlayerPedId(), true);
+//     // SetTimecycleModifier('scanline_cam_cheap');
+//     // SetTimecycleModifierStrength(1.5);
+//     // console.log(IsCamActive(camera));
+//     // console.log(DoesCamExist(camera));
+//     // console.log(GetCamCoord(camera));
+//   },
+//   false,
+// );

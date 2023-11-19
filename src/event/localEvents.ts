@@ -65,30 +65,42 @@ on(
 );
 
 /**
- * Saves the player's inventory when they disconnect
+ * Saves the player's loadout
  */
-on('Core/syncCharacterInventory', async () => {
-  const allowedInventoryWeapons = [
+on('Core/syncCharacterLoadout', async () => {
+  const allowedLoadout = [
     {
       id: 'WEAPON_PISTOL',
       label: 'Pistol',
       weight: 10,
-      img: 'https://i.imgur.com/1aXZvJ3.png',
+      img: 'https://i.imgur.com/n4SV2Sv.png',
     },
     {
       id: 'WEAPON_COMBATPISTOL',
       label: 'Combat Pistol',
       weight: 10,
-      img: 'https://i.imgur.com/1aXZvJ3.png',
+      img: 'https://i.imgur.com/BTAE4QQ.png',
+    },
+    {
+      id: 'WEAPON_COMBATSHOTGUN',
+      label: 'Combat Shotgun',
+      weight: 10,
+      img: 'https://i.imgur.com/2k4X8Qa.png',
+    },
+    {
+      id: 'WEAPON_MILITARYRIFLE',
+      label: 'Military Rifle',
+      weight: 10,
+      img: 'https://i.imgur.com/2k4X8Qa.png',
     },
   ];
 
-  const inventory = [];
+  const loadout = [];
 
   /**
-   * Sets allowed weapons in the inventory array
+   * Sets allowed weapons in the loadout array
    */
-  for (const allowedWeapon of allowedInventoryWeapons) {
+  for (const allowedWeapon of allowedLoadout) {
     const weapon = HasPedGotWeapon(
       PlayerPedId(),
       GetHashKey(allowedWeapon.id),
@@ -104,7 +116,7 @@ on('Core/syncCharacterInventory', async () => {
       GetHashKey(allowedWeapon.id),
     );
 
-    inventory.push({
+    loadout.push({
       type: 'WEAPON',
       id: allowedWeapon.id,
       label: allowedWeapon.label,
@@ -117,14 +129,14 @@ on('Core/syncCharacterInventory', async () => {
   const localId: number = GetPlayerIndex();
   const src: number = GetPlayerServerId(localId);
 
-  emitNet('Core/saveCharacterInventory', src, inventory);
+  emitNet('Core/saveCharacterLoadout', src, loadout);
 });
 
 /**
- * Set the player's inventory
+ * Set the player's loadout
  */
-onNet('Core/setCharacterInventory', async (inventory: TInvetory) => {
-  inventory.map((item: TInventoryItem) => {
+onNet('Core/setCharacterLoadout', async (loadout: TLoadout) => {
+  loadout.map((item: TLoadoutWeapon) => {
     if (item.type === 'WEAPON') {
       GiveWeaponToPed(
         PlayerPedId(),
@@ -137,9 +149,9 @@ onNet('Core/setCharacterInventory', async (inventory: TInvetory) => {
   });
 });
 
-onNet('Core/startCharacterInventorySyncLoop', () => {
+onNet('Core/startCharacterLoadoutSyncLoop', () => {
   setTick(async () => {
     await delay(500);
-    emit('Core/syncCharacterInventory');
+    emit('Core/syncCharacterLoadout');
   });
 });
