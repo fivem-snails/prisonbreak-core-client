@@ -14,5 +14,5 @@ setTick(() => {
 
 setTick(async () => {
   await delay(500);
-  emitNet('Core/characterUpdateHud');
+  emitNet('Core/User:SyncHud');
 });

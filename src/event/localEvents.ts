@@ -67,7 +67,7 @@ on(
 /**
  * Saves the player's loadout
  */
-on('Core/syncCharacterLoadout', async () => {
+on('Core/User:SaveLoadout', async () => {
   const allowedLoadout = [
     {
       id: 'WEAPON_PISTOL',
@@ -129,13 +129,13 @@ on('Core/syncCharacterLoadout', async () => {
   const localId: number = GetPlayerIndex();
   const src: number = GetPlayerServerId(localId);
 
-  emitNet('Core/saveCharacterLoadout', src, loadout);
+  emitNet('Core/User:SyncLoadout', src, loadout);
 });
 
 /**
  * Set the player's loadout
  */
-onNet('Core/setCharacterLoadout', async (loadout: TLoadout) => {
+onNet('Core/User:SetLoadout', async (loadout: TLoadout) => {
   loadout.map((item: TLoadoutWeapon) => {
     if (item.type === 'WEAPON') {
       GiveWeaponToPed(
@@ -149,9 +149,10 @@ onNet('Core/setCharacterLoadout', async (loadout: TLoadout) => {
   });
 });
 
-onNet('Core/startCharacterLoadoutSyncLoop', () => {
+onNet('Core/User:SyncLoadout:Loop', () => {
   setTick(async () => {
-    await delay(500);
-    emit('Core/syncCharacterLoadout');
+    await delay(800);
+
+    emit('Core/User:SaveLoadout');
   });
 });

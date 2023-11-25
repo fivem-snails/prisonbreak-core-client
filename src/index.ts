@@ -31,9 +31,9 @@ async function spawn(): Promise<void> {
     DisableIdleCamera(true);
     DisplayRadar(false);
 
-    emitNet('Core/characterSync', src, userSchema);
+    emitNet('Core/User:Sync', src, userSchema);
   } catch (error) {
-    console.error('^1Error (Func/ensureUserSpawned)^7', error);
+    console.error('^1ERROR ⋯ (Func/User:Spawn) ⋯^7', error);
   }
 }
 
