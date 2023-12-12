@@ -8,11 +8,11 @@ async function spawn(): Promise<void> {
   try {
     await delay(1000);
 
-    const localId: number = GetPlayerIndex();
-    const src: number = GetPlayerServerId(localId);
-    const entityId: number = PlayerPedId();
-    const name: string = GetPlayerName(localId);
-    const coords: number[] = GetEntityCoords(entityId, false);
+    const localId = GetPlayerIndex();
+    const src = GetPlayerServerId(localId);
+    const entityId = PlayerPedId();
+    const name = GetPlayerName(localId);
+    const coords = GetEntityCoords(entityId, false);
 
     const userSchema: TUserSchema = {
       name,
@@ -33,7 +33,9 @@ async function spawn(): Promise<void> {
 
     emitNet('Core/User:Sync', src, userSchema);
   } catch (error) {
-    console.error('^1ERROR ⋯ (Func/User:Spawn) ⋯^7', error);
+    if (error instanceof Error) {
+      console.error('Error :: Func/User:Spawn', error.message);
+    }
   }
 }
 

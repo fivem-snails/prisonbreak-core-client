@@ -67,92 +67,92 @@ on(
 /**
  * Saves the player's loadout
  */
-on('Core/User:SaveLoadout', async () => {
-  const allowedLoadout = [
-    {
-      id: 'WEAPON_PISTOL',
-      label: 'Pistol',
-      weight: 10,
-      img: 'https://i.imgur.com/n4SV2Sv.png',
-    },
-    {
-      id: 'WEAPON_COMBATPISTOL',
-      label: 'Combat Pistol',
-      weight: 10,
-      img: 'https://i.imgur.com/BTAE4QQ.png',
-    },
-    {
-      id: 'WEAPON_COMBATSHOTGUN',
-      label: 'Combat Shotgun',
-      weight: 10,
-      img: 'https://i.imgur.com/2k4X8Qa.png',
-    },
-    {
-      id: 'WEAPON_MILITARYRIFLE',
-      label: 'Military Rifle',
-      weight: 10,
-      img: 'https://i.imgur.com/2k4X8Qa.png',
-    },
-  ];
+// on('Core/User:SaveLoadout', async () => {
+//   const allowedLoadout = [
+//     {
+//       id: 'WEAPON_PISTOL',
+//       label: 'Pistol',
+//       weight: 10,
+//       img: 'https://i.imgur.com/n4SV2Sv.png',
+//     },
+//     {
+//       id: 'WEAPON_COMBATPISTOL',
+//       label: 'Combat Pistol',
+//       weight: 10,
+//       img: 'https://i.imgur.com/BTAE4QQ.png',
+//     },
+//     {
+//       id: 'WEAPON_COMBATSHOTGUN',
+//       label: 'Combat Shotgun',
+//       weight: 10,
+//       img: 'https://i.imgur.com/2k4X8Qa.png',
+//     },
+//     {
+//       id: 'WEAPON_MILITARYRIFLE',
+//       label: 'Military Rifle',
+//       weight: 10,
+//       img: 'https://i.imgur.com/2k4X8Qa.png',
+//     },
+//   ];
 
-  const loadout = [];
+//   const loadout = [];
 
-  /**
-   * Sets allowed weapons in the loadout array
-   */
-  for (const allowedWeapon of allowedLoadout) {
-    const weapon = HasPedGotWeapon(
-      PlayerPedId(),
-      GetHashKey(allowedWeapon.id),
-      false,
-    );
+//   /**
+//    * Sets allowed weapons in the loadout array
+//    */
+//   for (const allowedWeapon of allowedLoadout) {
+//     const hasWeapon = HasPedGotWeapon(
+//       PlayerPedId(),
+//       GetHashKey(allowedWeapon.id),
+//       false,
+//     );
 
-    if (!weapon) {
-      continue;
-    }
+//     if (!hasWeapon) {
+//       continue;
+//     }
 
-    const ammo = GetAmmoInPedWeapon(
-      PlayerPedId(),
-      GetHashKey(allowedWeapon.id),
-    );
+//     const ammo = GetAmmoInPedWeapon(
+//       PlayerPedId(),
+//       GetHashKey(allowedWeapon.id),
+//     );
 
-    loadout.push({
-      type: 'WEAPON',
-      id: allowedWeapon.id,
-      label: allowedWeapon.label,
-      amount: ammo,
-      weight: allowedWeapon.weight,
-      img: allowedWeapon.img,
-    });
-  }
+//     loadout.push({
+//       type: 'WEAPON',
+//       id: allowedWeapon.id,
+//       label: allowedWeapon.label,
+//       amount: ammo,
+//       weight: allowedWeapon.weight,
+//       img: allowedWeapon.img,
+//     });
+//   }
 
-  const localId: number = GetPlayerIndex();
-  const src: number = GetPlayerServerId(localId);
+//   const localId = GetPlayerIndex();
+//   const src = GetPlayerServerId(localId);
 
-  emitNet('Core/User:SyncLoadout', src, loadout);
-});
+//   emitNet('Core/User:SyncLoadout', src, loadout);
+// });
 
 /**
  * Set the player's loadout
  */
-onNet('Core/User:SetLoadout', async (loadout: TLoadout) => {
-  loadout.map((item: TLoadoutWeapon) => {
-    if (item.type === 'WEAPON') {
-      GiveWeaponToPed(
-        PlayerPedId(),
-        GetHashKey(item.id),
-        item.amount,
-        false,
-        true,
-      );
-    }
-  });
-});
+// onNet('Core/User:SetLoadout', async (loadout: TLoadout) => {
+//   loadout.map((item: TLoadoutWeapon) => {
+//     if (item.type === 'WEAPON') {
+//       GiveWeaponToPed(
+//         PlayerPedId(),
+//         GetHashKey(item.id),
+//         item.amount,
+//         false,
+//         true,
+//       );
+//     }
+//   });
+// });
 
-onNet('Core/User:SyncLoadout:Loop', () => {
-  setTick(async () => {
-    await delay(800);
+// onNet('Core/User:SyncLoadout:Loop', () => {
+//   setTick(async () => {
+//     await delay(800);
 
-    emit('Core/User:SaveLoadout');
-  });
-});
+//     emit('Core/User:SaveLoadout');
+//   });
+// });

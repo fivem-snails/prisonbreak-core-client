@@ -13,6 +13,6 @@ setTick(() => {
 });
 
 setTick(async () => {
-  await delay(500);
+  await delay(60000);
   emitNet('Core/User:SyncHud');
 });
