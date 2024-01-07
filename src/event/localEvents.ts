@@ -64,6 +64,15 @@ on(
   },
 );
 
+onNet('Core/Heist:Teamize', (team: string) => {
+  const groupExists = DoesRelationshipGroupExist(team.toUpperCase());
+  if (!groupExists) {
+    throw new Error(`Relationship group ${team.toUpperCase()} does not exist`);
+  }
+
+  SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
+});
+
 /**
  * Saves the player's loadout
  */

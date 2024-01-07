@@ -25,11 +25,17 @@ async function spawn(): Promise<void> {
       },
     };
 
-    NetworkSetFriendlyFireOption(false);
     SetCanAttackFriendly(PlayerPedId(), true, true);
     SetFlashLightKeepOnWhileMoving(true);
     DisableIdleCamera(true);
     DisplayRadar(false);
+
+    // Create relationship groups
+    AddRelationshipGroup('ROBBERS');
+    AddRelationshipGroup('COPPERS');
+
+    // Set relationship between groups, so they can attack each other
+    SetRelationshipBetweenGroups(5, 'ROBBERS', 'COPPERS');
 
     emitNet('Core/User:Sync', src, userSchema);
   } catch (error) {
