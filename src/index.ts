@@ -28,7 +28,7 @@ async function spawn(): Promise<void> {
     SetCanAttackFriendly(PlayerPedId(), true, true);
     SetFlashLightKeepOnWhileMoving(true);
     DisableIdleCamera(true);
-    DisplayRadar(false);
+    DisplayRadar(true);
 
     // Create relationship groups
     AddRelationshipGroup('ROBBERS');

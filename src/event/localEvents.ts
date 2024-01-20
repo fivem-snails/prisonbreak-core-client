@@ -73,95 +73,162 @@ onNet('Core/Heist:Teamize', (team: string) => {
   SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
 });
 
-/**
- * Saves the player's loadout
- */
-// on('Core/User:SaveLoadout', async () => {
-//   const allowedLoadout = [
-//     {
-//       id: 'WEAPON_PISTOL',
-//       label: 'Pistol',
-//       weight: 10,
-//       img: 'https://i.imgur.com/n4SV2Sv.png',
-//     },
-//     {
-//       id: 'WEAPON_COMBATPISTOL',
-//       label: 'Combat Pistol',
-//       weight: 10,
-//       img: 'https://i.imgur.com/BTAE4QQ.png',
-//     },
-//     {
-//       id: 'WEAPON_COMBATSHOTGUN',
-//       label: 'Combat Shotgun',
-//       weight: 10,
-//       img: 'https://i.imgur.com/2k4X8Qa.png',
-//     },
-//     {
-//       id: 'WEAPON_MILITARYRIFLE',
-//       label: 'Military Rifle',
-//       weight: 10,
-//       img: 'https://i.imgur.com/2k4X8Qa.png',
-//     },
-//   ];
+onNet(
+  'Core/Heist:CreateArea',
+  (
+    coords: {
+      x: number;
+      y: number;
+      z: number;
+      r: number;
+    },
+    sprite: number,
+    color: number,
+    player: {
+      name: string;
+      license: string;
+      team: string;
+      avatar: string;
+    },
+    spawn: {
+      x: number;
+      y: number;
+      z: number;
+    },
+  ) => {
+    const blip = AddBlipForRadius(coords.x, coords.y, coords.z, coords.r);
+    SetBlipSprite(blip, sprite);
+    SetBlipColour(blip, color);
+    SetBlipAlpha(blip, 90);
 
-//   const loadout = [];
+    let CREATEAREA_TIMER = 1000;
 
-//   /**
-//    * Sets allowed weapons in the loadout array
-//    */
-//   for (const allowedWeapon of allowedLoadout) {
-//     const hasWeapon = HasPedGotWeapon(
-//       PlayerPedId(),
-//       GetHashKey(allowedWeapon.id),
-//       false,
-//     );
+    const localId = GetPlayerIndex();
+    const src = GetPlayerServerId(localId);
 
-//     if (!hasWeapon) {
-//       continue;
-//     }
+    setTick(async () => {
+      await delay(CREATEAREA_TIMER);
 
-//     const ammo = GetAmmoInPedWeapon(
-//       PlayerPedId(),
-//       GetHashKey(allowedWeapon.id),
-//     );
+      const playerCoords = GetEntityCoords(PlayerPedId(), false);
+      const distance = GetDistanceBetweenCoords(
+        coords.x,
+        coords.y,
+        coords.z,
+        playerCoords[0],
+        playerCoords[1],
+        playerCoords[2],
+        true,
+      );
 
-//     loadout.push({
-//       type: 'WEAPON',
-//       id: allowedWeapon.id,
-//       label: allowedWeapon.label,
-//       amount: ammo,
-//       weight: allowedWeapon.weight,
-//       img: allowedWeapon.img,
-//     });
-//   }
+      if (distance > coords.r) {
+        emitNet('Core/Heist:ReturnArea', src);
 
-//   const localId = GetPlayerIndex();
-//   const src = GetPlayerServerId(localId);
+        SetTimecycleModifier('BloomMid');
+        SetTimecycleModifierStrength(3.0);
 
-//   emitNet('Core/User:SyncLoadout', src, loadout);
-// });
+        emit('Screens/return-to-area', true, {
+          heist_id: 9,
+          license: 'license:0673c17a25323f11be214fc75bdcae036ab5705f',
+          spawn,
+        });
 
-/**
- * Set the player's loadout
- */
-// onNet('Core/User:SetLoadout', async (loadout: TLoadout) => {
-//   loadout.map((item: TLoadoutWeapon) => {
-//     if (item.type === 'WEAPON') {
-//       GiveWeaponToPed(
-//         PlayerPedId(),
-//         GetHashKey(item.id),
-//         item.amount,
-//         false,
-//         true,
-//       );
-//     }
-//   });
-// });
+        return;
+      }
 
-// onNet('Core/User:SyncLoadout:Loop', () => {
-//   setTick(async () => {
-//     await delay(800);
+      if (distance < coords.r) {
+        // emit('Huds/character', true, [
+        //   {
+        //     name: player.name,
+        //     license: player.license,
+        //     team: player.team,
+        //     avatar: player.avatar,
+        //   },
+        // ]);
 
-//     emit('Core/User:SaveLoadout');
-//   });
-// });
+        SetTimecycleModifier('Bloom');
+        SetTimecycleModifierStrength(0.0);
+
+        emit('Screens/return-to-area', false, {
+          heist_id: null,
+          license: null,
+        });
+      }
+    });
+  },
+);
+
+function alert(message: string, beep: boolean, duration: number) {
+  AddTextEntry('CH_ALERT', message);
+
+  BeginTextCommandDisplayHelp('CH_ALERT');
+  EndTextCommandDisplayHelp(0, false, beep, duration);
+}
+
+onNet('Core/Heist:Start', async (vehicle: number, team: []) => {
+  emit('cS.banner', '~r~STARTED~s~', 'Find and ~r~hack~s~ the vault', 6, true);
+  emit('Screens/heist-hud', true, { team });
+
+  const blip = AddBlipForCoord(253.3, 228.18, 101.68);
+  SetBlipSprite(blip, 161);
+  SetBlipColour(blip, 5);
+  SetBlipScale(blip, 0.3);
+
+  let interactionShown = false;
+  setTick(() => {
+    const coords = GetEntityCoords(PlayerPedId(), false);
+    const distance = GetDistanceBetweenCoords(
+      253.3,
+      228.18,
+      101.68,
+      coords[0],
+      coords[1],
+      coords[2],
+      true,
+    );
+
+    if (distance > 1.0 && interactionShown) {
+      emit('Dependencies/hideKeyInteraction');
+      interactionShown = false;
+    }
+
+    if (distance < 1.0) {
+      if (!interactionShown) {
+        emit('Dependencies/showKeyInteraction', 'E', 'Inject Hack');
+        interactionShown = true;
+      }
+
+      if (IsControlJustReleased(0, 38)) {
+        console.log('Injects hack');
+
+        // TODO Add animation so the player crouches down and injects the hack
+      }
+    }
+
+    DrawMarker(
+      29,
+      253.3,
+      228.18,
+      101.68,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      1.5,
+      1.5,
+      1.5,
+      168,
+      58,
+      50,
+      0.8,
+      true,
+      false,
+      2,
+      false,
+      null,
+      null,
+      false,
+    );
+  });
+});
