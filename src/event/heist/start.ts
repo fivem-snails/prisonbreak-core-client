@@ -1,24 +1,14 @@
-interface ITeamSchema {
-  name: string;
-  loadout: Array<object>;
-  outfit: object;
-  spawns: Array<object>;
-  players: Array<object>;
-  vehicles: Array<object>;
-  timer: number;
-}
-
 onNet(
   'Core/Heist:Start',
   async (
     vehicle: number,
     heist_id: number,
     license: string,
-    teamSchema: ITeamSchema,
+    teamSchema: THeistTeam,
   ) => {
     emit('Screens/heist-hud', true, {
-      license: license,
       heist_id: heist_id,
+      license: license,
     });
 
     switch (teamSchema.name.toUpperCase()) {

@@ -12,7 +12,7 @@
 //   HideHudComponentThisFrame(1);
 // });
 
-setTick(async () => {
-  await delay(60000);
-  emitNet('Core/User:SyncHud');
-});
+// setTick(async () => {
+//   await delay(60000);
+//   emitNet('Core/User:SyncHud');
+// });

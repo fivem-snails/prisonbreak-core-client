@@ -1,6 +1,6 @@
-type TLoadout = Array<TLoadoutWeapon>;
+type TTeamLoadout = Array<TTeamLoadoutWeapon>;
 
-type TLoadoutWeapon = {
+type TTeamLoadoutWeapon = {
   id: string;
   img: string;
   type: string;
