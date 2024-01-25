@@ -121,6 +121,8 @@ onNet(
           true,
         );
 
+        SetNewWaypoint(259.77, 214.82);
+
         setTick(() => {
           DrawMarker(
             36,
