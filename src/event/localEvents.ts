@@ -64,13 +64,13 @@ on(
   },
 );
 
-onNet('Core/Heist:Teamize', (team: string) => {
-  const groupExists = DoesRelationshipGroupExist(team.toUpperCase());
+onNet('Core/Heist:SetupTeam', (name: string) => {
+  const groupExists = DoesRelationshipGroupExist(name.toUpperCase());
   if (!groupExists) {
-    throw new Error(`Relationship group ${team.toUpperCase()} does not exist`);
+    throw new Error(`Relationship group ${name.toUpperCase()} does not exist`);
   }
 
-  SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
+  SetPedRelationshipGroupHash(PlayerPedId(), name.toUpperCase());
 });
 
 onNet(
@@ -84,30 +84,24 @@ onNet(
     },
     sprite: number,
     color: number,
-    player: {
-      name: string;
-      license: string;
-      team: string;
-      avatar: string;
-    },
     spawn: {
       x: number;
       y: number;
       z: number;
     },
+    heist: any,
+    license: string,
   ) => {
     const blip = AddBlipForRadius(coords.x, coords.y, coords.z, coords.r);
     SetBlipSprite(blip, sprite);
     SetBlipColour(blip, color);
-    SetBlipAlpha(blip, 90);
-
-    let CREATEAREA_TIMER = 1000;
+    SetBlipAlpha(blip, 60);
 
     const localId = GetPlayerIndex();
     const src = GetPlayerServerId(localId);
 
     setTick(async () => {
-      await delay(CREATEAREA_TIMER);
+      await delay(1000);
 
       const playerCoords = GetEntityCoords(PlayerPedId(), false);
       const distance = GetDistanceBetweenCoords(
@@ -127,8 +121,8 @@ onNet(
         SetTimecycleModifierStrength(3.0);
 
         emit('Screens/return-to-area', true, {
-          heist_id: 9,
-          license: 'license:0673c17a25323f11be214fc75bdcae036ab5705f',
+          heist_id: heist.id,
+          license: license,
           spawn,
         });
 
@@ -136,15 +130,6 @@ onNet(
       }
 
       if (distance < coords.r) {
-        // emit('Huds/character', true, [
-        //   {
-        //     name: player.name,
-        //     license: player.license,
-        //     team: player.team,
-        //     avatar: player.avatar,
-        //   },
-        // ]);
-
         SetTimecycleModifier('Bloom');
         SetTimecycleModifierStrength(0.0);
 
@@ -156,79 +141,3 @@ onNet(
     });
   },
 );
-
-function alert(message: string, beep: boolean, duration: number) {
-  AddTextEntry('CH_ALERT', message);
-
-  BeginTextCommandDisplayHelp('CH_ALERT');
-  EndTextCommandDisplayHelp(0, false, beep, duration);
-}
-
-onNet('Core/Heist:Start', async (vehicle: number, team: []) => {
-  emit('cS.banner', '~r~STARTED~s~', 'Find and ~r~hack~s~ the vault', 6, true);
-  emit('Screens/heist-hud', true, { team });
-
-  const blip = AddBlipForCoord(253.3, 228.18, 101.68);
-  SetBlipSprite(blip, 161);
-  SetBlipColour(blip, 5);
-  SetBlipScale(blip, 0.3);
-
-  let interactionShown = false;
-  setTick(() => {
-    const coords = GetEntityCoords(PlayerPedId(), false);
-    const distance = GetDistanceBetweenCoords(
-      253.3,
-      228.18,
-      101.68,
-      coords[0],
-      coords[1],
-      coords[2],
-      true,
-    );
-
-    if (distance > 1.0 && interactionShown) {
-      emit('Dependencies/hideKeyInteraction');
-      interactionShown = false;
-    }
-
-    if (distance < 1.0) {
-      if (!interactionShown) {
-        emit('Dependencies/showKeyInteraction', 'E', 'Inject Hack');
-        interactionShown = true;
-      }
-
-      if (IsControlJustReleased(0, 38)) {
-        console.log('Injects hack');
-
-        // TODO Add animation so the player crouches down and injects the hack
-      }
-    }
-
-    DrawMarker(
-      29,
-      253.3,
-      228.18,
-      101.68,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      0.0,
-      1.5,
-      1.5,
-      1.5,
-      168,
-      58,
-      50,
-      0.8,
-      true,
-      false,
-      2,
-      false,
-      null,
-      null,
-      false,
-    );
-  });
-});

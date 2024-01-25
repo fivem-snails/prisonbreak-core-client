@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "bun build ./src/index.ts ./src/**/*.ts --outdir=dist --minify-syntax",
+    "build": "bun build ./src/index.ts ./src/**/*.ts ./src/**/**/*.ts --outdir=dist --minify-syntax",
     "test": "eslint src/**/*.ts"
   },
   "devDependencies": {
