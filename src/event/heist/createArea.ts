@@ -1,5 +1,5 @@
 onNet(
-  'Core/Heist:CreateArea',
+  'Core/Fe/Heist:CreateArea',
   (
     coords: TCoords,
     sprite: number,
@@ -31,7 +31,7 @@ onNet(
       );
 
       if (distance > coords.r) {
-        emitNet('Core/Heist:ReturnArea', src);
+        emitNet('Core/Be/Heist:ReturnArea', src);
 
         SetTimecycleModifier('BloomMid');
         SetTimecycleModifierStrength(3.0);
