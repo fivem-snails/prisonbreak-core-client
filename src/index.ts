@@ -1,4 +1,4 @@
-function delay(ms: number): Promise<number> {
+function AddDelay(ms: number): Promise<number> {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
@@ -6,26 +6,29 @@ function delay(ms: number): Promise<number> {
 
 async function spawn(): Promise<void> {
   try {
-    await delay(1000);
-
+    await AddDelay(4000);
     const index = GetPlayerIndex();
     const src = GetPlayerServerId(index);
     const ped = PlayerPedId();
-    const playerSchema: TPlayer = { src, index, ped };
 
-    SetCanAttackFriendly(PlayerPedId(), true, true);
-    SetFlashLightKeepOnWhileMoving(true);
+    DoScreenFadeOut(400);
+    SetEntityCoordsNoOffset(ped, 1714.04, 2523.2, 45.56, false, false, false);
+    RemoveAllPedWeapons(ped, false);
+
+    emit('Screens/team-choose', false, null);
+    emit('Screens/team-hud', false, null, null, null, null);
+
+    await AddDelay(10000);
+
+    DoScreenFadeIn(1000);
+    SetCanAttackFriendly(ped, true, true);
     DisableIdleCamera(true);
-    DisplayRadar(true);
+    DisplayRadar(false);
+    AddRelationshipGroup('CRIMINAL');
+    AddRelationshipGroup('POLICE');
+    SetRelationshipBetweenGroups(5, 'CRIMINAL', 'POLICE');
 
-    // Create relationship groups
-    AddRelationshipGroup('ROBBERS');
-    AddRelationshipGroup('COPPERS');
-
-    // Set relationship between groups, so they can attack each other
-    SetRelationshipBetweenGroups(5, 'ROBBERS', 'COPPERS');
-
-    emitNet('Core/Be/User:Sync', playerSchema.src, playerSchema);
+    emitNet('Core/Be/User:Sync', src);
   } catch (error) {
     if (error instanceof Error) {
       console.error('Error :: spawn', error.message);
