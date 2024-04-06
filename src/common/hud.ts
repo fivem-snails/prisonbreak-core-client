@@ -1,6 +1,3 @@
-/**
- * Hide all HUD components except for minimap
- */
 setTick(() => {
   HideHudComponentThisFrame(3);
   HideHudComponentThisFrame(4);
@@ -11,11 +8,6 @@ setTick(() => {
   HideHudComponentThisFrame(9);
   HideHudComponentThisFrame(1);
 });
-
-// setTick(async () => {
-//   await delay(60000);
-//   emitNet('Core/User:SyncHud');
-// });
 
 const playerDistances: any = {};
 
@@ -53,7 +45,7 @@ setTick(async () => {
           SetTextColour(textColour[0], textColour[1], textColour[2], 200);
           SetTextDropShadow();
           SetTextOutline();
-          SetTextEntry('STRING');
+          SetTextEntry("STRING");
           AddTextComponentString(GetPlayerName(id));
           DrawText(x, y + 0.024);
         }

@@ -17,7 +17,7 @@ onNet(
     const src = GetPlayerServerId(localId);
 
     setTick(async () => {
-      await delay(1000);
+      await AddDelay(1000);
 
       const playerCoords = GetEntityCoords(PlayerPedId(), false);
       const distance = GetDistanceBetweenCoords(
@@ -31,28 +31,28 @@ onNet(
       );
 
       if (distance > coords.r) {
-        emitNet('Core/Be/Heist:ReturnArea', src);
-
         SetTimecycleModifier('BloomMid');
         SetTimecycleModifierStrength(3.0);
 
-        emit('Screens/return-to-area', true, {
-          heist_id: heist.id,
-          license: license,
-          spawn,
-        });
+        // setTimeout(() => {
+        //   SetEntityCoords(
+        //     PlayerPedId(),
+        //     spawn.x,
+        //     spawn.y,
+        //     spawn.z,
+        //     false,
+        //     false,
+        //     false,
+        //     false,
+        //   );
 
-        return;
+        //   return;
+        // }, 6000);
       }
 
       if (distance < coords.r) {
         SetTimecycleModifier('Bloom');
         SetTimecycleModifierStrength(0.0);
-
-        emit('Screens/return-to-area', false, {
-          heist_id: null,
-          license: null,
-        });
       }
     });
   },

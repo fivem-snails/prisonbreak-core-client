@@ -1,10 +1,8 @@
 type TTeamLoadout = Array<TTeamLoadoutWeapon>;
 
 type TTeamLoadoutWeapon = {
-  id: string;
-  img: string;
-  type: string;
-  label: string;
-  amount: number;
-  weight: number;
+  name: string;
+  ammo: number;
+  // weight: number;
+  // image: string;
 };
