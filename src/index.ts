@@ -18,6 +18,7 @@ async function Spawn(): Promise<void> {
 
     emit("Screens/team-choose", false, "");
     emit("Screens/team-hud", false, "", {}, 0, 0);
+    emit("Screens/team-alert", false, "");
 
     await AddDelay(10000);
     DoScreenFadeIn(1000);

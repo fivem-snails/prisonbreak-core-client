@@ -19,6 +19,12 @@ async function checkIfPlayerIsInBank(): Promise<void> {
     console.info("ALARM HAS BEEN TRIGGERED");
 
     // TODO: Show hud message to player that alarm has been triggered
+    emit("Screens/team-alert", true, "Criminal");
+    emit("Screens/alarm", true, "");
+
+    setTimeout(() => {
+      emit("Screens/team-alert", false, "");
+    }, 4000);
 
     return clearTick(tickId);
   }
