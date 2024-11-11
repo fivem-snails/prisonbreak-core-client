@@ -16,15 +16,68 @@ async function checkIfPlayerIsInBank(): Promise<void> {
   );
 
   if (playerDistanceToBank < 4) {
-    console.info("ALARM HAS BEEN TRIGGERED");
-
-    // TODO: Show hud message to player that alarm has been triggered
     emit("Screens/team-alert", true, "Criminal");
     emit("Screens/alarm", true, "");
 
     setTimeout(() => {
       emit("Screens/team-alert", false, "");
     }, 4000);
+
+    setTick(() => {
+      DrawMarker(
+        1,
+        256.77,
+        219.94,
+        105.0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1.5,
+        1.5,
+        1.5,
+        255,
+        0,
+        0,
+        0.2,
+        false,
+        false,
+        2,
+        true,
+        // @ts-ignore
+        null,
+        null,
+        false,
+      );
+
+      // const coords = GetEntityCoords(PlayerPedId(), true);
+      // const bankdoor = GetClosestObjectOfType(
+      //   coords[0],
+      //   coords[1],
+      //   coords[2],
+      //   99999.0,
+      //   GetHashKey("prop_ld_bankdoors_02"),
+      //   false,
+      //   false,
+      //   false,
+      // );
+
+      // DoorControl(
+      //   "v_ilev_cbankvaulgate02",
+      //   256.56,
+      //   219.97,
+      //   106.29,
+      //   true,
+      //   0,
+      //   0,
+      //   0,
+      // );
+
+      // console.log("Bankdoor", bankdoor);
+      // FreezeEntityPosition(bankdoor, true);
+    });
 
     return clearTick(tickId);
   }
