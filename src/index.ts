@@ -7,7 +7,7 @@ const AddDelay = async (ms: number): Promise<number> => {
 const Spawn = async (): Promise<void> => {
   try {
     const playerIndex: number = GetPlayerIndex();
-    const playerId: number = GetPlayerServerId(playerIndex);
+    const playerSrc: number = GetPlayerServerId(playerIndex);
     const playerPed: number = PlayerPedId();
 
     emit("Screens/team-choose", false, "");
@@ -28,7 +28,7 @@ const Spawn = async (): Promise<void> => {
     AddRelationshipGroup("POLICE");
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
 
-    emitNet("Core/Server/User:Sync", playerId);
+    emitNet("Core/Server/User:Sync", playerSrc);
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error.message);
