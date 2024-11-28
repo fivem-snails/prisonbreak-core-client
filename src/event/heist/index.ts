@@ -88,4 +88,4 @@ function StartHeist(): void {
   tickId = setTick(checkIfPlayerIsInBank);
 }
 
-onNet("Core/Fe/Heist:Start", StartHeist);
+onNet("Core/Client/Heist:Start", StartHeist);

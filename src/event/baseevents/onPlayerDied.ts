@@ -1,5 +1,5 @@
-on('baseevents:onPlayerDied', (_killedBy: number, _position: []) => {
-  emit('Screens/death', true, 20);
+on("baseevents:onPlayerDied", (_killedBy: number, _position: []): void => {
+  emit("Screens/death", true, 20);
 });
 
 // on('playerSpawned', () => {

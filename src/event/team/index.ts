@@ -7,10 +7,7 @@ function SetTeam(team: string): void {
   console.info("Setting player team to: ", team.toUpperCase());
   SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
 
-  console.info(
-    "Player team is now: ",
-    GetPedRelationshipGroupHash(PlayerPedId()),
-  );
+  console.info("Player team is now: ", GetPedRelationshipGroupHash(PlayerPedId()));
 }
 
-onNet("Core/Fe/Team:SetTeam", SetTeam);
+onNet("Core/Client/Team:SetTeam", SetTeam);

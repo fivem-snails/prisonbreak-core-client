@@ -1,5 +1,5 @@
 on(
-  'baseevents:onPlayerKilled',
+  "baseevents:onPlayerKilled",
   (
     _killerId: number,
     _weaponHash: string,
@@ -8,6 +8,6 @@ on(
     _killerVehName: string,
     _deathCoords: Array<number>,
   ) => {
-    emit('Screens/death', true, 100);
+    emit("Screens/death", true, 100);
   },
 );

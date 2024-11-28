@@ -11,15 +11,14 @@ setTick(async () => {
   SetCreateRandomCopsNotOnScenarios(false);
   SetCreateRandomCopsOnScenarios(false);
   ClearAreaOfCops(
-    // @ts-ignore
     GetEntityCoords(PlayerPedId(), false)[0],
     GetEntityCoords(PlayerPedId(), false)[1],
     GetEntityCoords(PlayerPedId(), false)[2],
     10.0,
     false,
   );
-  StartAudioScene('CHARACTER_CHANGE_IN_SKY_SCENE');
-  SetAudioFlag('PoliceScannerDisabled', true);
+  StartAudioScene("CHARACTER_CHANGE_IN_SKY_SCENE");
+  SetAudioFlag("PoliceScannerDisabled", true);
   SetPlayerWantedLevel(PlayerId(), 0, false);
   SetPlayerWantedLevelNow(PlayerId(), false);
   for (const id of dispatch) {
