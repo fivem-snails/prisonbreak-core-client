@@ -1,5 +1,16 @@
-on("baseevents:onPlayerDied", (_killedBy: number, _position: []): void => {
-  emit("Screens/death", true, 20);
+on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<void> => {
+  try {
+    DoScreenFadeOut(0);
+    NetworkResurrectLocalPlayer(100, 100, 100, 0, 1000, false);
+    await AddDelay(600);
+    DoScreenFadeIn(600);
+    DoAutoSave();
+    DistantCopCarSirens(false);
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
+  }
 });
 
 // on('playerSpawned', () => {
