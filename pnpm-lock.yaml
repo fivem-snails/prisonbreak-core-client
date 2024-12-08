@@ -15,9 +15,9 @@ importers:
       '@biomejs/biome':
         specifier: ^1.9.4
         version: 1.9.4
-      '@tsconfig/node22':
-        specifier: ^22.0.0
-        version: 22.0.0
+      '@tsconfig/node23':
+        specifier: ^23.0.0
+        version: 23.0.0
 
 packages:
 
@@ -77,8 +77,8 @@ packages:
   '@citizenfx/client@2.0.11535-1':
     resolution: {integrity: sha512-5S9PImTILEqW57imKbvA305+pHcoDhf2DRfgNUxl5jCGIEqdzapF9QWoeqqxPy6EnKlN16A2f0Um+HRmakhePg==}
 
-  '@tsconfig/node22@22.0.0':
-    resolution: {integrity: sha512-twLQ77zevtxobBOD4ToAtVmuYrpeYUh3qh+TEp+08IWhpsrIflVHqQ1F1CiPxQGL7doCdBIOOCF+1Tm833faNg==}
+  '@tsconfig/node23@23.0.0':
+    resolution: {integrity: sha512-a2qO9QOEWnomKbFFE3XlOJ5za6Sc+XduxQkFpah42enbTPFPaW0QzKw616KDNfmMLPhXMwCw4EHVjcKaFOj/OA==}
 
 snapshots:
 
@@ -119,4 +119,4 @@ snapshots:
 
   '@citizenfx/client@2.0.11535-1': {}
 
-  '@tsconfig/node22@22.0.0': {}
+  '@tsconfig/node23@23.0.0': {}

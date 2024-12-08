@@ -14,6 +14,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@tsconfig/node22": "^22.0.0"
+    "@tsconfig/node23": "^23.0.0"
   }
 }

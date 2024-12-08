@@ -27,6 +27,7 @@ const Spawn = async (): Promise<void> => {
     AddRelationshipGroup("CRIMINAL");
     AddRelationshipGroup("POLICE");
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
+    await AddDelay(1600);
 
     emitNet("Core/Server/User:Sync", playerSrc);
   } catch (error: unknown) {
