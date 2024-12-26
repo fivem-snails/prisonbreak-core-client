@@ -4,7 +4,7 @@ setTick(() => {
   // SetWeatherTypeNowPersist("CLEAR");
   // SetWeatherTypeNow("CLEAR");
   SetTimecycleModifier("graveyard_shootout");
-  SetTimecycleModifierStrength(1.0);
+  SetTimecycleModifierStrength(0.9);
   SetWeatherTypePersist("RAIN");
   SetWeatherTypeNowPersist("RAIN");
   SetWeatherTypeNow("RAIN");
