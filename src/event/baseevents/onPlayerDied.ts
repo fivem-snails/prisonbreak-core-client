@@ -2,8 +2,8 @@ on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<
   try {
     DoScreenFadeOut(0);
     NetworkResurrectLocalPlayer(1680.81, 2518.49, 45.56, 0, 1000, false);
-    await AddDelay(600);
-    DoScreenFadeIn(600);
+    await AddDelay(1600);
+    DoScreenFadeIn(1600);
     DoAutoSave();
     DistantCopCarSirens(false);
   } catch (error: unknown) {
