@@ -1,7 +1,7 @@
 on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<void> => {
   try {
     DoScreenFadeOut(0);
-    NetworkResurrectLocalPlayer(100, 100, 100, 0, 1000, false);
+    NetworkResurrectLocalPlayer(1680.81, 2518.49, 45.56, 0, 1000, false);
     await AddDelay(600);
     DoScreenFadeIn(600);
     DoAutoSave();

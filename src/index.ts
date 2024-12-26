@@ -17,19 +17,18 @@ const Spawn = async (): Promise<void> => {
     SetEntityCoordsNoOffset(playerPed, 1714.04, 2523.2, 45.56, false, false, false);
     RemoveAllCoverBlockingAreas();
     RemoveAllPedWeapons(playerPed, false);
-    await AddDelay(600);
+    await AddDelay(1000);
     DoScreenFadeIn(600);
     DoAutoSave();
     SetCanAttackFriendly(playerPed, true, true);
     DisableIdleCamera(true);
-    DisplayRadar(false);
+    DisplayRadar(true);
     DistantCopCarSirens(true);
     AddRelationshipGroup("CRIMINAL");
     AddRelationshipGroup("POLICE");
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
-    await AddDelay(1600);
-
-    emitNet("Core/Server/User:Sync", playerSrc);
+    await AddDelay(5000);
+    emitNet("Core/Server/Player:Sync", playerSrc);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
   }
