@@ -6,6 +6,7 @@ const index = PlayerId();
 
 setTick(() => {
   DisablePlayerVehicleRewards(index);
+  SetFlyThroughWindscreenParams(35.0, 45.0, 17.0, 2000.0);
 });
 
 /**
