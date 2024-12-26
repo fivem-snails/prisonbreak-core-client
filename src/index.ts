@@ -17,8 +17,8 @@ const Spawn = async (): Promise<void> => {
     SetEntityCoordsNoOffset(playerPed, 1714.04, 2523.2, 45.56, false, false, false);
     RemoveAllCoverBlockingAreas();
     RemoveAllPedWeapons(playerPed, false);
-    await AddDelay(1000);
-    DoScreenFadeIn(600);
+    await AddDelay(1600);
+    DoScreenFadeIn(1600);
     DoAutoSave();
     SetCanAttackFriendly(playerPed, true, true);
     DisableIdleCamera(true);
