@@ -27,6 +27,12 @@ const Spawn = async (): Promise<void> => {
     AddRelationshipGroup("POLICE");
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
     await AddDelay(5000);
+
+    const prisonBlip = AddBlipForRadius(1849.24, 2606.48,45.57, 1.0);
+    SetBlipSprite(prisonBlip, 809);
+    SetBlipColour(prisonBlip, 17);
+    SetBlipAlpha(prisonBlip, 60);
+
     emitNet("Core/Server/Player:Sync", playerSrc);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
