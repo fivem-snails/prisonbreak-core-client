@@ -42,7 +42,7 @@ const Spawn = async (): Promise<void> => {
     SetBlipScale(policestationBlip, 0.5);
     SetBlipAsShortRange(policestationBlip, false);
     BeginTextCommandSetBlipName("STRING");
-    AddTextComponentString("Police");
+    AddTextComponentString("PD");
     EndTextCommandSetBlipName(policestationBlip);
 
     emitNet("Core/Server/Player:Sync", playerSrc);
