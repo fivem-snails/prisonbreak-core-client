@@ -45,6 +45,15 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("PD");
     EndTextCommandSetBlipName(policestationBlip);
 
+    const ammunationBlip = AddBlipForCoord(1696.72, 3756.09, 34.71);
+    SetBlipSprite(ammunationBlip, 150);
+    SetBlipScale(ammunationBlip, 0.5);
+    SetBlipColour(ammunationBlip, 6);
+    SetBlipAsShortRange(ammunationBlip, false);
+    BeginTextCommandSetBlipName("STRING");
+    AddTextComponentString("Ammunation");
+    EndTextCommandSetBlipName(ammunationBlip);
+
     emitNet("Core/Server/Player:Sync", playerSrc);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
