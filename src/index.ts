@@ -39,11 +39,10 @@ const Spawn = async (): Promise<void> => {
 
     const policestationBlip = AddBlipForCoord(446.13, -986.33, 30.69);
     SetBlipSprite(policestationBlip, 41);
-    SetBlipScale(policestationBlip, 1.0);
-    SetBlipColour(policestationBlip, 38);
+    SetBlipScale(policestationBlip, 0.6);
     SetBlipAsShortRange(policestationBlip, false);
     BeginTextCommandSetBlipName("STRING");
-    AddTextComponentString("Police Station");
+    AddTextComponentString("Police");
     EndTextCommandSetBlipName(policestationBlip);
 
     emitNet("Core/Server/Player:Sync", playerSrc);
