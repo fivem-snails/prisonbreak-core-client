@@ -30,8 +30,12 @@ const Spawn = async (): Promise<void> => {
 
     const prisonBlip = AddBlipForRadius(1849.24, 2606.48,45.57, 100.0);
     SetBlipSprite(prisonBlip, 809);
+    SetBlipScale(prisonBlip, 1.0);
     SetBlipColour(prisonBlip, 17);
     SetBlipAlpha(prisonBlip, 60);
+    BeginTextCommandSetBlipName("STRING");
+    AddTextComponentSubstringPlayerName("Prison");
+    EndTextCommandSetBlipName(prisonBlip);
 
     emitNet("Core/Server/Player:Sync", playerSrc);
   } catch (error: unknown) {
