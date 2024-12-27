@@ -19,7 +19,6 @@ const Spawn = async (): Promise<void> => {
     RemoveAllPedWeapons(playerPed, false);
     await AddDelay(1600);
     DoScreenFadeIn(1600);
-    DoAutoSave();
     SetCanAttackFriendly(playerPed, true, true);
     DisableIdleCamera(true);
     DisplayRadar(true);
