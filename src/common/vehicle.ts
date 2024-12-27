@@ -7,6 +7,7 @@ const index = PlayerId();
 setTick(() => {
   DisablePlayerVehicleRewards(index);
   SetFlyThroughWindscreenParams(0.0, 0.0, 0.0, 0.0);
+  SetVehicleRadioLoud(GetVehiclePedIsIn(GetPlayerPed(-1), false), true);
 });
 
 /**
