@@ -26,7 +26,6 @@ const Spawn = async (): Promise<void> => {
     AddRelationshipGroup("CRIMINAL");
     AddRelationshipGroup("POLICE");
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
-    await AddDelay(5000);
 
     const prisonBlip = AddBlipForCoord(1831.44, 2606.73, 45.57);
     SetBlipSprite(prisonBlip, 809);
