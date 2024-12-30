@@ -54,6 +54,8 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("Ammunation");
     EndTextCommandSetBlipName(ammunationBlip);
 
+    await AddDelay(1600);
+
     emitNet("Core/Server/Player:Sync", playerSrc);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
