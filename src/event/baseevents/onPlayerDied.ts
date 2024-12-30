@@ -1,14 +1,25 @@
 on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<void> => {
   try {
     await AddDelay(2600);
+
     DoScreenFadeOut(0);
     NetworkResurrectLocalPlayer(361.16, -585.09, 28.83, 340.74, 1000, false);
+
     await AddDelay(2600);
+
     DoScreenFadeIn(2600);
     DistantCopCarSirens(false);
 
+    await AddDelay(1000);
+
     BeginTextCommandThefeedPost("STRING");
-    AddTextComponentSubstringPlayerName("~r~-$800~s~ for hospital bills.");
+    AddTextComponentSubstringPlayerName("Hospital Bill: ~r~-$200~s~");
+    EndTextCommandThefeedPostTicker(true, true);
+
+    await AddDelay(500);
+
+    BeginTextCommandThefeedPost("STRING");
+    AddTextComponentSubstringPlayerName("You have been ~r~revived~s~.");
     EndTextCommandThefeedPostTicker(true, true);
   } catch (error: unknown) {
     if (error instanceof Error) {
