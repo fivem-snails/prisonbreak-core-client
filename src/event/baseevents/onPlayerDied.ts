@@ -6,6 +6,12 @@ on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<
     await AddDelay(2600);
     DoScreenFadeIn(2600);
     DistantCopCarSirens(false);
+
+    BeginScaleformMovieMethod(0, "SHOW_SHARD_WASTED_MP_MESSAGE");
+    PushScaleformMovieMethodParameterString("WASTED");
+    PushScaleformMovieMethodParameterString("You died.");
+    PushScaleformMovieMethodParameterInt(0);
+    EndScaleformMovieMethod();
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error.message);
