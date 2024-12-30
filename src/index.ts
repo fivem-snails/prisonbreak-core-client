@@ -28,7 +28,7 @@ const Spawn = async (): Promise<void> => {
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
 
     const prisonBlip = AddBlipForCoord(1831.44, 2606.73, 45.57);
-    SetBlipSprite(prisonBlip, 809);
+    SetBlipSprite(prisonBlip, 188);
     SetBlipScale(prisonBlip, 1.0);
     SetBlipColour(prisonBlip, 17);
     SetBlipAsShortRange(prisonBlip, false);
