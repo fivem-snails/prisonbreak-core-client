@@ -8,8 +8,8 @@ on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<
     DistantCopCarSirens(false);
 
     BeginTextCommandThefeedPost("STRING");
-    AddTextComponentSubstringPlayerName("You have been revived.");
-    EndTextCommandThefeedPostTicker(true, false);
+    AddTextComponentSubstringPlayerName("~r~-$800~s~ for hospital bills.");
+    EndTextCommandThefeedPostTicker(true, true);
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error.message);
