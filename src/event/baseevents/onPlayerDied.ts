@@ -13,7 +13,7 @@ on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<
     await AddDelay(2600);
 
     // Do notification sound effect
-    PlaySoundFrontend(-1, "police_notification", "DLC_AS_VNT_Sounds", false);
+    PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
 
     BeginTextCommandThefeedPost("STRING");
     AddTextComponentSubstringPlayerName("Hospital Bill: ~r~$200~s~");
