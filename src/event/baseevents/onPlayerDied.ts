@@ -7,11 +7,9 @@ on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<
     DoScreenFadeIn(2600);
     DistantCopCarSirens(false);
 
-    BeginScaleformMovieMethod(0, "SHOW_SHARD_WASTED_MP_MESSAGE");
-    PushScaleformMovieMethodParameterString("WASTED");
-    PushScaleformMovieMethodParameterString("You died.");
-    PushScaleformMovieMethodParameterInt(0);
-    EndScaleformMovieMethod();
+    BeginTextCommandThefeedPost("STRING");
+    AddTextComponentSubstringPlayerName("You have been revived.");
+    EndTextCommandThefeedPostTicker(true, false);
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error.message);
