@@ -10,16 +10,16 @@ on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<
     DoScreenFadeIn(2600);
     DistantCopCarSirens(false);
 
-    await AddDelay(1000);
+    await AddDelay(2600);
 
     BeginTextCommandThefeedPost("STRING");
-    AddTextComponentSubstringPlayerName("Hospital Bill: ~r~-$200~s~");
+    AddTextComponentSubstringPlayerName("Hospital Bill: ~r~$200~s~");
     EndTextCommandThefeedPostTicker(true, true);
 
     await AddDelay(500);
 
     BeginTextCommandThefeedPost("STRING");
-    AddTextComponentSubstringPlayerName("You have been ~r~revived~s~.");
+    AddTextComponentSubstringPlayerName("You have been ~r~revived~s~");
     EndTextCommandThefeedPostTicker(true, true);
   } catch (error: unknown) {
     if (error instanceof Error) {
