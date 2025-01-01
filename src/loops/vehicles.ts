@@ -5,11 +5,11 @@ setTick((): void => {
 
   const playerCoords: number[] = GetEntityCoords(PlayerId(), true);
   const serverVehicles: number[] = GetGamePool("CVehicle");
-  console.info(`Server Vehicles: ${serverVehicles}`);
+  console.info("Server Vehicles:", {
+    serverVehicles,
+  });
 
   serverVehicles.map((serverVehicle: number): void => {
-    console.info(`Server Vehicle: ${serverVehicle}`);
-
     const serverVehicleCoords: number[] = GetEntityCoords(serverVehicle, true);
     const distancefromPlayerToServerVehicle: number = GetDistanceBetweenCoords(
       playerCoords[0],
@@ -21,8 +21,16 @@ setTick((): void => {
       true,
     );
 
+    console.info("Vehicle Data:", {
+      serverVehicle,
+      serverVehicleCoords,
+      distancefromPlayerToServerVehicle,
+    });
+
     if (distancefromPlayerToServerVehicle < 5) {
-      console.info(`Player is near the vehicle with distance: ${distancefromPlayerToServerVehicle}`);
+      console.info("Vehicle is near player:", {
+        distancefromPlayerToServerVehicle,
+      });
     }
   });
 });
