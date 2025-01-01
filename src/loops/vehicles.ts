@@ -35,6 +35,17 @@ setTick(async (): Promise<void> => {
         distancefromPlayerToServerVehicle,
       });
 
+      const [x, screenX, screenY] = GetScreenCoordFromWorldCoord(
+        serverVehicleCoords[0],
+        serverVehicleCoords[1],
+        serverVehicleCoords[2] + 1.0, // Adjust the value to position the text above the vehicle
+      );
+
+      console.info("Screen Coords:", {
+        screenX,
+        screenY,
+      });
+
       BeginTextCommandDisplayText("STRING");
       SetTextScale(0.0, 0.55);
       SetTextFont(0);
@@ -46,7 +57,7 @@ setTick(async (): Promise<void> => {
       SetTextOutline();
       SetTextEntry("STRING");
       AddTextComponentString(`${serverVehicle} - ${distancefromPlayerToServerVehicle}`);
-      EndTextCommandDisplayText(serverVehicleCoords[0], serverVehicleCoords[1]);
+      EndTextCommandDisplayText(screenX, screenY);
     }
   });
 });
