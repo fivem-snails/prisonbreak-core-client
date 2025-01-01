@@ -52,11 +52,11 @@ setTick(async (): Promise<void> => {
 
       // Draw vehicle model text
       BeginTextCommandDisplayText("STRING");
-      SetTextScale(0.0, 0.2);
+      SetTextScale(0.0, 0.16);
       SetTextFont(0);
       SetTextProportional(true);
       SetTextCentre(true);
-      SetTextColour(255, 255, 255, 150);
+      SetTextColour(255, 255, 255, 100);
       SetTextDropshadow(0, 0, 0, 0, 255);
       SetTextEdge(1, 0, 0, 0, 255);
       SetTextDropShadow();
@@ -72,7 +72,7 @@ setTick(async (): Promise<void> => {
       SetTextProportional(true);
       SetTextCentre(true);
       SetTextColour(0, 255, 0, 255);
-      SetTextDropshadow(0, 0, 0, 0, 255);
+      SetTextDropshadow(0, 0, 0, 0, 250);
       SetTextEdge(1, 0, 0, 0, 255);
       SetTextDropShadow();
       SetTextOutline();
