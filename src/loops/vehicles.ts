@@ -38,7 +38,6 @@ setTick(async (): Promise<void> => {
       });
 
       BeginTextCommandDisplayText("STRING");
-
       SetTextScale(0.0, 0.55);
       SetTextFont(0);
       SetTextProportional(true);
