@@ -45,8 +45,8 @@ setTick(async (): Promise<void> => {
       const serverVehicleModel: number = GetEntityModel(serverVehicle);
       const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel);
 
-      const rectWidth: number = 0.1;
-      const rectHeight: number = 0.03;
+      const rectWidth: number = 0.07;
+      const rectHeight: number = 0.04;
 
       DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
 
