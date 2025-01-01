@@ -49,12 +49,14 @@ setTick(async (): Promise<void> => {
       const rectHeight: number = 0.03;
 
       DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
+
+      // Draw vehicle model text
       BeginTextCommandDisplayText("STRING");
-      SetTextScale(0.0, 0.3);
+      SetTextScale(0.0, 0.2);
       SetTextFont(0);
       SetTextProportional(true);
       SetTextCentre(true);
-      SetTextColour(255, 255, 255, 255);
+      SetTextColour(255, 255, 255, 150);
       SetTextDropshadow(0, 0, 0, 0, 255);
       SetTextEdge(1, 0, 0, 0, 255);
       SetTextDropShadow();
@@ -62,6 +64,21 @@ setTick(async (): Promise<void> => {
       SetTextEntry("STRING");
       AddTextComponentString(`${serverVehicleModelName}`);
       EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2 - 0.015);
+
+      // Draw vehicle price text
+      BeginTextCommandDisplayText("STRING");
+      SetTextScale(0.0, 0.2);
+      SetTextFont(0);
+      SetTextProportional(true);
+      SetTextCentre(true);
+      SetTextColour(0, 255, 0, 255);
+      SetTextDropshadow(0, 0, 0, 0, 255);
+      SetTextEdge(1, 0, 0, 0, 255);
+      SetTextDropShadow();
+      SetTextOutline();
+      SetTextEntry("STRING");
+      AddTextComponentString("$5,000,000");
+      EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2);
     }
   });
 });
