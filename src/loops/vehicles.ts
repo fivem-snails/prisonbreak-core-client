@@ -45,8 +45,8 @@ setTick(async (): Promise<void> => {
       SetTextDropShadow();
       SetTextOutline();
       SetTextEntry("STRING");
-      AddTextComponentString("Vehicle is near player");
-      EndTextCommandDisplayText(0.0, 0.0);
+      AddTextComponentString(`${serverVehicle} - ${distancefromPlayerToServerVehicle}`);
+      EndTextCommandDisplayText(serverVehicleCoords[0], serverVehicleCoords[1]);
     }
   });
 });
