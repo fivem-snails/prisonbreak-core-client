@@ -45,14 +45,15 @@ setTick(async (): Promise<void> => {
       const serverVehicleModel: number = GetEntityModel(serverVehicle);
       const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel);
 
-      const rectWidth: number = 0.05;
+      const rectWidth: number = 0.1;
       const rectHeight: number = 0.03;
-      DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
 
+      DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
       BeginTextCommandDisplayText("STRING");
-      SetTextScale(0.0, 0.2);
+      SetTextScale(0.0, 0.3);
       SetTextFont(0);
       SetTextProportional(true);
+      SetTextCentre(true);
       SetTextColour(255, 255, 255, 255);
       SetTextDropshadow(0, 0, 0, 0, 255);
       SetTextEdge(1, 0, 0, 0, 255);
@@ -60,7 +61,7 @@ setTick(async (): Promise<void> => {
       SetTextOutline();
       SetTextEntry("STRING");
       AddTextComponentString(`${serverVehicleModelName}`);
-      EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY);
+      EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2 - 0.015);
     }
   });
 });
