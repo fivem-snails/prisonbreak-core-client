@@ -5,7 +5,7 @@ setTick(async (): Promise<void> => {
   SetFlyThroughWindscreenParams(30.0, 0.0, 0.0, 0.0);
   SetVehicleRadioLoud(GetVehiclePedIsIn(GetPlayerPed(-1), false), true);
 
-  const playerCoords: number[] = GetEntityCoords(PlayerId(), true);
+  const playerCoords: number[] = GetEntityCoords(PlayerPedId(), true);
   const serverVehicles: number[] = GetGamePool("CVehicle");
   console.info("Player Coords:", {
     playerCoords,
