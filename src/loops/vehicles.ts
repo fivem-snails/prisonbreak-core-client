@@ -5,8 +5,11 @@ setTick((): void => {
 
   const playerCoords: number[] = GetEntityCoords(PlayerId(), true);
   const serverVehicles: number[] = GetGamePool("CVehicle");
+  console.info(`Server Vehicles: ${serverVehicles}`);
 
   serverVehicles.map((serverVehicle: number): void => {
+    console.info(`Server Vehicle: ${serverVehicle}`);
+
     const serverVehicleCoords: number[] = GetEntityCoords(serverVehicle, true);
     const distancefromPlayerToServerVehicle: number = GetDistanceBetweenCoords(
       playerCoords[0],
