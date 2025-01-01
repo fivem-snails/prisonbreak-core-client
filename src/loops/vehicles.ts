@@ -42,6 +42,9 @@ setTick(async (): Promise<void> => {
         serverVehicleScreenY,
       });
 
+      const serverVehicleModel: number = GetEntityModel(serverVehicle);
+      const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel);
+
       BeginTextCommandDisplayText("STRING");
       SetTextScale(0.0, 0.55);
       SetTextFont(0);
@@ -52,9 +55,7 @@ setTick(async (): Promise<void> => {
       SetTextDropShadow();
       SetTextOutline();
       SetTextEntry("STRING");
-      AddTextComponentString(
-        `${GetDisplayNameFromVehicleModel(GetEntityModel(serverVehicle))} - ${distancefromPlayerToServerVehicle}`,
-      );
+      AddTextComponentString(`${serverVehicleModelName} - ${distancefromPlayerToServerVehicle}`);
       EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY);
     }
   });
