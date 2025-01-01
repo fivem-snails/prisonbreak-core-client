@@ -32,10 +32,24 @@ setTick(async (): Promise<void> => {
       distancefromPlayerToServerVehicle,
     });
 
-    if (distancefromPlayerToServerVehicle < 5) {
+    if (distancefromPlayerToServerVehicle < 8) {
       console.info("Vehicle is near player:", {
         distancefromPlayerToServerVehicle,
       });
+
+      BeginTextCommandDisplayText("STRING");
+
+      SetTextScale(0.0, 0.55);
+      SetTextFont(0);
+      SetTextProportional(true);
+      SetTextColour(255, 255, 255, 255);
+      SetTextDropshadow(0, 0, 0, 0, 255);
+      SetTextEdge(1, 0, 0, 0, 255);
+      SetTextDropShadow();
+      SetTextOutline();
+      SetTextEntry("STRING");
+      AddTextComponentString("Vehicle is near player");
+      EndTextCommandDisplayText(0.0, 0.0);
     }
   });
 });
