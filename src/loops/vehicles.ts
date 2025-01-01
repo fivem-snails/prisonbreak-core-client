@@ -7,6 +7,9 @@ setTick(async (): Promise<void> => {
 
   const playerCoords: number[] = GetEntityCoords(PlayerId(), true);
   const serverVehicles: number[] = GetGamePool("CVehicle");
+  console.info("Player Coords:", {
+    playerCoords,
+  });
   console.info("Server Vehicles:", {
     serverVehicles,
   });
