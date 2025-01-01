@@ -31,19 +31,15 @@ setTick(async (): Promise<void> => {
     });
 
     if (distancefromPlayerToServerVehicle < 8) {
-      console.info("Vehicle is near player:", {
-        distancefromPlayerToServerVehicle,
-      });
-
-      const [x, screenX, screenY] = GetScreenCoordFromWorldCoord(
+      const [_, serverVehicleScreenX, serverVehicleScreenY] = GetScreenCoordFromWorldCoord(
         serverVehicleCoords[0],
         serverVehicleCoords[1],
-        serverVehicleCoords[2] + 1.0, // Adjust the value to position the text above the vehicle
+        serverVehicleCoords[2] + 1.0,
       );
 
       console.info("Screen Coords:", {
-        screenX,
-        screenY,
+        serverVehicleScreenX,
+        serverVehicleScreenY,
       });
 
       BeginTextCommandDisplayText("STRING");
@@ -56,8 +52,10 @@ setTick(async (): Promise<void> => {
       SetTextDropShadow();
       SetTextOutline();
       SetTextEntry("STRING");
-      AddTextComponentString(`${serverVehicle} - ${distancefromPlayerToServerVehicle}`);
-      EndTextCommandDisplayText(screenX, screenY);
+      AddTextComponentString(
+        `${GetDisplayNameFromVehicleModel(GetEntityModel(serverVehicle))} - ${distancefromPlayerToServerVehicle}`,
+      );
+      EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY);
     }
   });
 });
