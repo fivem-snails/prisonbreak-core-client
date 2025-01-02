@@ -45,22 +45,24 @@ setTick(async (): Promise<void> => {
       const serverVehicleModel: number = GetEntityModel(serverVehicle);
       const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel);
 
-      console.info("Server Vehicle Model Name:", {
-        serverVehicleModelName,
-      });
+      // console.info("Server Vehicle Model Name:", {
+      //   serverVehicleModelName,
+      // });
 
-      const getVehicleResponse: Response = await fetch(`${BASE_URL}/api/v1/vehicles/get/${serverVehicleModelName}`, {
-        method: "GET",
-      });
+      // Call server-event to get the vehicle model and then receive it back to client through callback
 
-      if (!getVehicleResponse.ok) {
-        throw new Error(getVehicleResponse.statusText);
-      }
+      // const getVehicleResponse: Response = await fetch(`${BASE_URL}/api/v1/vehicles/get/${serverVehicleModelName}`, {
+      //   method: "GET",
+      // });
 
-      const getVehicleResponseBody: IVehicle = (await getVehicleResponse.json()) as IVehicle;
+      // if (!getVehicleResponse.ok) {
+      //   throw new Error(getVehicleResponse.statusText);
+      // }
+
+      // const getVehicleResponseBody: IVehicle = (await getVehicleResponse.json()) as IVehicle;
 
       const serverVehiclePrice: string = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
-        getVehicleResponseBody.price,
+        5_000_000,
       );
 
       console.info("Server Vehicle Price:", {
@@ -69,6 +71,8 @@ setTick(async (): Promise<void> => {
 
       const rectWidth: number = 0.07;
       const rectHeight: number = 0.04;
+
+      // Perhaps we render NUI?
 
       DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
 
