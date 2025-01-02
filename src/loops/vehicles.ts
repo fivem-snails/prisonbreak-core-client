@@ -12,7 +12,7 @@ setTick(async (): Promise<void> => {
     serverVehicles,
   });
 
-  serverVehicles.map((serverVehicle: number): void => {
+  serverVehicles.map(async (serverVehicle: number): Promise<void> => {
     const serverVehicleCoords: number[] = GetEntityCoords(serverVehicle, true);
     const distancefromPlayerToServerVehicle: number = GetDistanceBetweenCoords(
       playerCoords[0],
@@ -44,6 +44,20 @@ setTick(async (): Promise<void> => {
 
       const serverVehicleModel: number = GetEntityModel(serverVehicle);
       const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel);
+
+      const getVehicleResponse: Response = await fetch(`${BASE_URL}/api/v1/vehicles/get/${serverVehicleModel}`, {
+        method: "GET",
+      });
+
+      if (!getVehicleResponse.ok) {
+        throw new Error(getVehicleResponse.statusText);
+      }
+
+      const getVehicleResponseBody: IVehicle = (await getVehicleResponse.json()) as IVehicle;
+
+      const serverVehiclePrice: string = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
+        getVehicleResponseBody.price,
+      );
 
       const rectWidth: number = 0.07;
       const rectHeight: number = 0.04;
@@ -77,7 +91,7 @@ setTick(async (): Promise<void> => {
       SetTextDropShadow();
       SetTextOutline();
       SetTextEntry("STRING");
-      AddTextComponentString("$5,000,000");
+      AddTextComponentString(serverVehiclePrice);
       EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2);
     }
   });

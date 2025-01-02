@@ -10,10 +10,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@citizenfx/client": "2.0.11535-1"
+    "@citizenfx/client": "2.0.11535-1",
+    "node-fetch-commonjs": "^3.3.2"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@tsconfig/node22": "^22.0.0"
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^22.10.3"
   }
 }
