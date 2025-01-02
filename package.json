@@ -10,8 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@citizenfx/client": "2.0.11535-1",
-    "node-fetch-commonjs": "^3.3.2"
+    "@citizenfx/client": "2.0.11535-1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

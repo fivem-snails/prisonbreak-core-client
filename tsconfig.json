@@ -1,7 +1,7 @@
 {
   "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
-    "types": ["@citizenfx/client", "node-fetch-commonjs"],
+    "types": ["@citizenfx/client"],
     "moduleResolution": "node",
     "module": "CommonJS",
     "outDir": "dist"

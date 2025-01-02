@@ -1,5 +1,3 @@
-const fetch = require("node-fetch-commonjs");
-
 const AddDelay = async (ms: number): Promise<number> => {
   return new Promise((resolve) => {
     setTimeout(resolve, ms, 0);
