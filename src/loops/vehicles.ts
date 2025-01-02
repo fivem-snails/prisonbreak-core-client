@@ -5,12 +5,12 @@ setTick(async (): Promise<void> => {
 
   const playerCoords: number[] = GetEntityCoords(PlayerPedId(), true);
   const serverVehicles: number[] = GetGamePool("CVehicle");
-  console.info("Player Coords:", {
-    playerCoords,
-  });
-  console.info("Server Vehicles:", {
-    serverVehicles,
-  });
+  // console.info("Player Coords:", {
+  //   playerCoords,
+  // });
+  // console.info("Server Vehicles:", {
+  //   serverVehicles,
+  // });
 
   serverVehicles.map(async (serverVehicle: number): Promise<void> => {
     const serverVehicleCoords: number[] = GetEntityCoords(serverVehicle, true);
@@ -24,11 +24,11 @@ setTick(async (): Promise<void> => {
       true,
     );
 
-    console.info("Vehicle Data:", {
-      serverVehicle,
-      serverVehicleCoords,
-      distancefromPlayerToServerVehicle,
-    });
+    // console.info("Vehicle Data:", {
+    //   serverVehicle,
+    //   serverVehicleCoords,
+    //   distancefromPlayerToServerVehicle,
+    // });
 
     if (distancefromPlayerToServerVehicle < 8) {
       const [_, serverVehicleScreenX, serverVehicleScreenY] = GetScreenCoordFromWorldCoord(
@@ -37,15 +37,19 @@ setTick(async (): Promise<void> => {
         serverVehicleCoords[2] + 1.0,
       );
 
-      console.info("Screen Coords:", {
-        serverVehicleScreenX,
-        serverVehicleScreenY,
-      });
+      // console.info("Screen Coords:", {
+      //   serverVehicleScreenX,
+      //   serverVehicleScreenY,
+      // });
 
       const serverVehicleModel: number = GetEntityModel(serverVehicle);
       const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel);
 
-      const getVehicleResponse: Response = await fetch(`${BASE_URL}/api/v1/vehicles/get/${serverVehicleModel}`, {
+      console.info("Server Vehicle Model Name:", {
+        serverVehicleModelName,
+      });
+
+      const getVehicleResponse: Response = await fetch(`${BASE_URL}/api/v1/vehicles/get/${serverVehicleModelName}`, {
         method: "GET",
       });
 
@@ -58,6 +62,10 @@ setTick(async (): Promise<void> => {
       const serverVehiclePrice: string = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
         getVehicleResponseBody.price,
       );
+
+      console.info("Server Vehicle Price:", {
+        serverVehiclePrice,
+      });
 
       const rectWidth: number = 0.07;
       const rectHeight: number = 0.04;
