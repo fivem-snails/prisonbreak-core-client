@@ -18,10 +18,8 @@ const GetVehicle = (
     SetTextFont(4);
     SetTextProportional(true);
     SetTextCentre(true);
-    SetTextColour(0, 255, 0, 255);
+    SetTextColour(124, 252, 0, 250);
     SetTextDropshadow(0, 0, 0, 0, 250);
-    SetTextEdge(1, 0, 0, 0, 255);
-    SetTextDropShadow();
     SetTextOutline();
     SetTextEntry("STRING");
     AddTextComponentString(serverVehiclePriceUSD);
