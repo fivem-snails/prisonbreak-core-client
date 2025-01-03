@@ -1,20 +1,22 @@
 // const serverVehiclePrice: number = 0;
 
 const GetVehicle = (
-  vehicle: IVehicle,
+  serverVehiclePrice: number,
   serverVehicleScreenX: number,
   serverVehicleScreenY: number,
   rectHeight: number,
 ) => {
   try {
-    console.info("Vehicle:", {
-      vehicle,
-    });
-
     const serverVehiclePriceUSD: string = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
-    }).format(vehicle.price);
+    }).format(serverVehiclePrice);
+
+    // Perhaps we need to cache the vehicle price in the client-side cache
+    // to avoid making the same request multiple times
+    // if (serverVehiclePrice === 0) {
+    //   serverVehiclePrice = vehicle.price;
+    // }
 
     // Draw vehicle price text
     BeginTextCommandDisplayText("STRING");
