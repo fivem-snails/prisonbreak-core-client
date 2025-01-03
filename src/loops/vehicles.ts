@@ -30,7 +30,7 @@ setTick(async (): Promise<void> => {
     //   distancefromPlayerToServerVehicle,
     // });
 
-    if (distancefromPlayerToServerVehicle < 8) {
+    if (distancefromPlayerToServerVehicle < 4) {
       const [_, serverVehicleScreenX, serverVehicleScreenY] = GetScreenCoordFromWorldCoord(
         serverVehicleCoords[0],
         serverVehicleCoords[1],
