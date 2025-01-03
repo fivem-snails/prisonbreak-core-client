@@ -15,7 +15,7 @@ const GetVehicle = (
     // Draw vehicle price text
     BeginTextCommandDisplayText("STRING");
     SetTextScale(0.0, 0.6);
-    SetTextFont(3);
+    SetTextFont(0);
     SetTextProportional(true);
     SetTextCentre(true);
     SetTextColour(0, 255, 0, 255);
@@ -25,7 +25,7 @@ const GetVehicle = (
     SetTextOutline();
     SetTextEntry("STRING");
     AddTextComponentString(serverVehiclePriceUSD);
-    EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY);
+    EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error);
   }
