@@ -8,6 +8,8 @@ const GetVehicle = (
     const serverVehiclePriceUSD: string = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
     }).format(serverVehiclePrice);
 
     // Draw vehicle price text
