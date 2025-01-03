@@ -23,7 +23,8 @@ const GetVehicle = (
     SetTextOutline();
     SetTextEntry("STRING");
     AddTextComponentString(serverVehiclePriceUSD);
-    EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + 0.04);
+    console.info("Server Vehicle ScreenY:", serverVehicleScreenY);
+    EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + 0.08);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error);
   }
