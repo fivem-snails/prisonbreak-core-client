@@ -53,13 +53,36 @@ setTick(async (): Promise<void> => {
 
       DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
 
-      emitNet(
-        "Core/Server/Shared:GetVehicle",
-        playerSrc,
-        serverVehicleModelName,
-        serverVehicleScreenX,
-        serverVehicleScreenY,
-      );
+      // Draw vehicle model text
+      BeginTextCommandDisplayText("STRING");
+      SetTextScale(0.0, 0.16);
+      SetTextFont(0);
+      SetTextProportional(true);
+      SetTextCentre(true);
+      SetTextColour(255, 255, 255, 100);
+      SetTextDropshadow(0, 0, 0, 0, 255);
+      SetTextEdge(1, 0, 0, 0, 255);
+      SetTextDropShadow();
+      SetTextOutline();
+      SetTextEntry("STRING");
+      AddTextComponentString(serverVehicleModelName);
+      EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2 - 0.015);
+
+      // Draw vehicle price text
+      BeginTextCommandDisplayText("STRING");
+      SetTextScale(0.0, 0.2);
+      SetTextFont(0);
+      SetTextProportional(true);
+      SetTextCentre(true);
+      SetTextColour(0, 255, 0, 255);
+      SetTextDropshadow(0, 0, 0, 0, 250);
+      SetTextEdge(1, 0, 0, 0, 255);
+      SetTextDropShadow();
+      SetTextOutline();
+      SetTextEntry("STRING");
+      EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2);
+
+      emitNet("Core/Server/Shared:GetVehicle", playerSrc, serverVehicleModelName);
     }
   });
 });
