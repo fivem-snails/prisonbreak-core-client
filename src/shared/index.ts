@@ -5,11 +5,6 @@ const GetVehicle = (vehicle: IVehicle, serverVehicleScreenX: number, serverVehic
       currency: "USD",
     }).format(vehicle.price);
 
-    const rectWidth: number = 0.07;
-    const rectHeight: number = 0.04;
-
-    DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
-
     // Draw vehicle model text
     BeginTextCommandDisplayText("STRING");
     SetTextScale(0.0, 0.16);
