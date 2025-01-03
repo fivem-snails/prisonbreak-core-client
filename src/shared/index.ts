@@ -1,5 +1,9 @@
 const GetVehicle = (vehicle: IVehicle) => {
   try {
+    console.info("Vehicle:", {
+      vehicle,
+    });
+
     const serverVehiclePrice: string = new Intl.NumberFormat("en-US", {
       style: "currency",
       currency: "USD",
