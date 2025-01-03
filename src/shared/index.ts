@@ -18,7 +18,7 @@ const GetVehicle = (
     SetTextFont(4);
     SetTextProportional(true);
     SetTextCentre(true);
-    SetTextColour(124, 252, 0, 250);
+    SetTextColour(255, 69, 0, 250);
     SetTextDropshadow(0, 0, 0, 0, 250);
     SetTextOutline();
     SetTextEntry("STRING");
