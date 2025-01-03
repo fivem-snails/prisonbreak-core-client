@@ -43,36 +43,19 @@ setTick(async (): Promise<void> => {
       // });
 
       const serverVehicleModel: number = GetEntityModel(serverVehicle);
-      const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel);
+      const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel).toLowerCase();
 
-      // console.info("Server Vehicle Model Name:", {
-      //   serverVehicleModelName,
-      // });
+      const playerIndex: number = GetPlayerIndex();
+      const playerSrc: number = GetPlayerServerId(playerIndex);
 
-      // Call server-event to get the vehicle model and then receive it back to client through callback
-
-      // const getVehicleResponse: Response = await fetch(`${BASE_URL}/api/v1/vehicles/get/${serverVehicleModelName}`, {
-      //   method: "GET",
-      // });
-
-      // if (!getVehicleResponse.ok) {
-      //   throw new Error(getVehicleResponse.statusText);
-      // }
-
-      // const getVehicleResponseBody: IVehicle = (await getVehicleResponse.json()) as IVehicle;
+      emitNet("Core/Server/Shared:GetVehicle", playerSrc, serverVehicleModelName);
 
       const serverVehiclePrice: string = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
         5_000_000,
       );
 
-      console.info("Server Vehicle Price:", {
-        serverVehiclePrice,
-      });
-
       const rectWidth: number = 0.07;
       const rectHeight: number = 0.04;
-
-      // Perhaps we render NUI?
 
       DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
 
