@@ -11,14 +11,14 @@ const GetVehicle = (
       vehicle,
     });
 
-    // const serverVehiclePriceUSD: string = new Intl.NumberFormat("en-US", {
-    //   style: "currency",
-    //   currency: "USD",
-    // }).format(serverVehiclePrice);
+    const serverVehiclePriceUSD: string = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(vehicle.price);
 
     // Draw vehicle price text
     BeginTextCommandDisplayText("STRING");
-    SetTextScale(0.0, 0.2);
+    SetTextScale(0.0, 0.4);
     SetTextFont(0);
     SetTextProportional(true);
     SetTextCentre(true);
@@ -28,7 +28,7 @@ const GetVehicle = (
     SetTextDropShadow();
     SetTextOutline();
     SetTextEntry("STRING");
-    AddTextComponentString(`$${vehicle.price}`);
+    AddTextComponentString(serverVehiclePriceUSD);
     EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error);

@@ -53,21 +53,6 @@ setTick(async (): Promise<void> => {
 
       DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
 
-      // Draw vehicle model text
-      BeginTextCommandDisplayText("STRING");
-      SetTextScale(0.0, 0.16);
-      SetTextFont(0);
-      SetTextProportional(true);
-      SetTextCentre(true);
-      SetTextColour(255, 255, 255, 100);
-      SetTextDropshadow(0, 0, 0, 0, 255);
-      SetTextEdge(1, 0, 0, 0, 255);
-      SetTextDropShadow();
-      SetTextOutline();
-      SetTextEntry("STRING");
-      AddTextComponentString(serverVehicleModelName);
-      EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2 - 0.015);
-
       emitNet(
         "Core/Server/Shared:GetVehicle",
         playerSrc,
