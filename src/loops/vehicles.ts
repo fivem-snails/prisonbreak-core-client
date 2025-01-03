@@ -80,9 +80,15 @@ setTick(async (): Promise<void> => {
       SetTextDropShadow();
       SetTextOutline();
       SetTextEntry("STRING");
-      EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2);
 
-      emitNet("Core/Server/Shared:GetVehicle", playerSrc, serverVehicleModelName);
+      emitNet(
+        "Core/Server/Shared:GetVehicle",
+        playerSrc,
+        serverVehicleModelName,
+        serverVehicleScreenX,
+        serverVehicleScreenY,
+        rectHeight,
+      );
     }
   });
 });

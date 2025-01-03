@@ -1,4 +1,9 @@
-const GetVehicle = (vehicle: IVehicle) => {
+const GetVehicle = (
+  vehicle: IVehicle,
+  serverVehicleScreenX: number,
+  serverVehicleScreenY: number,
+  rectHeight: number,
+) => {
   try {
     console.info("Vehicle:", {
       vehicle,
@@ -10,6 +15,7 @@ const GetVehicle = (vehicle: IVehicle) => {
     }).format(vehicle.price);
 
     AddTextComponentString(serverVehiclePrice);
+    EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error);
   }
