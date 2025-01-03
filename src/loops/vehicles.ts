@@ -51,7 +51,7 @@ setTick(async (): Promise<void> => {
       const rectWidth: number = 0.07;
       const rectHeight: number = 0.04;
 
-      DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 150);
+      DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 100);
 
       emitNet(
         "Core/Server/Shared:GetVehicle",

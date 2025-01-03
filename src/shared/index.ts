@@ -1,5 +1,3 @@
-// const serverVehiclePrice: number = 0;
-
 const GetVehicle = (
   serverVehiclePrice: number,
   serverVehicleScreenX: number,
@@ -12,15 +10,9 @@ const GetVehicle = (
       currency: "USD",
     }).format(serverVehiclePrice);
 
-    // Perhaps we need to cache the vehicle price in the client-side cache
-    // to avoid making the same request multiple times
-    // if (serverVehiclePrice === 0) {
-    //   serverVehiclePrice = vehicle.price;
-    // }
-
     // Draw vehicle price text
     BeginTextCommandDisplayText("STRING");
-    SetTextScale(0.0, 0.4);
+    SetTextScale(0.0, 0.2);
     SetTextFont(0);
     SetTextProportional(true);
     SetTextCentre(true);
