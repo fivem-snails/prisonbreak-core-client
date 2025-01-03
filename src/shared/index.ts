@@ -14,8 +14,8 @@ const GetVehicle = (
 
     // Draw vehicle price text
     BeginTextCommandDisplayText("STRING");
-    SetTextScale(0.0, 0.8);
-    SetTextFont(1);
+    SetTextScale(0.0, 1.0);
+    SetTextFont(4);
     SetTextProportional(true);
     SetTextCentre(true);
     SetTextColour(0, 255, 0, 255);
