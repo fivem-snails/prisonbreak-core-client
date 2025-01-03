@@ -1,3 +1,5 @@
+// const serverVehiclePrice: number = 0;
+
 const GetVehicle = (
   vehicle: IVehicle,
   serverVehicleScreenX: number,
@@ -9,12 +11,24 @@ const GetVehicle = (
       vehicle,
     });
 
-    const serverVehiclePrice: string = new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-    }).format(vehicle.price);
+    // const serverVehiclePriceUSD: string = new Intl.NumberFormat("en-US", {
+    //   style: "currency",
+    //   currency: "USD",
+    // }).format(serverVehiclePrice);
 
-    AddTextComponentString(serverVehiclePrice);
+    // Draw vehicle price text
+    BeginTextCommandDisplayText("STRING");
+    SetTextScale(0.0, 0.2);
+    SetTextFont(0);
+    SetTextProportional(true);
+    SetTextCentre(true);
+    SetTextColour(0, 255, 0, 255);
+    SetTextDropshadow(0, 0, 0, 0, 250);
+    SetTextEdge(1, 0, 0, 0, 255);
+    SetTextDropShadow();
+    SetTextOutline();
+    SetTextEntry("STRING");
+    AddTextComponentString(`$${vehicle.price}`);
     EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error);

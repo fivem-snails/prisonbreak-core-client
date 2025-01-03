@@ -68,19 +68,6 @@ setTick(async (): Promise<void> => {
       AddTextComponentString(serverVehicleModelName);
       EndTextCommandDisplayText(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2 - 0.015);
 
-      // Draw vehicle price text
-      BeginTextCommandDisplayText("STRING");
-      SetTextScale(0.0, 0.2);
-      SetTextFont(0);
-      SetTextProportional(true);
-      SetTextCentre(true);
-      SetTextColour(0, 255, 0, 255);
-      SetTextDropshadow(0, 0, 0, 0, 250);
-      SetTextEdge(1, 0, 0, 0, 255);
-      SetTextDropShadow();
-      SetTextOutline();
-      SetTextEntry("STRING");
-
       emitNet(
         "Core/Server/Shared:GetVehicle",
         playerSrc,
