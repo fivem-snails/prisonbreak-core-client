@@ -8,6 +8,8 @@ const TeamAssign = (team: string): void => {
   SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
 
   console.info("Player team is now: ", GetPedRelationshipGroupHash(PlayerPedId()));
+
+  emit("alta-nui-welcome", true);
 };
 
 onNet("Core/Client/Team:Assign", TeamAssign);
