@@ -11,6 +11,7 @@ const Spawn = async (): Promise<void> => {
     const playerPed: number = PlayerPedId();
 
     emit("Screens/team-choose", false, "");
+    emit("alta-nui-welcome", false);
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
     DoScreenFadeOut(0);
