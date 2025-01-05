@@ -9,7 +9,7 @@ const TeamAssign = (team: string): void => {
 
   console.info("Player team is now: ", GetPedRelationshipGroupHash(PlayerPedId()));
 
-  SetNewWaypoint(232.16, 198.18);
+  SetNewWaypoint(249.29, 217.37);
   DistantCopCarSirens(false);
   PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
   emit("alta-nui-welcome", true);
