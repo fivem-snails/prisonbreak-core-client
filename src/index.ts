@@ -30,7 +30,7 @@ const Spawn = async (): Promise<void> => {
 
     const prisonBlip = AddBlipForCoord(1831.44, 2606.73, 45.57);
     SetBlipSprite(prisonBlip, 188);
-    SetBlipScale(prisonBlip, 1);
+    SetBlipScale(prisonBlip, 1.5);
     SetBlipColour(prisonBlip, 17);
     SetBlipAsShortRange(prisonBlip, false);
     BeginTextCommandSetBlipName("STRING");
