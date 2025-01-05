@@ -61,7 +61,7 @@ const Spawn = async (): Promise<void> => {
 
     const bank: number = AddBlipForCoord(249.29, 217.37, 106.29);
     SetBlipSprite(bank, 855);
-    SetBlipScale(bank, 2.0);
+    SetBlipScale(bank, 1.6);
     SetBlipColour(bank, 2);
     SetBlipAsShortRange(bank, false);
     BeginTextCommandSetBlipName("STRING");
