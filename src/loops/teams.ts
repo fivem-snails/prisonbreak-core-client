@@ -2,7 +2,9 @@ const playerBlips: Map<number, number> = new Map();
 
 setTick((): void => {
   const serverPlayers: number[] = GetActivePlayers();
+  const activePlayerSet: Set<number> = new Set(serverPlayers);
 
+  // Add or update blips for active players
   for (const id of serverPlayers) {
     const serverPlayerPed: number = GetPlayerPed(id);
 
@@ -17,6 +19,14 @@ setTick((): void => {
         EndTextCommandSetBlipName(serverPlayerBlip);
         playerBlips.set(id, serverPlayerBlip);
       }
+    }
+  }
+
+  // Remove blips for players who are no longer active
+  for (const [id, blip] of playerBlips) {
+    if (!activePlayerSet.has(id)) {
+      RemoveBlip(blip);
+      playerBlips.delete(id);
     }
   }
 });
