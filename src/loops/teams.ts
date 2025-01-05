@@ -9,8 +9,8 @@ setTick((): void => {
       SetBlipSprite(serverPlayerBlip, 1);
       SetBlipColour(serverPlayerBlip, 44);
       SetBlipAsShortRange(serverPlayerBlip, true);
+      BeginTextCommandSetBlipName("STRING");
       AddTextComponentString("Criminal");
-      AddTextComponentString(GetPlayerName(id));
       EndTextCommandSetBlipName(serverPlayerBlip);
     }
   }
