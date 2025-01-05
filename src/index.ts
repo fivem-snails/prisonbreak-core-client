@@ -28,7 +28,7 @@ const Spawn = async (): Promise<void> => {
     AddRelationshipGroup("POLICE");
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
 
-    const prisonBlip = AddBlipForCoord(1831.44, 2606.73, 45.57);
+    const prisonBlip: number = AddBlipForCoord(1831.44, 2606.73, 45.57);
     SetBlipSprite(prisonBlip, 188);
     SetBlipScale(prisonBlip, 1.5);
     SetBlipColour(prisonBlip, 17);
@@ -37,11 +37,11 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("Prison");
     EndTextCommandSetBlipName(prisonBlip);
 
-    const prisonGreenzone = AddBlipForRadius(1854, 2594.1, 45.67, 150);
+    const prisonGreenzone: number = AddBlipForRadius(1854, 2594.1, 45.67, 150);
     SetBlipColour(prisonGreenzone, 44);
     SetBlipAlpha(prisonGreenzone, 150);
 
-    const policestationBlip = AddBlipForCoord(449.62, -975.09, 30.69);
+    const policestationBlip: number = AddBlipForCoord(449.62, -975.09, 30.69);
     SetBlipSprite(policestationBlip, 60);
     SetBlipScale(policestationBlip, 0.8);
     SetBlipColour(policestationBlip, 3);
@@ -50,7 +50,7 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("PD");
     EndTextCommandSetBlipName(policestationBlip);
 
-    const ammunationBlip = AddBlipForCoord(20.68, -1109, 29.8);
+    const ammunationBlip: number = AddBlipForCoord(20.68, -1109, 29.8);
     SetBlipSprite(ammunationBlip, 150);
     SetBlipScale(ammunationBlip, 0.7);
     SetBlipColour(ammunationBlip, 1);
@@ -59,6 +59,14 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("Ammunation");
     EndTextCommandSetBlipName(ammunationBlip);
 
+    const bank: number = AddBlipForCoord(249.29, 217.37, 106.29);
+    SetBlipSprite(bank, 855);
+    SetBlipScale(bank, 2.0);
+    SetBlipColour(bank, 2);
+    SetBlipAsShortRange(bank, false);
+    BeginTextCommandSetBlipName("STRING");
+    AddTextComponentString("Big Bank");
+    EndTextCommandSetBlipName(bank);
     await AddDelay(1600);
 
     emitNet("Core/Server/Player:Sync", playerSrc);
