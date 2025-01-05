@@ -37,7 +37,7 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("Prison");
     EndTextCommandSetBlipName(prisonBlip);
 
-    const prisonGreenzone = AddBlipForRadius(1851.75, 2606.97, 45.67, 100);
+    const prisonGreenzone = AddBlipForRadius(1854, 2594.1, 45.67, 100);
     SetBlipColour(prisonGreenzone, 51);
     SetBlipAlpha(prisonGreenzone, 100);
 
