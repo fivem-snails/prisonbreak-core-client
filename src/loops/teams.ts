@@ -1,3 +1,5 @@
+const playerBlips: Map<number, number> = new Map();
+
 setTick((): void => {
   const serverPlayers: number[] = GetActivePlayers();
 
@@ -5,13 +7,16 @@ setTick((): void => {
     const serverPlayerPed: number = GetPlayerPed(id);
 
     if (serverPlayerPed !== PlayerPedId()) {
-      const serverPlayerBlip: number = AddBlipForEntity(serverPlayerPed);
-      SetBlipSprite(serverPlayerBlip, 1);
-      SetBlipColour(serverPlayerBlip, 44);
-      SetBlipAsShortRange(serverPlayerBlip, true);
-      BeginTextCommandSetBlipName("STRING");
-      AddTextComponentString(GetPlayerName(id));
-      EndTextCommandSetBlipName(serverPlayerBlip);
+      if (!playerBlips.has(id)) {
+        const serverPlayerBlip: number = AddBlipForEntity(serverPlayerPed);
+        SetBlipSprite(serverPlayerBlip, 1);
+        SetBlipColour(serverPlayerBlip, 49);
+        SetBlipAsShortRange(serverPlayerBlip, true);
+        BeginTextCommandSetBlipName("STRING");
+        AddTextComponentString("Criminal");
+        EndTextCommandSetBlipName(serverPlayerBlip);
+        playerBlips.set(id, serverPlayerBlip);
+      }
     }
   }
 });
