@@ -59,8 +59,6 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("Ammunation");
     EndTextCommandSetBlipName(ammunationBlip);
 
-    SetBlipRoute(ammunationBlip, true);
-
     await AddDelay(1600);
 
     emitNet("Core/Server/Player:Sync", playerSrc);
