@@ -6,8 +6,12 @@ setTick((): void => {
 
     if (serverPlayerPed !== PlayerPedId()) {
       const serverPlayerBlip: number = AddBlipForEntity(serverPlayerPed);
-
       SetBlipSprite(serverPlayerBlip, 1);
+      SetBlipColour(serverPlayerBlip, 44);
+      SetBlipAsShortRange(serverPlayerBlip, true);
+      BeginTextCommandSetBlipName("STRING");
+      AddTextComponentString(GetPlayerName(id));
+      EndTextCommandSetBlipName(serverPlayerBlip);
     }
   }
 });
