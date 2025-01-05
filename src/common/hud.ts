@@ -30,7 +30,7 @@ setTick(async () => {
         const fov = (1 / GetGameplayCamFov()) * 100;
         scale = scale * fov;
 
-        const textColour = teamHash === -1185955016 ? [255, 0, 0] : [0, 95, 255];
+        const textColour = teamHash === -1185955016 ? [243, 125, 61] : [0, 95, 255];
 
         if (onScreen) {
           SetTextScale(0.0, 0.4);
