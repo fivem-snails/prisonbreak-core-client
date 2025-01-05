@@ -6,11 +6,16 @@ setTick((): void => {
 
     if (serverPlayerPed !== PlayerPedId()) {
       const serverPlayerBlip: number = AddBlipForEntity(serverPlayerPed);
+      const serverPlayerGroupHash: number = GetPedRelationshipGroupHash(serverPlayerPed);
+
+      const serverPlayerBlipName: string = serverPlayerGroupHash === -1185955016 ? "Criminal" : "Police";
+      const serverPlayerBlipColour: number = serverPlayerGroupHash === -1185955016 ? 44 : 42;
+
       SetBlipSprite(serverPlayerBlip, 1);
-      SetBlipColour(serverPlayerBlip, 44);
+      SetBlipColour(serverPlayerBlip, serverPlayerBlipColour);
       SetBlipAsShortRange(serverPlayerBlip, true);
       BeginTextCommandSetBlipName("STRING");
-      AddTextComponentString(`Criminal [${id}]`);
+      AddTextComponentString(`${serverPlayerBlipName} [${id}]`);
       EndTextCommandSetBlipName(serverPlayerBlip);
     }
   }
