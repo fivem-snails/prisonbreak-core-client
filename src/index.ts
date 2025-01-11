@@ -69,7 +69,9 @@ const spawn = async (): Promise<void> => {
 
     await delay(1600);
 
-    SetTimecycleModifier("hud_def_blur");
+    SetTimecycleModifier("Bloom");
+    SetTimecycleModifierStrength(1.0);
+
     emitNet("Core/Server/Player:Sync", serverPlayerSID);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
