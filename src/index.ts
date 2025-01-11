@@ -69,8 +69,8 @@ const spawn = async (): Promise<void> => {
 
     await delay(1600);
 
-    SetTimecycleModifier("Bloom");
-    SetTimecycleModifierStrength(1.0);
+    SetTimecycleModifier("TinyRacerMoBlur");
+    // SetTimecycleModifierStrength(1.0);
 
     emitNet("Core/Server/Player:Sync", serverPlayerSID);
   } catch (error: unknown) {
