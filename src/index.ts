@@ -67,7 +67,7 @@ const spawn = async (): Promise<void> => {
     AddTextComponentString("Big Bank Robbery");
     EndTextCommandSetBlipName(bankBlip);
 
-    await delay(1600);
+    await delay(500);
 
     emitNet("Core/Server/Player:Sync", serverPlayerSID);
   } catch (error: unknown) {
