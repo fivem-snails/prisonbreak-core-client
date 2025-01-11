@@ -1,7 +1,4 @@
 const TeamAssign = (team: string): void => {
-  // SetTimecycleModifier("hud_def_blur");
-  // SetTimecycleModifierStrength(3.0);
-
   const groupAlreadyExists: boolean = DoesRelationshipGroupExist(team.toUpperCase());
   if (!groupAlreadyExists) {
     throw new Error(`Relationship group ${team.toUpperCase()} does not exist`);
