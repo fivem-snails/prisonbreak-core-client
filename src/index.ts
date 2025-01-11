@@ -51,7 +51,7 @@ const spawn = async (): Promise<void> => {
 
     const ammunationBlip: number = AddBlipForCoord(20.68, -1109, 29.8);
     SetBlipSprite(ammunationBlip, 150);
-    SetBlipScale(ammunationBlip, 0.7);
+    SetBlipScale(ammunationBlip, 0.8);
     SetBlipColour(ammunationBlip, 1);
     SetBlipAsShortRange(ammunationBlip, false);
     BeginTextCommandSetBlipName("STRING");
@@ -60,7 +60,7 @@ const spawn = async (): Promise<void> => {
 
     const bankBlip: number = AddBlipForCoord(249.29, 217.37, 106.29);
     SetBlipSprite(bankBlip, 855);
-    SetBlipScale(bankBlip, 1.6);
+    SetBlipScale(bankBlip, 0.8);
     SetBlipColour(bankBlip, 2);
     SetBlipAsShortRange(bankBlip, false);
     BeginTextCommandSetBlipName("STRING");
