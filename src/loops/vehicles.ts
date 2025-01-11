@@ -1,9 +1,9 @@
 setTick(async (): Promise<void> => {
-  DisablePlayerVehicleRewards(serverPlayerID);
+  DisablePlayerVehicleRewards(PlayerId());
   SetFlyThroughWindscreenParams(30.0, 0.0, 0.0, 0.0);
-  SetVehicleRadioLoud(GetVehiclePedIsIn(serverPlayerPed, false), true);
+  SetVehicleRadioLoud(GetVehiclePedIsIn(GetPlayerPed(-1), false), true);
 
-  const serverPlayerCoords: number[] = GetEntityCoords(serverPlayerPed, true);
+  const serverPlayerCoords: number[] = GetEntityCoords(PlayerPedId(), true);
   const serverVehicles: number[] = GetGamePool("CVehicle");
 
   serverVehicles.map(async (serverVehicle: number): Promise<void> => {
@@ -34,6 +34,9 @@ setTick(async (): Promise<void> => {
       const serverVehicleModel: number = GetEntityModel(serverVehicle);
       const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel).toLowerCase();
       const rectHeight: number = 0.04;
+
+      const serverPlayerIndex: number = GetPlayerIndex();
+      const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
 
       emitNet(
         "Core/Server/Shared:GetVehicle",

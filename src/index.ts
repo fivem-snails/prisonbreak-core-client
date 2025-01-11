@@ -4,13 +4,12 @@ const delay = async (ms: number): Promise<number> => {
   });
 };
 
-const serverPlayerIndex: number = GetPlayerIndex();
-const serverPlayerID: number = PlayerId();
-const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
-const serverPlayerPed: number = PlayerPedId();
-
 const spawn = async (): Promise<void> => {
   try {
+    const serverPlayerIndex: number = GetPlayerIndex();
+    const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
+    const serverPlayerPed: number = PlayerPedId();
+
     emit("Screens/team-choose", false, "");
     emit("alta-nui-welcome", false);
     emit("alta-nui-teamchoose", false);
