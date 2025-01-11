@@ -67,5 +67,5 @@ setTick(async () => {
     }
   }
 
-  await AddDelay(1000);
+  await delay(1000);
 });
