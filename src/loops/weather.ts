@@ -3,8 +3,8 @@ setTick((): void => {
   SetWeatherTypePersist("CLEAR");
   SetWeatherTypeNowPersist("CLEAR");
   SetWeatherTypeNow("CLEAR");
-  SetTimecycleModifier("helicamfirst");
-  SetTimecycleModifierStrength(0.9);
+  // SetTimecycleModifier("helicamfirst");
+  // SetTimecycleModifierStrength(0.9);
   // SetWeatherTypePersist("RAIN");
   // SetWeatherTypeNowPersist("RAIN");
   // SetWeatherTypeNow("RAIN");
