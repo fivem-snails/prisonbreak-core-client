@@ -9,6 +9,15 @@ const spawn = async (): Promise<void> => {
     const serverPlayerIndex: number = GetPlayerIndex();
     const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
     const serverPlayerPed: number = PlayerPedId();
+    const prisonerPed: number = GetHashKey("s_m_y_prisoner_01");
+
+    RequestModel(prisonerPed);
+    while (!HasModelLoaded(prisonerPed)) {
+      await delay(100);
+    }
+
+    SetPlayerModel(PlayerId(), prisonerPed);
+    SetModelAsNoLongerNeeded(prisonerPed);
 
     emit("Screens/team-choose", false, "");
     emit("alta-nui-welcome", false);
