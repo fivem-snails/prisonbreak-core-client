@@ -11,14 +11,6 @@ const spawn = async (): Promise<void> => {
     const serverPlayerPed: number = PlayerPedId();
     const prisonerPed: number = GetHashKey("s_m_y_prisoner_01");
 
-    RequestModel(prisonerPed);
-    while (!HasModelLoaded(prisonerPed)) {
-      await delay(100);
-    }
-
-    SetPlayerModel(PlayerId(), prisonerPed);
-    SetModelAsNoLongerNeeded(prisonerPed);
-
     emit("Screens/team-choose", false, "");
     emit("alta-nui-welcome", false);
     emit("alta-nui-teamchoose", false);
@@ -30,6 +22,13 @@ const spawn = async (): Promise<void> => {
 
     DoScreenFadeOut(0);
     await delay(500);
+    RequestModel(prisonerPed);
+    while (!HasModelLoaded(prisonerPed)) {
+      await delay(100);
+    }
+
+    SetPlayerModel(PlayerId(), prisonerPed);
+    SetModelAsNoLongerNeeded(prisonerPed);
     DoScreenFadeIn(500);
 
     SetCanAttackFriendly(serverPlayerPed, true, true);
