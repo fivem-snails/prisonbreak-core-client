@@ -15,14 +15,14 @@ const spawn = async (): Promise<void> => {
     emit("alta-nui-teamchoose", false);
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
-    DoScreenFadeOut(0);
     SetEntityCoordsNoOffset(serverPlayerPed, 1714.04, 2523.2, 45.56, false, false, false);
     RemoveAllCoverBlockingAreas();
     RemoveAllPedWeapons(serverPlayerPed, false);
 
-    await delay(1600);
+    DoScreenFadeOut(0);
+    await delay(500);
+    DoScreenFadeIn(500);
 
-    DoScreenFadeIn(1600);
     SetCanAttackFriendly(serverPlayerPed, true, true);
     DisableIdleCamera(true);
     DisplayRadar(false);
