@@ -1,4 +1,4 @@
-setTick(() => {
+setTick((): void => {
   NetworkOverrideClockTime(14, 20, 0);
   SetWeatherTypePersist("CLEAR");
   SetWeatherTypeNowPersist("CLEAR");

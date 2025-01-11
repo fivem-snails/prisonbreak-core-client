@@ -5,9 +5,9 @@ const TeamAssign = (team: string): void => {
   }
 
   console.info("Setting player team to: ", team.toUpperCase());
-  SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
+  SetPedRelationshipGroupHash(serverPlayerPed, team.toUpperCase());
 
-  console.info("Player team is now: ", GetPedRelationshipGroupHash(PlayerPedId()));
+  console.info("Player team is now: ", GetPedRelationshipGroupHash(serverPlayerPed));
 
   SetNewWaypoint(249.29, 217.37);
   DistantCopCarSirens(false);

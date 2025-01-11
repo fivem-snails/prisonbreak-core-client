@@ -1,23 +1,17 @@
 setTick(async (): Promise<void> => {
-  DisablePlayerVehicleRewards(PlayerId());
+  DisablePlayerVehicleRewards(serverPlayerID);
   SetFlyThroughWindscreenParams(30.0, 0.0, 0.0, 0.0);
-  SetVehicleRadioLoud(GetVehiclePedIsIn(GetPlayerPed(-1), false), true);
+  SetVehicleRadioLoud(GetVehiclePedIsIn(serverPlayerPed, false), true);
 
-  const playerCoords: number[] = GetEntityCoords(PlayerPedId(), true);
+  const serverPlayerCoords: number[] = GetEntityCoords(serverPlayerPed, true);
   const serverVehicles: number[] = GetGamePool("CVehicle");
-  // console.info("Player Coords:", {
-  //   playerCoords,
-  // });
-  // console.info("Server Vehicles:", {
-  //   serverVehicles,
-  // });
 
   serverVehicles.map(async (serverVehicle: number): Promise<void> => {
     const serverVehicleCoords: number[] = GetEntityCoords(serverVehicle, true);
     const distancefromPlayerToServerVehicle: number = GetDistanceBetweenCoords(
-      playerCoords[0],
-      playerCoords[1],
-      playerCoords[2],
+      serverPlayerCoords[0],
+      serverPlayerCoords[1],
+      serverPlayerCoords[2],
       serverVehicleCoords[0],
       serverVehicleCoords[1],
       serverVehicleCoords[2],
@@ -37,25 +31,13 @@ setTick(async (): Promise<void> => {
         serverVehicleCoords[2] + 1.0,
       );
 
-      // console.info("Screen Coords:", {
-      //   serverVehicleScreenX,
-      //   serverVehicleScreenY,
-      // });
-
       const serverVehicleModel: number = GetEntityModel(serverVehicle);
       const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel).toLowerCase();
-
-      const playerIndex: number = GetPlayerIndex();
-      const playerSrc: number = GetPlayerServerId(playerIndex);
-
-      // const rectWidth: number = 0.07;
       const rectHeight: number = 0.04;
-
-      // DrawRect(serverVehicleScreenX, serverVehicleScreenY + rectHeight / 2, rectWidth, rectHeight, 0, 0, 0, 100);
 
       emitNet(
         "Core/Server/Shared:GetVehicle",
-        playerSrc,
+        serverPlayerSID,
         serverVehicleModelName,
         serverVehicleScreenX,
         serverVehicleScreenY,
@@ -63,4 +45,17 @@ setTick(async (): Promise<void> => {
       );
     }
   });
+});
+
+setTick((): void => {
+  if (IsPedOnFoot(serverPlayerPed)) {
+    SetRadarZoom(1100);
+  } else if (IsPedInAnyVehicle(serverPlayerPed, true)) {
+    SetPlayerCanDoDriveBy(serverPlayerID, false);
+    SetRadarZoom(1100);
+  } else if (IsPedGettingIntoAVehicle(serverPlayerPed)) {
+    AnimateGameplayCamZoom(1.0, 0.6);
+  } else {
+    return;
+  }
 });

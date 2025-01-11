@@ -10,7 +10,7 @@ onNet(
     const src = GetPlayerServerId(localId);
 
     setTick(async () => {
-      await AddDelay(1000);
+      await delay(1000);
 
       const playerCoords = GetEntityCoords(PlayerPedId(), false);
       const distance = GetDistanceBetweenCoords(

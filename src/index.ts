@@ -1,26 +1,30 @@
-const AddDelay = async (ms: number): Promise<number> => {
-  return new Promise((resolve) => {
+const delay = async (ms: number): Promise<number> => {
+  return new Promise((resolve): void => {
     setTimeout(resolve, ms, 0);
   });
 };
 
-const Spawn = async (): Promise<void> => {
-  try {
-    const playerIndex: number = GetPlayerIndex();
-    const playerSrc: number = GetPlayerServerId(playerIndex);
-    const playerPed: number = PlayerPedId();
+const serverPlayerIndex: number = GetPlayerIndex();
+const serverPlayerID: number = PlayerId();
+const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
+const serverPlayerPed: number = PlayerPedId();
 
+const spawn = async (): Promise<void> => {
+  try {
     emit("Screens/team-choose", false, "");
     emit("alta-nui-welcome", false);
+    emit("alta-nui-teamchoose", false);
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
     DoScreenFadeOut(0);
-    SetEntityCoordsNoOffset(playerPed, 1714.04, 2523.2, 45.56, false, false, false);
+    SetEntityCoordsNoOffset(serverPlayerPed, 1714.04, 2523.2, 45.56, false, false, false);
     RemoveAllCoverBlockingAreas();
-    RemoveAllPedWeapons(playerPed, false);
-    await AddDelay(1600);
+    RemoveAllPedWeapons(serverPlayerPed, false);
+
+    await delay(1600);
+
     DoScreenFadeIn(1600);
-    SetCanAttackFriendly(playerPed, true, true);
+    SetCanAttackFriendly(serverPlayerPed, true, true);
     DisableIdleCamera(true);
     DisplayRadar(true);
     DistantCopCarSirens(true);
@@ -37,10 +41,6 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("Prison");
     EndTextCommandSetBlipName(prisonBlip);
 
-    const prisonZone: number = AddBlipForRadius(1854, 2594.1, 45.67, 150);
-    SetBlipColour(prisonZone, 44);
-    SetBlipAlpha(prisonZone, 150);
-
     const policestationBlip: number = AddBlipForCoord(449.62, -975.09, 30.69);
     SetBlipSprite(policestationBlip, 60);
     SetBlipScale(policestationBlip, 0.8);
@@ -49,10 +49,6 @@ const Spawn = async (): Promise<void> => {
     BeginTextCommandSetBlipName("STRING");
     AddTextComponentString("PD");
     EndTextCommandSetBlipName(policestationBlip);
-
-    const policestationZone: number = AddBlipForRadius(449.62, -975.09, 30.69, 150);
-    SetBlipColour(policestationZone, 42);
-    SetBlipAlpha(policestationZone, 150);
 
     const ammunationBlip: number = AddBlipForCoord(20.68, -1109, 29.8);
     SetBlipSprite(ammunationBlip, 150);
@@ -63,20 +59,21 @@ const Spawn = async (): Promise<void> => {
     AddTextComponentString("Ammunation");
     EndTextCommandSetBlipName(ammunationBlip);
 
-    const bank: number = AddBlipForCoord(249.29, 217.37, 106.29);
-    SetBlipSprite(bank, 855);
-    SetBlipScale(bank, 1.6);
-    SetBlipColour(bank, 2);
-    SetBlipAsShortRange(bank, false);
+    const bankBlip: number = AddBlipForCoord(249.29, 217.37, 106.29);
+    SetBlipSprite(bankBlip, 855);
+    SetBlipScale(bankBlip, 1.6);
+    SetBlipColour(bankBlip, 2);
+    SetBlipAsShortRange(bankBlip, false);
     BeginTextCommandSetBlipName("STRING");
-    AddTextComponentString("Big Bank");
-    EndTextCommandSetBlipName(bank);
-    await AddDelay(1600);
+    AddTextComponentString("Big Bank Robbery");
+    EndTextCommandSetBlipName(bankBlip);
 
-    emitNet("Core/Server/Player:Sync", playerSrc);
+    await delay(1600);
+
+    emitNet("Core/Server/Player:Sync", serverPlayerSID);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
   }
 };
 
-Spawn();
+spawn();

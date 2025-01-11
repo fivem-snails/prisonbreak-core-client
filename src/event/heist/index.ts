@@ -1,7 +1,7 @@
 let tickId: number;
 
 async function checkIfPlayerIsInBank(): Promise<void> {
-  await AddDelay(1000);
+  await delay(1000);
 
   const playerPed = PlayerPedId();
   const playerPos = GetEntityCoords(playerPed, true);

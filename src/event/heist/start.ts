@@ -109,9 +109,10 @@ onNet(
                   FreezeEntityPosition(PlayerPedId(), false);
                   DoScreenFadeIn(1000);
 
-                  await AddDelay(2000);
+                  await delay(2000);
 
                   // Give player firearm
+                  // biome-ignore lint/complexity/noForEach: <explanation>
                   teamSchema.loadout.forEach((item) => {
                     GiveWeaponToPed(PlayerPedId(), item.name, item.ammo, false, true);
                   });
@@ -169,7 +170,7 @@ onNet(
       case "COPPERS":
         emit("cS.banner", "~b~STARTED~s~", "Find and ~b~catch~s~ the robbers", 6, true);
 
-        await AddDelay(10000);
+        await delay(10000);
 
         emit("Screens/heist-hud", true, {
           heist_id: heist_id,
