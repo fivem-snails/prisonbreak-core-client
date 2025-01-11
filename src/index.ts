@@ -15,7 +15,7 @@ const spawn = async (): Promise<void> => {
     emit("alta-nui-teamchoose", false);
 
     SetTimecycleModifier("BloomMid");
-    SetTimecycleModifierStrength(5.0);
+    SetTimecycleModifierStrength(1.0);
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
     DoScreenFadeOut(0);
