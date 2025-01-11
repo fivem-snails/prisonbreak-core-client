@@ -51,12 +51,12 @@ setTick(async (): Promise<void> => {
 });
 
 setTick((): void => {
-  if (IsPedOnFoot(serverPlayerPed)) {
+  if (IsPedOnFoot(GetPlayerPed(-1))) {
     SetRadarZoom(1100);
-  } else if (IsPedInAnyVehicle(serverPlayerPed, true)) {
-    SetPlayerCanDoDriveBy(serverPlayerID, false);
+  } else if (IsPedInAnyVehicle(GetPlayerPed(-1), true)) {
+    SetPlayerCanDoDriveBy(PlayerId(), false);
     SetRadarZoom(1100);
-  } else if (IsPedGettingIntoAVehicle(serverPlayerPed)) {
+  } else if (IsPedGettingIntoAVehicle(PlayerPedId())) {
     AnimateGameplayCamZoom(1.0, 0.6);
   } else {
     return;
