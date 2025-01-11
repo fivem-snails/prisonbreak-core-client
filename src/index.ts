@@ -14,6 +14,9 @@ const spawn = async (): Promise<void> => {
     emit("alta-nui-welcome", false);
     emit("alta-nui-teamchoose", false);
 
+    SetTimecycleModifier("BloomMid");
+    SetTimecycleModifierStrength(5.0);
+
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
     DoScreenFadeOut(0);
     SetEntityCoordsNoOffset(serverPlayerPed, 1714.04, 2523.2, 45.56, false, false, false);
@@ -68,9 +71,6 @@ const spawn = async (): Promise<void> => {
     EndTextCommandSetBlipName(bankBlip);
 
     await delay(1600);
-
-    SetTimecycleModifier("BloomMid");
-    SetTimecycleModifierStrength(3.0);
 
     emitNet("Core/Server/Player:Sync", serverPlayerSID);
   } catch (error: unknown) {
