@@ -14,8 +14,8 @@ const TeamAssign = (team: string): void => {
   const serverPlayerIndex: number = GetPlayerIndex();
   const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
 
-  emit("alta-nui-hud", true, serverPlayerSID);
-  emit("alta-nui-welcome", true);
+  emit("prisonbreak-nui-hud", true, serverPlayerSID);
+  emit("prisonbreak-nui-welcome", true);
 };
 
 onNet("Core/Client/Team:Assign", TeamAssign);

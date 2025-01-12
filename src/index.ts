@@ -11,9 +11,9 @@ const spawn = async (): Promise<void> => {
     const serverPlayerPed: number = PlayerPedId();
     const prisonerPed: number = GetHashKey("s_m_y_prisoner_01");
 
-    emit("alta-nui-hud", false, serverPlayerSID);
-    emit("alta-nui-welcome", false);
-    emit("alta-nui-teamchoose", false, "");
+    emit("prisonbreak-nui-hud", false, serverPlayerSID);
+    emit("prisonbreak-nui-welcome", false);
+    emit("prisonbreak-nui-teamchoose", false, "");
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
     SetEntityCoordsNoOffset(serverPlayerPed, 1714.04, 2523.2, 45.56, false, false, false);

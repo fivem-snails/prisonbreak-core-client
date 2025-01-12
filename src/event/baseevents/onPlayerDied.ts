@@ -47,5 +47,5 @@ on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<
 //   SetEntityCanBeDamaged(PlayerPedId(), true);
 //   SetPedMaxHealth(PlayerPedId(), 600);
 
-//   emit('cS.SplashText', '~b~Welcome to AltaRP~s~.', 10, true);
+//   emit('cS.SplashText', '~b~Welcome to prisonbreakRP~s~.', 10, true);
 // });
