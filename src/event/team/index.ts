@@ -10,6 +10,11 @@ const TeamAssign = (team: string): void => {
 
   DistantCopCarSirens(false);
   PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
+
+  const serverPlayerIndex: number = GetPlayerIndex();
+  const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
+
+  emit("alta-nui-hud", true, serverPlayerSID);
   emit("alta-nui-welcome", true);
 };
 
