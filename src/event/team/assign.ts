@@ -1,9 +1,7 @@
-onNet("prisonbreak-core-client:event:team:assign", (team: string): void => {
+const TeamAssign = (team: string): void => {
   try {
     const groupAlreadyExists: boolean = DoesRelationshipGroupExist(team.toUpperCase());
-    if (!groupAlreadyExists) {
-      throw new Error(`Relationship group ${team.toUpperCase()} does not exist`);
-    }
+    if (!groupAlreadyExists) throw new Error(`Relationship group ${team.toUpperCase()} does not exist`);
 
     console.info("Setting player team to: ", team.toUpperCase());
     SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
@@ -22,4 +20,6 @@ onNet("prisonbreak-core-client:event:team:assign", (team: string): void => {
       console.error(error.message);
     }
   }
-});
+};
+
+onNet("prisonbreak-core-client:event:team:assign", TeamAssign);

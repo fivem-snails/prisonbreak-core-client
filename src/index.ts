@@ -77,7 +77,7 @@ const spawn = async (): Promise<void> => {
 
     await delay(500);
 
-    emitNet("prisonbreak-core-server:player:sync", serverPlayerSID);
+    emitNet("prisonbreak-core-server:event:character:assign", serverPlayerSID);
   } catch (error: unknown) {
     if (error instanceof Error) console.error(error.message);
   }
