@@ -1,5 +1,4 @@
 setTick((): void => {
-  // Prison 36
   DrawMarker(
     36,
     1852.6,

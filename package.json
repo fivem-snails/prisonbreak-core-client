@@ -4,7 +4,7 @@
   "type": "commonjs",
   "scripts": {
     "build": "tsc",
-    "lint": "pnpm biome check --write"
+    "check": "pnpm biome check --write"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +15,6 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@tsconfig/node22": "^22.0.0",
-    "@types/node": "^22.10.3"
+    "@types/node": "^22.10.5"
   }
 }
