@@ -11,6 +11,7 @@ const spawn = async (): Promise<void> => {
     const serverPlayerPed: number = PlayerPedId();
     const prisonerPed: number = GetHashKey("s_m_y_prisoner_01");
 
+    emit("alta-nui-hud", false, serverPlayerSID);
     emit("alta-nui-welcome", false);
     emit("alta-nui-teamchoose", false, "");
 
