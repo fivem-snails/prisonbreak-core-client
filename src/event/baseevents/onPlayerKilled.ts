@@ -1,13 +1,19 @@
 on(
-  'baseevents:onPlayerKilled',
+  "baseevents:onPlayerKilled",
   (
-    _killerId: number,
+    killerId: number,
     _weaponHash: string,
     _killerInVeh: boolean,
     _killerVehSeat: number,
     _killerVehName: string,
     _deathCoords: Array<number>,
   ) => {
-    emit('Screens/death', true, 100);
+    try {
+      emit("baseevents:onPlayerDied", killerId, []);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);
+      }
+    }
   },
 );

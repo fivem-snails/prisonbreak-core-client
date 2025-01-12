@@ -1,29 +1,15 @@
 onNet(
-  "_Core/Fe/Heist:Start",
-  async (
-    _vehicle: number,
-    heist_id: number,
-    license: string,
-    teamSchema: THeistTeam,
-  ) => {
+  "_Core/Client/Heist:Start",
+  async (_vehicle: number, heist_id: number, license: string, teamSchema: THeistTeam) => {
     FreezeEntityPosition(PlayerPedId(), false);
     SetEntityVisible(PlayerPedId(), true, false);
 
     switch (teamSchema.name.toUpperCase()) {
-      case "ROBBERS":
+      case "ROBBERS": {
         const spawn: number[] = GetEntityCoords(PlayerPedId(), false);
 
         SetEntityVisible(PlayerPedId(), false, false);
-        SetEntityCoords(
-          PlayerPedId(),
-          247.26,
-          218.57,
-          108.49,
-          false,
-          false,
-          false,
-          false,
-        );
+        SetEntityCoords(PlayerPedId(), 247.26, 218.57, 108.49, false, false, false, false);
 
         type TCamera = {
           pos: number[];
@@ -56,7 +42,7 @@ onNet(
 
         let cameraInterval: any;
         cctvCameras.forEach((camera, index) => {
-          (function (i) {
+          ((i) => {
             if (i !== 0) {
               const prevCam = CreateCamWithParams(
                 "DEFAULT_SCRIPTED_CAMERA",
@@ -117,32 +103,18 @@ onNet(
                   SetTimecycleModifier("CAMERA_secuirity");
                   SetTimecycleModifierStrength(0.0);
 
-                  SetEntityCoords(
-                    PlayerPedId(),
-                    spawn[0],
-                    spawn[1],
-                    spawn[2],
-                    false,
-                    false,
-                    false,
-                    false,
-                  );
+                  SetEntityCoords(PlayerPedId(), spawn[0], spawn[1], spawn[2], false, false, false, false);
 
                   SetEntityVisible(PlayerPedId(), true, false);
                   FreezeEntityPosition(PlayerPedId(), false);
                   DoScreenFadeIn(1000);
 
-                  await AddDelay(2000);
+                  await delay(2000);
 
                   // Give player firearm
+                  // biome-ignore lint/complexity/noForEach: <explanation>
                   teamSchema.loadout.forEach((item) => {
-                    GiveWeaponToPed(
-                      PlayerPedId(),
-                      item.name,
-                      item.ammo,
-                      false,
-                      true,
-                    );
+                    GiveWeaponToPed(PlayerPedId(), item.name, item.ammo, false, true);
                   });
 
                   emit("Screens/heist-vault", true, {
@@ -161,19 +133,11 @@ onNet(
         //   audio: 'WELCOME_HEIST',
         // });
 
-        let isInteractionVisible: boolean = false;
+        let isInteractionVisible = false;
 
         setTick(async () => {
           const coords = GetEntityCoords(PlayerPedId(), false);
-          const distanceVault = GetDistanceBetweenCoords(
-            253.3,
-            228.38,
-            101.68,
-            coords[0],
-            coords[1],
-            coords[2],
-            true,
-          );
+          const distanceVault = GetDistanceBetweenCoords(253.3, 228.38, 101.68, coords[0], coords[1], coords[2], true);
 
           if (distanceVault > 1.0 && isInteractionVisible) {
             emit("Dependencies/hideKeyInteraction");
@@ -201,17 +165,12 @@ onNet(
         });
 
         break;
+      }
 
       case "COPPERS":
-        emit(
-          "cS.banner",
-          "~b~STARTED~s~",
-          "Find and ~b~catch~s~ the robbers",
-          6,
-          true,
-        );
+        emit("cS.banner", "~b~STARTED~s~", "Find and ~b~catch~s~ the robbers", 6, true);
 
-        await AddDelay(10000);
+        await delay(10000);
 
         emit("Screens/heist-hud", true, {
           heist_id: heist_id,

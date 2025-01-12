@@ -1,13 +1,6 @@
 onNet(
-  'Core/Fe/Heist:CreateArea',
-  (
-    coords: TCoords,
-    sprite: number,
-    color: number,
-    spawn: TSpawn,
-    heist: any,
-    license: string,
-  ) => {
+  "Core/Client/Heist:CreateArea",
+  (coords: TCoords, sprite: number, color: number, spawn: TSpawn, heist: any, license: string) => {
     const blip = AddBlipForRadius(coords.x, coords.y, coords.z, coords.r);
     SetBlipSprite(blip, sprite);
     SetBlipColour(blip, color);
@@ -17,7 +10,7 @@ onNet(
     const src = GetPlayerServerId(localId);
 
     setTick(async () => {
-      await AddDelay(1000);
+      await delay(1000);
 
       const playerCoords = GetEntityCoords(PlayerPedId(), false);
       const distance = GetDistanceBetweenCoords(
@@ -31,7 +24,7 @@ onNet(
       );
 
       if (distance > coords.r) {
-        SetTimecycleModifier('BloomMid');
+        SetTimecycleModifier("BloomMid");
         SetTimecycleModifierStrength(3.0);
 
         // setTimeout(() => {
@@ -51,7 +44,7 @@ onNet(
       }
 
       if (distance < coords.r) {
-        SetTimecycleModifier('Bloom');
+        SetTimecycleModifier("Bloom");
         SetTimecycleModifierStrength(0.0);
       }
     });

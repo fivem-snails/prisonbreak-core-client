@@ -1,10 +1,9 @@
 {
+  "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
-    "types": ["bun-types", "@citizenfx/client"],
-    "strict": true,
-    "rootDirs": ["src"],
+    "types": ["@citizenfx/client"],
+    "moduleResolution": "node",
+    "module": "CommonJS",
     "outDir": "dist"
-  },
-  "include": ["**/**.ts"],
-  "exclude": ["node_modules"]
+  }
 }

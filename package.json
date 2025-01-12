@@ -1,12 +1,20 @@
 {
   "name": "alta-core-front",
   "version": "1.0.0",
-  "license": "MIT",
+  "type": "commonjs",
   "scripts": {
-    "build": "bun build ./src/index.ts ./src/**/*.ts ./src/**/**/*.ts --outdir=dist --minify-syntax"
+    "build": "tsc",
+    "lint": "pnpm biome check --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@citizenfx/client": "2.0.11535-1"
   },
   "devDependencies": {
-    "@citizenfx/client": "2.0.6878-1",
-    "bun-types": "^1.0.6"
+    "@biomejs/biome": "^1.9.4",
+    "@tsconfig/node22": "^22.0.0",
+    "@types/node": "^22.10.3"
   }
 }
