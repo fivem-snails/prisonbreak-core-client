@@ -1,8 +1,8 @@
-const PlayerJoining = (source: number): void => {
+const PlayerJoining = (playerJoiningName: string): void => {
   try {
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
     BeginTextCommandThefeedPost("STRING");
-    AddTextComponentSubstringPlayerName(`~g~${GetPlayerName(source)} has joined the game`);
+    AddTextComponentSubstringPlayerName(`~g~${playerJoiningName} has joined the game`);
     EndTextCommandThefeedPostTicker(true, true);
   } catch (error: unknown) {
     if (error instanceof Error) {
