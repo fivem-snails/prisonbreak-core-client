@@ -16,7 +16,7 @@ const TeamAssign = (team: string): void => {
     emit("prisonbreak-nui-hud", true, serverPlayerSID);
     emit("prisonbreak-nui-welcome", true);
 
-    emitNet("prisonbreak-core-server:event:player:joined", serverPlayerSID);
+    emitNet("prisonbreak-core-server:event:player:joined", serverPlayerSID, team);
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error.message);
