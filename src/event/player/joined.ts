@@ -1,6 +1,6 @@
 const PlayerJoined = (playerJoinedName: string, team: string): void => {
   try {
-    const textColor: string = team === "CRIMINAL" ? "~c~" : "~b~";
+    const textColor: string = team === "CRIMINAL" ? "~o~" : "~b~";
 
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
     BeginTextCommandThefeedPost("STRING");
