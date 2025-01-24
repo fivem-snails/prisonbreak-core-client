@@ -15,18 +15,10 @@ setTick(() => {
   }
 });
 
-let isScoreboardOpen = false;
-
-setTick(async (): Promise<void> => {
+setTick((): void => {
   if (IsControlPressed(0, 20)) {
-    if (!isScoreboardOpen) {
-      emit("prisonbreak-nui-welcome", true);
-      isScoreboardOpen = true;
-    }
+    emit("prisonbreak-nui-welcome", true);
   } else {
-    if (isScoreboardOpen) {
-      emit("prisonbreak-nui-welcome", false);
-      isScoreboardOpen = false;
-    }
+    emit("prisonbreak-nui-welcome", false);
   }
 });
