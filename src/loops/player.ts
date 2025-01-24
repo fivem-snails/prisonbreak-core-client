@@ -17,7 +17,7 @@ setTick(() => {
 
 let isScoreboardOpen = false;
 
-setTick(async () => {
+setTick(async (): Promise<void> => {
   if (IsControlPressed(0, 20)) {
     console.info("Player is holding the key [Z]");
 
