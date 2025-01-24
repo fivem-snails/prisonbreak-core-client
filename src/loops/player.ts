@@ -17,13 +17,23 @@ setTick(() => {
 
 setTick((): void => {
   if (IsControlPressed(0, 20)) {
-    // Get server players
-    const serverPlayersSID: number[] = GetActivePlayers();
-    const serverPlayersPeds: number[] = serverPlayersSID.map((serverPlayer: number) => GetPlayerPed(serverPlayer));
+    const serverPlayers: string[] = getPlayers();
+    const serverPlayersIndices: number[] = GetActivePlayers();
 
-    console.info("Players:", {
-      serverPlayersSID,
-      serverPlayersPeds,
+    // const serverPlayers: IPlayer[] = serverPlayersIncides.map((serverPlayerIndices: number): IPlayer => {
+    //   const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndices);
+    //   const serverPlayerGroup: number = GetPlayerGroup(serverPlayerIndices);
+
+    //   return {
+    //     sid: serverPlayerSID,
+    //     indice: serverPlayerIndices,
+    //     group: serverPlayerGroup,
+    //   };
+    // });
+
+    console.info("serverPlayers:", {
+      serverPlayers,
+      serverPlayersIndices,
     });
 
     emit("prisonbreak-nui-scoreboard", true);

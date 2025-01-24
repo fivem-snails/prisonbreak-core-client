@@ -11,3 +11,9 @@ interface IVehicle {
   createdAt: Date;
   updatedAt: Date;
 }
+
+interface IPlayer {
+  sid: number;
+  indice: number;
+  group: number;
+}
