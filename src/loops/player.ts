@@ -17,8 +17,17 @@ setTick(() => {
 
 setTick((): void => {
   if (IsControlPressed(0, 20)) {
-    emit("prisonbreak-nui-welcome", true);
+    // Get server players
+    const serverPlayersSID: number[] = GetActivePlayers();
+    const serverPlayersPeds: number[] = serverPlayersSID.map((serverPlayer: number) => GetPlayerPed(serverPlayer));
+
+    console.info("Players:", {
+      serverPlayersSID,
+      serverPlayersPeds,
+    });
+
+    emit("prisonbreak-nui-scoreboard", true);
   } else {
-    emit("prisonbreak-nui-welcome", false);
+    emit("prisonbreak-nui-scoreboard", false);
   }
 });
