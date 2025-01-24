@@ -19,14 +19,14 @@ let isScoreboardOpen = false;
 
 setTick(async (): Promise<void> => {
   if (IsControlPressed(0, 20)) {
-    console.info("Player is holding the key [Z]");
-
     if (!isScoreboardOpen) {
       emit("prisonbreak-nui-welcome", true);
-
       isScoreboardOpen = true;
     }
-
-    // emit("prisonbreak-nui-welcome", false);
+  } else {
+    if (isScoreboardOpen) {
+      emit("prisonbreak-nui-welcome", false);
+      isScoreboardOpen = false;
+    }
   }
 });
