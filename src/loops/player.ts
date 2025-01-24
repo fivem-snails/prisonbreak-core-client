@@ -27,6 +27,6 @@ setTick(async (): Promise<void> => {
       isScoreboardOpen = true;
     }
 
-    emit("prisonbreak-nui-welcome", false);
+    // emit("prisonbreak-nui-welcome", false);
   }
 });
