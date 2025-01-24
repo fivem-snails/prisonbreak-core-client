@@ -15,16 +15,18 @@ setTick(() => {
   }
 });
 
-setTick(async () => {
-  // Pressing the key
-  // if (IsControlJustPressed(0, 20)) {
-  //   console.info("Player pressed the key [Z]");
-  // }
+let isScoreboardOpen = false;
 
-  // Holding the key
+setTick(async () => {
   if (IsControlPressed(0, 20)) {
     console.info("Player is holding the key [Z]");
 
-    emit("prisonbreak-nui-welcome", true);
+    if (!isScoreboardOpen) {
+      emit("prisonbreak-nui-welcome", true);
+
+      isScoreboardOpen = true;
+    }
+
+    emit("prisonbreak-nui-welcome", false);
   }
 });
