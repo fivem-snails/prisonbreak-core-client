@@ -1,3 +1,8 @@
+interface IPlayer {
+  sid: number;
+  group: number;
+}
+
 interface IVehicle {
   uuid: string;
   model: string;
@@ -10,10 +15,4 @@ interface IVehicle {
   };
   createdAt: Date;
   updatedAt: Date;
-}
-
-interface IPlayer {
-  sid: number;
-  indice: number;
-  group: number;
 }
