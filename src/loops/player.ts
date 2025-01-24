@@ -14,3 +14,15 @@ setTick(() => {
     DisableControlAction(0, 22, true);
   }
 });
+
+setTick(async () => {
+  // Pressing the key
+  if (IsControlJustPressed(0, 20)) {
+    console.info("Player pressed the key [Z]");
+  }
+
+  // Holding the key
+  if (IsControlPressed(0, 20)) {
+    console.info("Player is holding the key [Z]");
+  }
+});
