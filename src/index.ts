@@ -6,6 +6,8 @@ const delay = async (ms: number): Promise<number> => {
 
 const spawn = async (): Promise<void> => {
   try {
+    RegisterKeyMapping("scoreboard", "Scoreboard", "KEYBOARD", "Z");
+
     const serverPlayerIndex: number = GetPlayerIndex();
     const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
     const serverPlayerPed: number = PlayerPedId();

@@ -14,13 +14,3 @@ setTick(() => {
     DisableControlAction(0, 22, true);
   }
 });
-
-setTick(async (): Promise<void> => {
-  if (IsControlPressed(0, 20)) {
-    console.info("prisonbreak-nui-scoreboard");
-    emit("prisonbreak-nui-scoreboard", true);
-  } else {
-    emit("prisonbreak-nui-scoreboard", false);
-    await new Promise((resolve) => setTimeout(resolve, 1000, undefined)); // Wait for 1 second before the next check
-  }
-});
