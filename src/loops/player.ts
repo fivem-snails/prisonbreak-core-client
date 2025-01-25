@@ -17,6 +17,8 @@ setTick(() => {
 
 setTick((): void => {
   if (IsControlPressed(0, 20)) {
+    console.info("prisonbreak-nui-scoreboard");
+
     emit("prisonbreak-nui-scoreboard", true);
   } else {
     emit("prisonbreak-nui-scoreboard", false);
