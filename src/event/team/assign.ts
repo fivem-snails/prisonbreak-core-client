@@ -1,4 +1,4 @@
-const TeamAssign = (team: string): void => {
+const TeamAssign = async (team: string): Promise<void> => {
   try {
     const groupAlreadyExists: boolean = DoesRelationshipGroupExist(team.toUpperCase());
     if (!groupAlreadyExists) throw new Error(`Relationship group ${team.toUpperCase()} does not exist`);
@@ -17,6 +17,10 @@ const TeamAssign = (team: string): void => {
     emit("prisonbreak-nui-welcome", true);
 
     emitNet("prisonbreak-core-server:event:player:joined", serverPlayerSID, team);
+
+    await delay(15000);
+
+    emit("prisonbreak-nui-feedback", true);
   } catch (error: unknown) {
     if (error instanceof Error) {
       console.error(error.message);
