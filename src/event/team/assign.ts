@@ -20,6 +20,7 @@ const TeamAssign = async (team: string): Promise<void> => {
 
     await delay(35000);
 
+    PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
     emit("prisonbreak-nui-feedback", true);
   } catch (error: unknown) {
     if (error instanceof Error) {
