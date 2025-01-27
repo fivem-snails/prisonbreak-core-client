@@ -18,7 +18,7 @@ const TeamAssign = async (team: string): Promise<void> => {
 
     emitNet("prisonbreak-core-server:event:player:joined", serverPlayerSID, team);
 
-    await delay(15000);
+    await delay(35000);
 
     emit("prisonbreak-nui-feedback", true);
   } catch (error: unknown) {
