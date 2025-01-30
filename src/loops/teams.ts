@@ -22,69 +22,76 @@
 //   }
 // });
 
-setTick(async (): Promise<void> => {
-  await delay(1000);
+let isArrested = false;
 
-  const playerPed: number = PlayerPedId();
-  const playerCoords: number[] = GetEntityCoords(playerPed, false);
-  const playerRelationshipGroupHash: number = GetPedRelationshipGroupHash(playerPed);
-  const playerRelationshipGroup: "CRIMINAL" | "POLICE" =
-    playerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
+if (!isArrested) {
+  setTick(async (): Promise<void> => {
+    await delay(1000);
 
-  if (playerRelationshipGroup === "POLICE") {
-    const serverActivePlayers: number[] = GetActivePlayers();
+    const playerPed: number = PlayerPedId();
+    const playerCoords: number[] = GetEntityCoords(playerPed, false);
+    const playerRelationshipGroupHash: number = GetPedRelationshipGroupHash(playerPed);
+    const playerRelationshipGroup: "CRIMINAL" | "POLICE" =
+      playerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
-    for (const serverActivePlayerIndex of serverActivePlayers) {
-      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
-      const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
+    if (playerRelationshipGroup === "POLICE") {
+      const serverActivePlayers: number[] = GetActivePlayers();
 
-      if (serverActivePlayerIsNotOurPlayer) {
-        const serverActivePlayerCoordinates: number[] = GetEntityCoords(serverActivePlayerPed, false);
-        const distanceFromServerActivePlayerToOurPlayer: number = GetDistanceBetweenCoords(
-          playerCoords[0],
-          playerCoords[1],
-          playerCoords[2],
-          serverActivePlayerCoordinates[0],
-          serverActivePlayerCoordinates[1],
-          serverActivePlayerCoordinates[2],
-          true,
-        );
+      for (const serverActivePlayerIndex of serverActivePlayers) {
+        const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
+        const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
 
-        const serverActivePlayerRelationshipGroupHash: number = GetPedRelationshipGroupHash(serverActivePlayerPed);
-        const serverActivePlayerRelationshipGroup: "CRIMINAL" | "POLICE" =
-          serverActivePlayerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
+        if (serverActivePlayerIsNotOurPlayer) {
+          const serverActivePlayerCoordinates: number[] = GetEntityCoords(serverActivePlayerPed, false);
+          const distanceFromServerActivePlayerToOurPlayer: number = GetDistanceBetweenCoords(
+            playerCoords[0],
+            playerCoords[1],
+            playerCoords[2],
+            serverActivePlayerCoordinates[0],
+            serverActivePlayerCoordinates[1],
+            serverActivePlayerCoordinates[2],
+            true,
+          );
 
-        if (distanceFromServerActivePlayerToOurPlayer < 0.8) {
-          console.warn(`[${serverActivePlayerIndex}] is getting close to you!`, {
-            youPed: playerPed,
-            youCoords: playerCoords,
-            youGroup: playerRelationshipGroup,
-            evilPed: serverActivePlayerPed,
-            evilCoords: serverActivePlayerCoordinates,
-            evilGroup: serverActivePlayerRelationshipGroup,
-            evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
-          });
+          const serverActivePlayerRelationshipGroupHash: number = GetPedRelationshipGroupHash(serverActivePlayerPed);
+          const serverActivePlayerRelationshipGroup: "CRIMINAL" | "POLICE" =
+            serverActivePlayerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
-          // let isHandcuffed = false;
+          if (distanceFromServerActivePlayerToOurPlayer < 0.8) {
+            console.warn(`[${serverActivePlayerIndex}] is getting close to you!`, {
+              youPed: playerPed,
+              youCoords: playerCoords,
+              youGroup: playerRelationshipGroup,
+              evilPed: serverActivePlayerPed,
+              evilCoords: serverActivePlayerCoordinates,
+              evilGroup: serverActivePlayerRelationshipGroup,
+              evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
+            });
 
-          // Arrest the guy (force animation / spawn handcuff prop / hands behind back) also remember the NUI
+            // let isHandcuffed = false;
 
-          // if (isHandcuffed) {
-          //   ClearPedSecondaryTask(serverActivePlayerPed);
-          //   SetEnableHandcuffs(serverActivePlayerPed, true);
-          //   SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
-          // } else {
-          ClearPedTasksImmediately(serverActivePlayerPed);
+            // Arrest the guy (force animation / spawn handcuff prop / hands behind back) also remember the NUI
 
-          // RequestAnimDict("mp_arrest_paired");
-          // }
+            // if (isHandcuffed) {
+            //   ClearPedSecondaryTask(serverActivePlayerPed);
+            //   SetEnableHandcuffs(serverActivePlayerPed, true);
+            //   SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
+            // } else {
+            ClearPedTasksImmediately(serverActivePlayerPed);
 
-          TaskPlayAnim(playerPed, "mp_arresting", "idle", 8.0, -8, -1, 49, 0, false, false, false);
+            // RequestAnimDict("mp_arrest_paired");
+            // }
 
-          SetEnableHandcuffs(serverActivePlayerPed, true);
-          SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
+            TaskPlayAnim(playerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
+
+            // SetEnableHandcuffs(serverActivePlayerPed, true);
+
+            SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
+
+            isArrested = true;
+          }
         }
       }
     }
-  }
-});
+  });
+}
