@@ -64,6 +64,12 @@ setTick(async (): Promise<void> => {
             evilGroup: serverActivePlayerRelationshipGroup,
             evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
           });
+
+          // Arrest the guy (force animation / spawn handcuff prop / hands behind back) also remember the NUI
+
+          SetEnableHandcuffs(serverActivePlayerPed, true);
+
+          emit("prisonbreak-core-client:event:player:message", "~b~Noob you got handcuffed by the Police force.");
         }
       }
     }
