@@ -38,7 +38,7 @@ setTick(async (): Promise<void> => {
   for (const activePlayerSID of activePlayers) {
     const activePlayerPed: number = GetPlayerPed(activePlayerSID);
 
-    if (activePlayerPed !== playerPed) {
+    if (activePlayerPed !== playerPed && playerRelationshipGroup === "POLICE") {
       const activePlayerCoordinates: number[] = GetEntityCoords(activePlayerPed, false);
       const distanceFromActivePlayerToPlayer: number = GetDistanceBetweenCoords(
         playerCoords[0],
