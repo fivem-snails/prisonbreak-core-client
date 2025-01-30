@@ -31,41 +31,40 @@ setTick(async (): Promise<void> => {
   const playerRelationshipGroup: "CRIMINAL" | "POLICE" =
     playerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
-  const activePlayers: number[] = GetActivePlayers();
+  if (playerRelationshipGroup === "POLICE") {
+    const serverActivePlayers: number[] = GetActivePlayers();
 
-  // Find the member of criminal group that is closest to the member of police group.
+    for (const serverActivePlayerIndex of serverActivePlayers) {
+      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
+      const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
 
-  for (const activePlayerSID of activePlayers) {
-    const activePlayerPed: number = GetPlayerPed(activePlayerSID);
+      if (serverActivePlayerIsNotOurPlayer) {
+        const serverActivePlayerCoordinates: number[] = GetEntityCoords(serverActivePlayerPed, false);
+        const distanceFromServerActivePlayerToOurPlayer: number = GetDistanceBetweenCoords(
+          playerCoords[0],
+          playerCoords[1],
+          playerCoords[2],
+          serverActivePlayerCoordinates[0],
+          serverActivePlayerCoordinates[1],
+          serverActivePlayerCoordinates[2],
+          true,
+        );
 
-    if (activePlayerPed !== playerPed && playerRelationshipGroup === "POLICE") {
-      const activePlayerCoordinates: number[] = GetEntityCoords(activePlayerPed, false);
-      const distanceFromActivePlayerToPlayer: number = GetDistanceBetweenCoords(
-        playerCoords[0],
-        playerCoords[1],
-        playerCoords[2],
-        activePlayerCoordinates[0],
-        activePlayerCoordinates[1],
-        activePlayerCoordinates[2],
-        true,
-      );
+        const serverActivePlayerRelationshipGroupHash: number = GetPedRelationshipGroupHash(serverActivePlayerPed);
+        const serverActivePlayerRelationshipGroup: "CRIMINAL" | "POLICE" =
+          serverActivePlayerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
-      const activePlayerRelationshipGroupHash: number = GetPedRelationshipGroupHash(activePlayerPed);
-      const activePlayerRelationshipGroup: "CRIMINAL" | "POLICE" =
-        activePlayerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
-
-      // If distanceFromActivePlayerToPlayer is < 1 && group is CRIMINAL then arrest him
-
-      if (distanceFromActivePlayerToPlayer < 0.8) {
-        console.warn(`[${activePlayerSID}] is getting close to you!`, {
-          youPed: playerPed,
-          youCoords: playerCoords,
-          youGroup: playerRelationshipGroup,
-          evilPed: activePlayerPed,
-          evilCoords: activePlayerCoordinates,
-          evilGroup: activePlayerRelationshipGroup,
-          evilDistanceToYou: distanceFromActivePlayerToPlayer,
-        });
+        if (distanceFromServerActivePlayerToOurPlayer < 0.8) {
+          console.warn(`[${serverActivePlayerIndex}] is getting close to you!`, {
+            youPed: playerPed,
+            youCoords: playerCoords,
+            youGroup: playerRelationshipGroup,
+            evilPed: serverActivePlayerPed,
+            evilCoords: serverActivePlayerCoordinates,
+            evilGroup: serverActivePlayerRelationshipGroup,
+            evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
+          });
+        }
       }
     }
   }
