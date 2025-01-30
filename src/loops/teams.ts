@@ -29,7 +29,7 @@ setTick(async (): Promise<void> => {
   const playerSID: number = GetPlayerServerId(playerIndex);
   const playerPed: number = PlayerPedId();
   const playerCoords: number[] = GetEntityCoords(playerPed, false);
-  const playerGroup: number = GetPlayerGroup(playerSID);
+  const playerGroup: number = GetPlayerGroup(playerIndex);
   const activePlayers: number[] = GetActivePlayers();
 
   console.info("Data:", {
