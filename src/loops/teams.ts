@@ -32,8 +32,8 @@ setTick(async (): Promise<void> => {
 
   for (const activePlayerSID of activePlayers) {
     const activePlayerPed: number = GetPlayerPed(activePlayerSID);
-    const activePlayerGroup: number = GetPedRelationshipGroupHash(activePlayerPed);
-    const activePlayerCoordinates: number[] = GetEntityCoords(activePlayerSID, false);
+
+    const activePlayerCoordinates: number[] = GetEntityCoords(activePlayerPed, false);
 
     const distanceFromPlayerToActivePlayer: number = GetDistanceBetweenCoords(
       playerCoords[0],
@@ -44,6 +44,8 @@ setTick(async (): Promise<void> => {
       activePlayerCoordinates[2],
       true,
     );
+
+    const activePlayerGroup: number = GetPedRelationshipGroupHash(activePlayerPed);
 
     console.info(`Hey: ${activePlayerSID}`, {
       activePlayerPed,
