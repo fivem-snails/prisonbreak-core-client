@@ -88,6 +88,8 @@ if (!isArrested) {
 
             SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
 
+            console.log("🚀 ~ setTick ~ isArrested:", isArrested);
+
             isArrested = true;
           }
         }
