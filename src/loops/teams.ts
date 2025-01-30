@@ -26,7 +26,12 @@ setTick(async (): Promise<void> => {
   await delay(1000);
 
   const playerPed: number = PlayerPedId();
-  const nearestPlayerPed: number = GetNearestPlayerToEntity(playerPed);
+  const playerCoords: number[] = GetEntityCoords(playerPed, false);
+  const activePlayers: number[] = GetActivePlayers();
 
-  console.info("Group:", { criminal: GetHashKey("CRIMINAL"), police: GetHashKey("POLICE"), nearestPlayerPed });
+  console.info("Data:", {
+    playerPed,
+    playerCoords,
+    activePlayers,
+  });
 });
