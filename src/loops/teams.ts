@@ -28,9 +28,8 @@ setTick(async (): Promise<void> => {
   const playerPed: number = PlayerPedId();
   const playerCoords: number[] = GetEntityCoords(playerPed, false);
   const playerRelationshipGroupHash: number = GetPedRelationshipGroupHash(playerPed);
-
-  const a: number = GetNearestPlayerToEntityOnTeam(playerPed, playerRelationshipGroupHash);
-  console.log("🚀 ~ setTick ~ a:", a);
+  const playerRelationshipGroup: "CRIMINAL" | "POLICE" =
+    playerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
   const activePlayers: number[] = GetActivePlayers();
 
@@ -41,7 +40,6 @@ setTick(async (): Promise<void> => {
 
     if (activePlayerPed !== playerPed) {
       const activePlayerCoordinates: number[] = GetEntityCoords(activePlayerPed, false);
-
       const distanceFromActivePlayerToPlayer: number = GetDistanceBetweenCoords(
         playerCoords[0],
         playerCoords[1],
@@ -52,7 +50,9 @@ setTick(async (): Promise<void> => {
         true,
       );
 
-      const activePlayerRelationshipGroup: number = GetPedRelationshipGroupHash(activePlayerPed);
+      const activePlayerRelationshipGroupHash: number = GetPedRelationshipGroupHash(activePlayerPed);
+      const activePlayerRelationshipGroup: "CRIMINAL" | "POLICE" =
+        activePlayerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
       // If distanceFromActivePlayerToPlayer is < 1 && group is CRIMINAL then arrest him
 
@@ -60,7 +60,7 @@ setTick(async (): Promise<void> => {
         console.warn(`[${activePlayerSID}] is getting close to you!`, {
           youPed: playerPed,
           youCoords: playerCoords,
-          youGroup: playerRelationshipGroupHash,
+          youGroup: playerRelationshipGroup,
           evilPed: activePlayerPed,
           evilCoords: activePlayerCoordinates,
           evilGroup: activePlayerRelationshipGroup,
