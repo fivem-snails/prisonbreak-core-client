@@ -65,17 +65,24 @@ setTick(async (): Promise<void> => {
             evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
           });
 
+          // let isHandcuffed = false;
+
           // Arrest the guy (force animation / spawn handcuff prop / hands behind back) also remember the NUI
 
+          // if (isHandcuffed) {
+          //   ClearPedSecondaryTask(serverActivePlayerPed);
+          //   SetEnableHandcuffs(serverActivePlayerPed, true);
+          //   SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
+          // } else {
+          ClearPedTasksImmediately(serverActivePlayerPed);
+
+          // RequestAnimDict("mp_arrest_paired");
+          // }
+
+          TaskPlayAnim(playerPed, "mp_arresting", "idle", 8.0, -8, -1, 49, 0, false, false, false);
+
           SetEnableHandcuffs(serverActivePlayerPed, true);
-
-          const serverActivePlayerSID: number = GetPlayerServerId(serverActivePlayerIndex);
-
-          emit(
-            "prisonbreak-core-client:event:player:message",
-            serverActivePlayerSID,
-            "~b~You just got handcuffed by the police👮",
-          );
+          SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
         }
       }
     }
