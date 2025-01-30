@@ -25,12 +25,16 @@
 setTick(async (): Promise<void> => {
   await delay(1000);
 
+  const playerIndex: number = GetPlayerIndex();
+  const playerSID: number = GetPlayerServerId(playerIndex);
   const playerPed: number = PlayerPedId();
   const playerCoords: number[] = GetEntityCoords(playerPed, false);
-  const playerGroup: number = GetPlayerGroup(playerPed);
+  const playerGroup: number = GetPlayerGroup(playerSID);
   const activePlayers: number[] = GetActivePlayers();
 
   console.info("Data:", {
+    playerIndex,
+    playerSID,
     playerPed,
     playerCoords,
     playerGroup,
