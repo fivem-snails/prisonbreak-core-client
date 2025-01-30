@@ -69,7 +69,13 @@ setTick(async (): Promise<void> => {
 
           SetEnableHandcuffs(serverActivePlayerPed, true);
 
-          emit("prisonbreak-core-client:event:player:message", "~b~Noob you got handcuffed by the Police force.");
+          const serverActivePlayerSID: number = GetPlayerServerId(serverActivePlayerIndex);
+
+          emit(
+            "prisonbreak-core-client:event:player:message",
+            serverActivePlayerSID,
+            "~b~You just got handcuffed by the police👮",
+          );
         }
       }
     }
