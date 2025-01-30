@@ -51,15 +51,19 @@ setTick(async (): Promise<void> => {
 
       const activePlayerRelationshipGroup: number = GetPedRelationshipGroupHash(activePlayerPed);
 
-      console.info(`Data of: [${activePlayerSID}]`, {
-        playerPed,
-        playerCoords,
-        playerRelationshipGroup,
-        activePlayerPed,
-        activePlayerCoordinates,
-        activePlayerRelationshipGroup,
-        distanceFromActivePlayerToPlayer,
-      });
+      // If distanceFromActivePlayerToPlayer is < 1 && group is CRIMINAL then arrest him
+
+      if (distanceFromActivePlayerToPlayer < 0.8) {
+        console.warn(`[${activePlayerSID}] is getting close to you!`, {
+          youPed: playerPed,
+          youCoords: playerCoords,
+          youGroup: playerRelationshipGroup,
+          evilPed: activePlayerPed,
+          evilCoords: activePlayerCoordinates,
+          evilGroup: activePlayerRelationshipGroup,
+          evilDistanceToYou: distanceFromActivePlayerToPlayer,
+        });
+      }
     }
   }
 });
