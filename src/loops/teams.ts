@@ -27,7 +27,10 @@ setTick(async (): Promise<void> => {
 
   const playerPed: number = PlayerPedId();
   const playerCoords: number[] = GetEntityCoords(playerPed, false);
-  const playerRelationshipGroup: number = GetPedRelationshipGroupHash(playerPed);
+  const playerRelationshipGroupHash: number = GetPedRelationshipGroupHash(playerPed);
+
+  const a: number = GetNearestPlayerToEntityOnTeam(playerPed, playerRelationshipGroupHash);
+  console.log("🚀 ~ setTick ~ a:", a);
 
   const activePlayers: number[] = GetActivePlayers();
 
@@ -57,7 +60,7 @@ setTick(async (): Promise<void> => {
         console.warn(`[${activePlayerSID}] is getting close to you!`, {
           youPed: playerPed,
           youCoords: playerCoords,
-          youGroup: playerRelationshipGroup,
+          youGroup: playerRelationshipGroupHash,
           evilPed: activePlayerPed,
           evilCoords: activePlayerCoordinates,
           evilGroup: activePlayerRelationshipGroup,
