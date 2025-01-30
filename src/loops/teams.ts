@@ -27,31 +27,39 @@ setTick(async (): Promise<void> => {
 
   const playerPed: number = PlayerPedId();
   const playerCoords: number[] = GetEntityCoords(playerPed, false);
+  const playerRelationshipGroup: number = GetPedRelationshipGroupHash(playerPed);
 
   const activePlayers: number[] = GetActivePlayers();
+
+  // Find the member of criminal group that is closest to the member of police group.
 
   for (const activePlayerSID of activePlayers) {
     const activePlayerPed: number = GetPlayerPed(activePlayerSID);
 
-    const activePlayerCoordinates: number[] = GetEntityCoords(activePlayerPed, false);
+    if (activePlayerPed !== playerPed) {
+      const activePlayerCoordinates: number[] = GetEntityCoords(activePlayerPed, false);
 
-    const distanceFromPlayerToActivePlayer: number = GetDistanceBetweenCoords(
-      playerCoords[0],
-      playerCoords[1],
-      playerCoords[2],
-      activePlayerCoordinates[0],
-      activePlayerCoordinates[1],
-      activePlayerCoordinates[2],
-      true,
-    );
+      const distanceFromActivePlayerToPlayer: number = GetDistanceBetweenCoords(
+        playerCoords[0],
+        playerCoords[1],
+        playerCoords[2],
+        activePlayerCoordinates[0],
+        activePlayerCoordinates[1],
+        activePlayerCoordinates[2],
+        true,
+      );
 
-    const activePlayerGroup: number = GetPedRelationshipGroupHash(activePlayerPed);
+      const activePlayerRelationshipGroup: number = GetPedRelationshipGroupHash(activePlayerPed);
 
-    console.info(`Hey: ${activePlayerSID}`, {
-      activePlayerPed,
-      activePlayerGroup,
-      activePlayerCoordinates,
-      distanceFromPlayerToActivePlayer,
-    });
+      console.info(`Data of: [${activePlayerSID}]`, {
+        playerPed,
+        playerCoords,
+        playerRelationshipGroup,
+        activePlayerPed,
+        activePlayerCoordinates,
+        activePlayerRelationshipGroup,
+        distanceFromActivePlayerToPlayer,
+      });
+    }
   }
 });
