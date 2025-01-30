@@ -25,25 +25,22 @@
 setTick(async (): Promise<void> => {
   await delay(1000);
 
-  const playerIndex: number = GetPlayerIndex();
-  const playerSID: number = GetPlayerServerId(playerIndex);
-  const playerPed: number = PlayerPedId();
-  const playerCoords: number[] = GetEntityCoords(playerPed, false);
-  const playerGroup: number = GetPedRelationshipGroupHash(playerPed);
+  // const playerIndex: number = GetPlayerIndex();
+  // const playerSID: number = GetPlayerServerId(playerIndex);
+  // const playerPed: number = PlayerPedId();
+  // const playerCoords: number[] = GetEntityCoords(playerPed, false);
+  // const playerGroup: number = GetPedRelationshipGroupHash(playerPed);
   const activePlayers: number[] = GetActivePlayers();
 
   for (const activePlayerSID of activePlayers) {
-    console.info("ActivePlayerSID:", { activePlayerSID });
+    const activePlayerPed: number = GetPlayerPed(activePlayerSID);
+    const activePlayerGroup: number = GetPedRelationshipGroupHash(activePlayerPed);
+
+    console.info(`Hey: ${activePlayerSID}`, {
+      activePlayerPed,
+      activePlayerGroup,
+    });
   }
 
   // For each activePlayer we get the playerGroup and then check if its "CRIMINAL" and our group is "POLICE" then check for the distance
-
-  console.info("Data:", {
-    playerIndex,
-    playerSID,
-    playerPed,
-    playerCoords,
-    playerGroup,
-    activePlayers,
-  });
 });
