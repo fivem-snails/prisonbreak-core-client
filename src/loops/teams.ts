@@ -27,11 +27,13 @@ setTick(async (): Promise<void> => {
 
   const playerPed: number = PlayerPedId();
   const playerCoords: number[] = GetEntityCoords(playerPed, false);
+  const playerGroup: number = GetPlayerGroup(playerPed);
   const activePlayers: number[] = GetActivePlayers();
 
   console.info("Data:", {
     playerPed,
     playerCoords,
+    playerGroup,
     activePlayers,
   });
 });
