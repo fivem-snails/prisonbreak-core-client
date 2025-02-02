@@ -77,12 +77,12 @@ if (!isArrested) {
             //   SetEnableHandcuffs(serverActivePlayerPed, true);
             //   SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
             // } else {
-            ClearPedTasksImmediately(serverActivePlayerPed);
+            // ClearPedTasksImmediately(serverActivePlayerPed);
 
             // RequestAnimDict("mp_arrest_paired");
             // }
 
-            TaskPlayAnim(playerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
+            TaskPlayAnim(GetPlayerPed(-1), "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
 
             // SetEnableHandcuffs(serverActivePlayerPed, true);
 
