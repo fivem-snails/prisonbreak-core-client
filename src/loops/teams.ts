@@ -87,9 +87,9 @@ setTick(async (): Promise<void> => {
 
           SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
 
-          console.log("🚀 ~ setTick ~ isArrested:", isArrested);
+          // console.log("🚀 ~ setTick ~ isArrested:", isArrested);
 
-          isArrested = true;
+          // isArrested = true;
         }
       }
     }
