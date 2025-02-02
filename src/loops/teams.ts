@@ -22,8 +22,6 @@
 //   }
 // });
 
-let isArrested = false;
-
 setTick(async (): Promise<void> => {
   await delay(1000);
 
@@ -57,15 +55,15 @@ setTick(async (): Promise<void> => {
           serverActivePlayerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
         if (distanceFromServerActivePlayerToOurPlayer < 0.8) {
-          console.warn(`[${serverActivePlayerIndex}] is getting close to you!`, {
-            youPed: playerPed,
-            youCoords: playerCoords,
-            youGroup: playerRelationshipGroup,
-            evilPed: serverActivePlayerPed,
-            evilCoords: serverActivePlayerCoordinates,
-            evilGroup: serverActivePlayerRelationshipGroup,
-            evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
-          });
+          // console.warn(`[${serverActivePlayerIndex}] is getting close to you!`, {
+          //   youPed: playerPed,
+          //   youCoords: playerCoords,
+          //   youGroup: playerRelationshipGroup,
+          //   evilPed: serverActivePlayerPed,
+          //   evilCoords: serverActivePlayerCoordinates,
+          //   evilGroup: serverActivePlayerRelationshipGroup,
+          //   evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
+          // });
 
           // let isHandcuffed = false;
 
@@ -82,6 +80,8 @@ setTick(async (): Promise<void> => {
           // }
 
           TaskPlayAnim(GetPlayerPed(-1), "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
+
+          console.warn(`Arresting ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndex}]`);
 
           // SetEnableHandcuffs(serverActivePlayerPed, true);
 
