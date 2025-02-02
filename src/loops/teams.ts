@@ -24,76 +24,74 @@
 
 let isArrested = false;
 
-if (!isArrested) {
-  setTick(async (): Promise<void> => {
-    await delay(1000);
+setTick(async (): Promise<void> => {
+  await delay(1000);
 
-    const playerPed: number = PlayerPedId();
-    const playerCoords: number[] = GetEntityCoords(playerPed, false);
-    const playerRelationshipGroupHash: number = GetPedRelationshipGroupHash(playerPed);
-    const playerRelationshipGroup: "CRIMINAL" | "POLICE" =
-      playerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
+  const playerPed: number = PlayerPedId();
+  const playerCoords: number[] = GetEntityCoords(playerPed, false);
+  const playerRelationshipGroupHash: number = GetPedRelationshipGroupHash(playerPed);
+  const playerRelationshipGroup: "CRIMINAL" | "POLICE" =
+    playerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
-    if (playerRelationshipGroup === "POLICE") {
-      const serverActivePlayers: number[] = GetActivePlayers();
+  if (playerRelationshipGroup === "POLICE") {
+    const serverActivePlayers: number[] = GetActivePlayers();
 
-      for (const serverActivePlayerIndex of serverActivePlayers) {
-        const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
-        const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
+    for (const serverActivePlayerIndex of serverActivePlayers) {
+      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
+      const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
 
-        if (serverActivePlayerIsNotOurPlayer) {
-          const serverActivePlayerCoordinates: number[] = GetEntityCoords(serverActivePlayerPed, false);
-          const distanceFromServerActivePlayerToOurPlayer: number = GetDistanceBetweenCoords(
-            playerCoords[0],
-            playerCoords[1],
-            playerCoords[2],
-            serverActivePlayerCoordinates[0],
-            serverActivePlayerCoordinates[1],
-            serverActivePlayerCoordinates[2],
-            true,
-          );
+      if (serverActivePlayerIsNotOurPlayer) {
+        const serverActivePlayerCoordinates: number[] = GetEntityCoords(serverActivePlayerPed, false);
+        const distanceFromServerActivePlayerToOurPlayer: number = GetDistanceBetweenCoords(
+          playerCoords[0],
+          playerCoords[1],
+          playerCoords[2],
+          serverActivePlayerCoordinates[0],
+          serverActivePlayerCoordinates[1],
+          serverActivePlayerCoordinates[2],
+          true,
+        );
 
-          const serverActivePlayerRelationshipGroupHash: number = GetPedRelationshipGroupHash(serverActivePlayerPed);
-          const serverActivePlayerRelationshipGroup: "CRIMINAL" | "POLICE" =
-            serverActivePlayerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
+        const serverActivePlayerRelationshipGroupHash: number = GetPedRelationshipGroupHash(serverActivePlayerPed);
+        const serverActivePlayerRelationshipGroup: "CRIMINAL" | "POLICE" =
+          serverActivePlayerRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
-          if (distanceFromServerActivePlayerToOurPlayer < 0.8) {
-            console.warn(`[${serverActivePlayerIndex}] is getting close to you!`, {
-              youPed: playerPed,
-              youCoords: playerCoords,
-              youGroup: playerRelationshipGroup,
-              evilPed: serverActivePlayerPed,
-              evilCoords: serverActivePlayerCoordinates,
-              evilGroup: serverActivePlayerRelationshipGroup,
-              evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
-            });
+        if (distanceFromServerActivePlayerToOurPlayer < 0.8) {
+          console.warn(`[${serverActivePlayerIndex}] is getting close to you!`, {
+            youPed: playerPed,
+            youCoords: playerCoords,
+            youGroup: playerRelationshipGroup,
+            evilPed: serverActivePlayerPed,
+            evilCoords: serverActivePlayerCoordinates,
+            evilGroup: serverActivePlayerRelationshipGroup,
+            evilDistanceToYou: distanceFromServerActivePlayerToOurPlayer,
+          });
 
-            // let isHandcuffed = false;
+          // let isHandcuffed = false;
 
-            // Arrest the guy (force animation / spawn handcuff prop / hands behind back) also remember the NUI
+          // Arrest the guy (force animation / spawn handcuff prop / hands behind back) also remember the NUI
 
-            // if (isHandcuffed) {
-            //   ClearPedSecondaryTask(serverActivePlayerPed);
-            //   SetEnableHandcuffs(serverActivePlayerPed, true);
-            //   SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
-            // } else {
-            // ClearPedTasksImmediately(serverActivePlayerPed);
+          // if (isHandcuffed) {
+          //   ClearPedSecondaryTask(serverActivePlayerPed);
+          //   SetEnableHandcuffs(serverActivePlayerPed, true);
+          //   SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
+          // } else {
+          // ClearPedTasksImmediately(serverActivePlayerPed);
 
-            // RequestAnimDict("mp_arrest_paired");
-            // }
+          // RequestAnimDict("mp_arrest_paired");
+          // }
 
-            TaskPlayAnim(GetPlayerPed(-1), "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
+          TaskPlayAnim(GetPlayerPed(-1), "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
 
-            // SetEnableHandcuffs(serverActivePlayerPed, true);
+          // SetEnableHandcuffs(serverActivePlayerPed, true);
 
-            SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
+          SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
 
-            console.log("🚀 ~ setTick ~ isArrested:", isArrested);
+          console.log("🚀 ~ setTick ~ isArrested:", isArrested);
 
-            isArrested = true;
-          }
+          isArrested = true;
         }
       }
     }
-  });
-}
+  }
+});
