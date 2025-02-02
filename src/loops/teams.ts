@@ -79,16 +79,16 @@ setTick(async (): Promise<void> => {
           // RequestAnimDict("mp_arrest_paired");
           // }
 
-          ClearPedTasks(playerPed);
+          ClearPedTasks(serverActivePlayerPed);
           await delay(1000);
           RequestAnimDict("mp_arresting");
           if (!HasAnimDictLoaded("mp_arresting")) {
             await delay(500);
           }
 
-          TaskPlayAnim(playerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
+          TaskPlayAnim(serverActivePlayerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
 
-          console.warn(`Arresting ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndex}]`);
+          console.warn(`Arrested ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndex}]`);
 
           // SetEnableHandcuffs(serverActivePlayerPed, true);
 
