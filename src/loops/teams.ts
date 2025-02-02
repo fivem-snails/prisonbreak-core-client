@@ -79,7 +79,14 @@ setTick(async (): Promise<void> => {
           // RequestAnimDict("mp_arrest_paired");
           // }
 
-          TaskPlayAnim(GetPlayerPed(-1), "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
+          ClearPedTasks(playerPed);
+          await delay(1000);
+          RequestAnimDict("mp_arresting");
+          if (!HasAnimDictLoaded("mp_arresting")) {
+            await delay(500);
+          }
+
+          TaskPlayAnim(playerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
 
           console.warn(`Arresting ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndex}]`);
 
