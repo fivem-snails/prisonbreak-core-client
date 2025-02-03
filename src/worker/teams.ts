@@ -89,13 +89,13 @@ setTick(async (): Promise<void> => {
           }
 
           TaskPlayAnim(
-            GetPlayerPed(playerSrc),
+            GetPlayerPed(serverActivePlayerIndex),
             "mp_arresting",
-            "arrested_spin_r_180",
+            "arrested_spin_l_0",
             1.0,
             1.0,
-            8000,
-            1,
+            4000,
+            49,
             1.0,
             true,
             true,
