@@ -48,7 +48,6 @@ setTick(async (): Promise<void> => {
           serverActivePlayerIndex,
           serverActivePlayerSrc,
           serverActivePlayerPed,
-          serverActivePlayerIndex,
           serverActivePlayerIsNotOurPlayer,
         });
 
