@@ -1,4 +1,4 @@
-setTick((): void => {
+setTick(async (): Promise<void> => {
   NetworkOverrideClockTime(14, 20, 0);
   SetWeatherTypePersist("CLEAR");
   SetWeatherTypeNowPersist("CLEAR");
@@ -9,5 +9,5 @@ setTick((): void => {
   SetWeatherTypeNowPersist("RAIN");
   SetWeatherTypeNow("RAIN");
   SetRainLevel(1.0);
-  Wait(8000);
+  await Waiit(8000);
 });
