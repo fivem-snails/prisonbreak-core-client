@@ -25,6 +25,8 @@
 setTick(async (): Promise<void> => {
   await Waiit(1000);
 
+  const playerIndex: number = GetPlayerIndex();
+  const playerSrc: number = GetPlayerServerId(playerIndex);
   const playerPed: number = PlayerPedId();
   const playerCoords: number[] = GetEntityCoords(playerPed, false);
   const playerRelationshipGroupHash: number = GetPedRelationshipGroupHash(playerPed);
@@ -94,6 +96,9 @@ setTick(async (): Promise<void> => {
           // SetEnableHandcuffs(serverActivePlayerPed, true);
 
           SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
+
+          const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
+          emitNet("prisonbreak-core-client:event:police:handcuff", playerSrc, serverActivePlayerSrc);
 
           // console.log("🚀 ~ setTick ~ isArrested:", isArrested);
 
