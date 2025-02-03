@@ -36,16 +36,21 @@ setTick(async (): Promise<void> => {
   if (playerRelationshipGroup === "POLICE") {
     const serverActivePlayers: number[] = GetActivePlayers();
 
-    for (const serverActivePlayerIndex of serverActivePlayers) {
-      const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
-      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerSrc);
-      const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
+    for (const serverActivePlayerIndice of serverActivePlayers) {
+      const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndice);
+
+      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndice);
+
+      const serverActivePlayerIndex: number = NetworkGetPlayerIndexFromPed(serverActivePlayerPed);
+
+      const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerIndex !== playerIndex;
 
       if (serverActivePlayerIsNotOurPlayer) {
         console.info("Extra Data:", {
+          serverActivePlayerIndice,
           serverActivePlayerSrc,
-          serverActivePlayerIndex,
           serverActivePlayerPed,
+          serverActivePlayerIndex,
           serverActivePlayerIsNotOurPlayer,
         });
 
@@ -113,7 +118,7 @@ setTick(async (): Promise<void> => {
           // TaskPlayAnim(serverActivePlayerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
           // FreezeEntityPosition(serverActivePlayerPed, true);
 
-          console.warn(`Arrested ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndex}]`);
+          console.warn(`Arrested ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndice}]`);
 
           // SetEnableHandcuffs(serverActivePlayerPed, true);
 
