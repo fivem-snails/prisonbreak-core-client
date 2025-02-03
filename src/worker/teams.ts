@@ -37,11 +37,14 @@ setTick(async (): Promise<void> => {
     const serverActivePlayers: number[] = GetActivePlayers();
 
     for (const serverActivePlayerIndex of serverActivePlayers) {
+      const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
+
       const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
       const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
 
       if (serverActivePlayerIsNotOurPlayer) {
         console.info("Extra Data:", {
+          serverActivePlayerSrc,
           serverActivePlayerIndex,
           serverActivePlayerPed,
           serverActivePlayerIsNotOurPlayer,
