@@ -1,23 +1,23 @@
 on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<void> => {
   try {
-    await delay(2600);
+    await Wait(2600);
 
     DoScreenFadeOut(0);
     NetworkResurrectLocalPlayer(361.16, -585.09, 28.83, 340.74, 1000, false);
 
-    await delay(2600);
+    await Wait(2600);
 
     DoScreenFadeIn(2600);
     DistantCopCarSirens(false);
 
-    await delay(2600);
+    await Wait(2600);
 
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
     BeginTextCommandThefeedPost("STRING");
     AddTextComponentSubstringPlayerName("Hospital Bill: ~r~$200~s~");
     EndTextCommandThefeedPostTicker(true, true);
 
-    await delay(500);
+    await Wait(500);
 
     BeginTextCommandThefeedPost("STRING");
     AddTextComponentSubstringPlayerName("You have been ~r~revived~s~");

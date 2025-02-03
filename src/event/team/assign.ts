@@ -10,17 +10,18 @@ const TeamAssign = async (team: string): Promise<void> => {
     DistantCopCarSirens(false);
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
 
-    const serverPlayerIndex: number = GetPlayerIndex();
-    const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
+    const playerIndex: number = GetPlayerIndex();
+    const playerSrc: number = GetPlayerServerId(playerIndex);
 
-    emit("prisonbreak-nui-hud", true, serverPlayerSID);
+    emit("prisonbreak-nui-hud", true, playerSrc);
     emit("prisonbreak-nui-welcome", true);
 
-    emitNet("prisonbreak-core-server:event:player:joined", serverPlayerSID, team);
+    emitNet("prisonbreak-core-server:event:player:joined", playerSrc, team);
 
-    await delay(35000);
+    await Wait(35000);
 
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
+
     emit("prisonbreak-nui-feedback", true);
   } catch (error: unknown) {
     if (error instanceof Error) {

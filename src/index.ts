@@ -1,4 +1,4 @@
-const delay = async (ms: number): Promise<number> => {
+const Wait = async (ms: number): Promise<number> => {
   return new Promise((resolve): void => {
     setTimeout(resolve, ms, 0);
   });
@@ -8,36 +8,43 @@ const spawn = async (): Promise<void> => {
   try {
     RegisterKeyMapping("scoreboard", "Scoreboard", "KEYBOARD", "Z");
 
-    const serverPlayerIndex: number = GetPlayerIndex();
-    const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
-    const serverPlayerPed: number = PlayerPedId();
+    const playerIndex: number = GetPlayerIndex();
+    const playerSrc: number = GetPlayerServerId(playerIndex);
+    const playerPed: number = PlayerPedId();
     const prisonerPed: number = GetHashKey("s_m_y_prisoner_01");
 
-    emit("prisonbreak-nui-hud", false, serverPlayerSID);
+    emit("prisonbreak-nui-hud", false, playerSrc);
     emit("prisonbreak-nui-interact", false, "", 0, "");
     emit("prisonbreak-nui-teamchoose", false, "");
     emit("prisonbreak-nui-welcome", false);
+    emit("prisonbreak-nui-scoreboard", false);
+    emit("prisonbreak-nui-feedback", false);
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
-    SetEntityCoordsNoOffset(serverPlayerPed, 1714.04, 2523.2, 45.56, false, false, false);
+    SetEntityCoordsNoOffset(playerPed, 1714.04, 2523.2, 45.56, false, false, false);
+
     RemoveAllCoverBlockingAreas();
-    RemoveAllPedWeapons(serverPlayerPed, false);
+    RemoveAllPedWeapons(playerPed, false);
 
     DoScreenFadeOut(0);
-    await delay(500);
+
+    await Wait(500);
+
     RequestModel(prisonerPed);
     while (!HasModelLoaded(prisonerPed)) {
-      await delay(100);
+      await Wait(100);
     }
 
     SetPlayerModel(PlayerId(), prisonerPed);
     SetModelAsNoLongerNeeded(prisonerPed);
+    SetCanAttackFriendly(playerPed, true, true);
+
     DoScreenFadeIn(500);
 
-    SetCanAttackFriendly(serverPlayerPed, true, true);
     DisableIdleCamera(true);
     DisplayRadar(false);
     DistantCopCarSirens(true);
+
     AddRelationshipGroup("CRIMINAL");
     AddRelationshipGroup("POLICE");
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
@@ -78,11 +85,13 @@ const spawn = async (): Promise<void> => {
     AddTextComponentString("Big Bank Robbery");
     EndTextCommandSetBlipName(bankBlip);
 
-    await delay(500);
+    await Wait(500);
 
-    emitNet("prisonbreak-core-server:event:player:assign", serverPlayerSID);
+    emitNet("prisonbreak-core-server:event:player:assign", playerSrc);
   } catch (error: unknown) {
-    if (error instanceof Error) console.error(error.message);
+    if (error instanceof Error) {
+      console.error(error.message);
+    }
   }
 };
 
