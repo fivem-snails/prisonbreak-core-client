@@ -95,8 +95,6 @@ setTick(async (): Promise<void> => {
 
           // SetEnableHandcuffs(serverActivePlayerPed, true);
 
-          SetCurrentPedWeapon(serverActivePlayerPed, GetHashKey("WEAPON_UNARMED"), true);
-
           const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
           emitNet("prisonbreak-core-client:event:police:handcuff", playerSrc, serverActivePlayerSrc);
 
