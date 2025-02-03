@@ -40,6 +40,12 @@ setTick(async (): Promise<void> => {
       const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
       const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
 
+      console.info("Extra Data:", {
+        serverActivePlayerIndex,
+        serverActivePlayerPed,
+        serverActivePlayerIsNotOurPlayer,
+      });
+
       if (serverActivePlayerIsNotOurPlayer) {
         const serverActivePlayerCoordinates: number[] = GetEntityCoords(serverActivePlayerPed, false);
         const distanceFromServerActivePlayerToOurPlayer: number = GetDistanceBetweenCoords(
@@ -110,7 +116,7 @@ setTick(async (): Promise<void> => {
           // SetEnableHandcuffs(serverActivePlayerPed, true);
 
           // const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
-          emitNet("prisonbreak-core-client:event:police:handcuff", playerSrc, playerIndex, serverActivePlayerIndex);
+          emitNet("prisonbreak-core-client:event:police:handcuff", playerSrc, playerIndex, serverActivePlayerPed);
 
           // console.log("🚀 ~ setTick ~ isArrested:", isArrested);
 
