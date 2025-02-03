@@ -88,6 +88,20 @@ setTick(async (): Promise<void> => {
             await Waiit(500);
           }
 
+          TaskPlayAnim(
+            GetPlayerPed(playerSrc),
+            "mp_arresting",
+            "arrested_spin_r_180",
+            1.0,
+            1.0,
+            8000,
+            1,
+            1.0,
+            true,
+            true,
+            true,
+          );
+
           // TaskPlayAnim(serverActivePlayerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
           // FreezeEntityPosition(serverActivePlayerPed, true);
 
