@@ -39,7 +39,7 @@ setTick(async (): Promise<void> => {
     for (const serverActivePlayerIndice of serverActivePlayers) {
       const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndice);
 
-      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndice);
+      const serverActivePlayerPed: number = GetPlayerPed(31);
 
       const serverActivePlayerIndex: number = NetworkGetPlayerIndex(serverActivePlayerIndice);
 
