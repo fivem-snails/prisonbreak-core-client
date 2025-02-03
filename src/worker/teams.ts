@@ -38,8 +38,7 @@ setTick(async (): Promise<void> => {
 
     for (const serverActivePlayerIndex of serverActivePlayers) {
       const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
-
-      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
+      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerSrc);
       const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
 
       if (serverActivePlayerIsNotOurPlayer) {
