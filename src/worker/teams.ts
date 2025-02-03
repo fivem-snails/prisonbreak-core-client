@@ -23,7 +23,7 @@
 // });
 
 setTick(async (): Promise<void> => {
-  await Wait(1000);
+  Wait(1000);
 
   const playerPed: number = PlayerPedId();
   const playerCoords: number[] = GetEntityCoords(playerPed, false);
@@ -80,10 +80,10 @@ setTick(async (): Promise<void> => {
           // }
 
           ClearPedTasks(serverActivePlayerPed);
-          await Wait(1000);
+          Wait(1000);
           RequestAnimDict("mp_arresting");
           if (!HasAnimDictLoaded("mp_arresting")) {
-            await Wait(500);
+            Wait(500);
           }
 
           TaskPlayAnim(serverActivePlayerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);

@@ -1,9 +1,3 @@
-const Wait = async (ms: number): Promise<number> => {
-  return new Promise((resolve): void => {
-    setTimeout(resolve, ms, 0);
-  });
-};
-
 const spawn = async (): Promise<void> => {
   try {
     RegisterKeyMapping("scoreboard", "Scoreboard", "KEYBOARD", "Z");
@@ -28,11 +22,11 @@ const spawn = async (): Promise<void> => {
 
     DoScreenFadeOut(0);
 
-    await Wait(500);
+    Wait(500);
 
     RequestModel(prisonerPed);
     while (!HasModelLoaded(prisonerPed)) {
-      await Wait(100);
+      Wait(100);
     }
 
     SetPlayerModel(PlayerId(), prisonerPed);
@@ -85,7 +79,7 @@ const spawn = async (): Promise<void> => {
     AddTextComponentString("Big Bank Robbery");
     EndTextCommandSetBlipName(bankBlip);
 
-    await Wait(500);
+    Wait(500);
 
     emitNet("prisonbreak-core-server:event:player:assign", playerSrc);
   } catch (error: unknown) {

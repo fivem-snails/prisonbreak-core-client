@@ -18,7 +18,7 @@ const TeamAssign = async (team: string): Promise<void> => {
 
     emitNet("prisonbreak-core-server:event:player:joined", playerSrc, team);
 
-    await Wait(35000);
+    Wait(35000);
 
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
 
