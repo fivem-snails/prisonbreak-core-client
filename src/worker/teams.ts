@@ -40,13 +40,13 @@ setTick(async (): Promise<void> => {
       const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
       const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
 
-      console.info("Extra Data:", {
-        serverActivePlayerIndex,
-        serverActivePlayerPed,
-        serverActivePlayerIsNotOurPlayer,
-      });
-
       if (serverActivePlayerIsNotOurPlayer) {
+        console.info("Extra Data:", {
+          serverActivePlayerIndex,
+          serverActivePlayerPed,
+          serverActivePlayerIsNotOurPlayer,
+        });
+
         const serverActivePlayerCoordinates: number[] = GetEntityCoords(serverActivePlayerPed, false);
         const distanceFromServerActivePlayerToOurPlayer: number = GetDistanceBetweenCoords(
           playerCoords[0],
