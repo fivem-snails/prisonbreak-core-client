@@ -88,7 +88,7 @@ setTick(async (): Promise<void> => {
             await Waiit(500);
           }
 
-          TaskPlayAnim(serverActivePlayerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
+          // TaskPlayAnim(serverActivePlayerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
           FreezeEntityPosition(serverActivePlayerPed, true);
 
           console.warn(`Arrested ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndex}]`);
