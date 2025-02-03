@@ -4,7 +4,7 @@ RegisterCommand(
     try {
       console.info("animation", {
         playerSrc,
-        args,
+        arg: args[0],
         rawCommand,
       });
 
@@ -15,7 +15,7 @@ RegisterCommand(
         await Waiit(1000);
       }
 
-      TaskPlayAnim(GetPlayerPed(playerSrc), "mp_arresting", args[0], 1.0, 1.0, 8000, 1, 1.0, true, true, true);
+      TaskPlayAnim(GetPlayerPed(playerSrc), "mp_arresting", args[0], 1.0, 1.0, 6000, 49, 1.0, true, true, true);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);
