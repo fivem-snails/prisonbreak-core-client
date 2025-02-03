@@ -113,7 +113,7 @@ setTick(async (): Promise<void> => {
           // TaskPlayAnim(serverActivePlayerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
           // FreezeEntityPosition(serverActivePlayerPed, true);
 
-          console.warn(`Arrested ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndice}]`);
+          console.warn(`Arrested ${serverActivePlayerRelationshipGroup} [${serverActivePlayerIndex}]`);
 
           // SetEnableHandcuffs(serverActivePlayerPed, true);
 
