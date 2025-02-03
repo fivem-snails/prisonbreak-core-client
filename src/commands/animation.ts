@@ -1,8 +1,12 @@
 RegisterCommand(
   "animation",
-  async (playerSrc: number, args: string[], rawCommand: string): Promise<void> => {
+  async (source: number, args: string[], rawCommand: string): Promise<void> => {
     try {
+      const playerIndex: number = GetPlayerIndex();
+      const playerSrc: number = GetPlayerServerId(playerIndex);
+
       console.info("animation", {
+        source,
         playerSrc,
         arg: args[0],
         rawCommand,
