@@ -88,19 +88,19 @@ setTick(async (): Promise<void> => {
             await Waiit(500);
           }
 
-          TaskPlayAnim(
-            GetPlayerPed(serverActivePlayerIndex),
-            "mp_arresting",
-            "arrested_spin_l_0",
-            1.0,
-            1.0,
-            4000,
-            49,
-            1.0,
-            true,
-            true,
-            true,
-          );
+          // TaskPlayAnim(
+          //   GetPlayerPed(serverActivePlayerIndex),
+          //   "mp_arresting",
+          //   "arrested_spin_l_0",
+          //   1.0,
+          //   1.0,
+          //   4000,
+          //   49,
+          //   1.0,
+          //   true,
+          //   true,
+          //   true,
+          // );
 
           // TaskPlayAnim(serverActivePlayerPed, "mp_arresting", "idle", 8.0, 1.0, 6000, 49, 1.0, true, true, true);
           // FreezeEntityPosition(serverActivePlayerPed, true);
@@ -109,8 +109,8 @@ setTick(async (): Promise<void> => {
 
           // SetEnableHandcuffs(serverActivePlayerPed, true);
 
-          const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
-          emitNet("prisonbreak-core-client:event:police:handcuff", playerSrc, serverActivePlayerSrc);
+          // const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
+          emitNet("prisonbreak-core-client:event:police:handcuff", playerSrc, playerIndex, serverActivePlayerIndex);
 
           // console.log("🚀 ~ setTick ~ isArrested:", isArrested);
 
