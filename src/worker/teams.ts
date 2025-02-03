@@ -36,18 +36,16 @@ setTick(async (): Promise<void> => {
   if (playerRelationshipGroup === "POLICE") {
     const serverActivePlayers: number[] = GetActivePlayers();
 
-    for (const serverActivePlayerIndice of serverActivePlayers) {
-      const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndice);
+    for (const serverActivePlayerIndex of serverActivePlayers) {
+      const serverActivePlayerSrc: number = GetPlayerServerId(serverActivePlayerIndex);
 
-      const serverActivePlayerPed: number = GetPlayerPed(31);
-
-      const serverActivePlayerIndex: number = NetworkGetPlayerIndex(serverActivePlayerIndice);
+      const serverActivePlayerPed: number = GetPlayerPed(serverActivePlayerIndex);
 
       const serverActivePlayerIsNotOurPlayer: boolean = serverActivePlayerPed !== playerPed;
 
       if (serverActivePlayerIsNotOurPlayer) {
         console.info("TARGET_CRIMINAL", {
-          serverActivePlayerIndice,
+          serverActivePlayerIndex,
           serverActivePlayerSrc,
           serverActivePlayerPed,
           serverActivePlayerIndex,
