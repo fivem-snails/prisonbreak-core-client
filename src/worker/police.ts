@@ -66,6 +66,8 @@ setTick(async (): Promise<void> => {
             await Waiit(500);
           }
 
+          TaskPlayAnim(authorPed, "mp_arrest_paired", "cop_p2_back_left", 1.0, 1.0, 4000, 49, 1.0, true, true, true);
+
           TaskPlayAnim(
             GetPlayerPed(targetIndex),
             "mp_arresting",
