@@ -61,12 +61,17 @@ setTick(async (): Promise<void> => {
         );
 
         if (distanceFromAuthorToTarget < 0.8) {
-          RequestAnimDict("mp_arresting");
-          if (!HasAnimDictLoaded("mp_arresting")) {
+          RequestAnimDict("mp_arrest_paired");
+          if (!HasAnimDictLoaded("mp_arrest_paired")) {
             await Waiit(500);
           }
 
           TaskPlayAnim(authorPed, "mp_arrest_paired", "cop_p2_back_left", 1.0, 1.0, 4000, 49, 1.0, true, true, true);
+
+          RequestAnimDict("mp_arresting");
+          if (!HasAnimDictLoaded("mp_arresting")) {
+            await Waiit(500);
+          }
 
           TaskPlayAnim(
             GetPlayerPed(targetIndex),
