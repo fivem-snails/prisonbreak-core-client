@@ -27,8 +27,6 @@ setTick(async (): Promise<void> => {
 });
 
 setTick(async (): Promise<void> => {
-  await Waiit(5000);
-
   const authorIndex: number = GetPlayerIndex();
   const authorSrc: number = GetPlayerServerId(authorIndex);
   const authorPed: number = PlayerPedId();
@@ -103,4 +101,6 @@ setTick(async (): Promise<void> => {
       }
     }
   }
+
+  await Waiit(10000);
 });
