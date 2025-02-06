@@ -68,7 +68,25 @@ RegisterCommand(
                 true,
               );
 
-              console.warn(`You just arrested ${targetSrc} ${targetIndex} ${targetPed}`);
+              AttachEntityToEntity(
+                GetPlayerPed(-1),
+                targetPed,
+                11816,
+                -0.1,
+                0.45,
+                0,
+                0,
+                0,
+                20,
+                false,
+                false,
+                false,
+                false,
+                20,
+                false,
+              );
+
+              await Waiit(6000);
 
               emit("prisonbreak-core-client:event:player:message", "~b~GG! You just arrested a criminal");
             }
