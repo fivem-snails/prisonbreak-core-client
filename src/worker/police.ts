@@ -64,9 +64,17 @@ setTick(async (): Promise<void> => {
             await Waiit(500);
           }
 
+          TaskPlayAnim(authorPed, "mp_arrest_paired", "cop_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
+
+          RequestAnimDict("mp_arresting");
+          if (!HasAnimDictLoaded("mp_arresting")) {
+            await Waiit(500);
+          }
+
+          TaskPlayAnim(targetPed, "mp_arrest_paired", "crook_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
           AttachEntityToEntity(
-            authorPed,
             targetPed,
+            authorPed,
             11816,
             -0.1,
             0.45,
@@ -82,18 +90,9 @@ setTick(async (): Promise<void> => {
             false,
           );
 
-          TaskPlayAnim(authorPed, "mp_arrest_paired", "cop_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
-
-          RequestAnimDict("mp_arresting");
-          if (!HasAnimDictLoaded("mp_arresting")) {
-            await Waiit(500);
-          }
-
-          TaskPlayAnim(targetPed, "mp_arrest_paired", "crook_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
-
           console.warn(`[${targetSrc}] was arrested by [${authorSrc}]`);
 
-          DetachEntity(authorPed, true, false);
+          DetachEntity(targetPed, true, false);
 
           // Send to prison (fadeOut) and freeze, no server-wide animation needed for now
 
