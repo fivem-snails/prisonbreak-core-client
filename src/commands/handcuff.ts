@@ -69,6 +69,8 @@ RegisterCommand(
               );
 
               console.warn(`You just arrested ${targetSrc} ${targetIndex} ${targetPed}`);
+
+              emit("prisonbreak-core-client:event:player:message", "~b~GG! You just arrested a criminal");
             }
           }
         }
