@@ -27,7 +27,7 @@ setTick(async (): Promise<void> => {
 });
 
 setTick(async (): Promise<void> => {
-  await Waiit(1000);
+  await Waiit(5000);
 
   const authorIndex: number = GetPlayerIndex();
   const authorSrc: number = GetPlayerServerId(authorIndex);
@@ -66,7 +66,7 @@ setTick(async (): Promise<void> => {
             await Waiit(500);
           }
 
-          TaskPlayAnim(authorPed, "mp_arrest_paired", "cop_p2_back_left", 1.0, 1.0, 4000, 49, 1.0, true, true, true);
+          TaskPlayAnim(authorPed, "mp_arrest_paired", "cop_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
 
           RequestAnimDict("mp_arresting");
           if (!HasAnimDictLoaded("mp_arresting")) {
