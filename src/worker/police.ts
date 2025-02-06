@@ -65,8 +65,8 @@ setTick(async (): Promise<void> => {
           }
 
           AttachEntityToEntity(
-            authorPed,
             targetPed,
+            authorPed,
             11816,
             -0.1,
             0.45,
@@ -93,7 +93,7 @@ setTick(async (): Promise<void> => {
 
           console.warn(`[${targetSrc}] was arrested by [${authorSrc}]`);
 
-          DetachEntity(authorPed, true, false);
+          DetachEntity(targetPed, true, false);
 
           // Send to prison (fadeOut) and freeze, no server-wide animation needed for now
 
