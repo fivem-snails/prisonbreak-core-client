@@ -69,8 +69,8 @@ RegisterCommand(
               );
 
               AttachEntityToEntity(
-                GetPlayerPed(-1),
                 targetPed,
+                GetPlayerPed(-1),
                 11816,
                 -0.1,
                 0.45,
@@ -89,6 +89,8 @@ RegisterCommand(
               await Waiit(6000);
 
               emit("prisonbreak-core-client:event:player:message", "~b~GG! You just arrested a criminal");
+
+              DetachEntity(GetPlayerPed(-1), true, false);
             }
           }
         }
