@@ -5,6 +5,13 @@ const CharacterArrest = async (
   targetPed: number,
 ): Promise<void> => {
   try {
+    console.info("CharacterArrest", {
+      _authorSrc,
+      authorPed,
+      _targetSrc,
+      targetPed,
+    });
+
     RequestAnimDict("mp_arrest_paired");
     if (!HasAnimDictLoaded("mp_arrest_paired")) {
       await Waiit(500);
