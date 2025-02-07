@@ -33,6 +33,8 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
       true,
     );
 
+    // Play sound effect
+
     await Waiit(7000);
 
     RequestAnimDict("mp_arresting");
