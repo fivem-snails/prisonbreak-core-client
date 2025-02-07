@@ -1,6 +1,6 @@
 onNet("prisonbreak-core-client:event:player:message", (message: string): void => {
   try {
-    PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
+    PlaySoundFrontend(-1, "INFO", "HUD_FRONTEND_DEFAULT_SOUNDSET", false);
     BeginTextCommandThefeedPost("STRING");
     AddTextComponentSubstringPlayerName(message);
     EndTextCommandThefeedPostTicker(true, true);

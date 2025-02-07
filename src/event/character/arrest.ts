@@ -35,15 +35,15 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
 
     // Play sound effect
 
-    await Waiit(6000);
+    await Waiit(5000);
 
     RequestAnimDict("mp_arresting");
     if (!HasAnimDictLoaded("mp_arresting")) {
       await Waiit(500);
     }
 
-    TaskPlayAnim(GetPlayerPed(targetIndex), "mp_arresting", "idle", 1.0, 1.0, -1, 49, 1.0, true, true, true);
     PlaySoundFrontend(-1, "Whistle", "DLC_TG_Running_Back_Sounds", false);
+    TaskPlayAnim(GetPlayerPed(targetIndex), "mp_arresting", "idle", 1.0, 1.0, -1, 49, 1.0, true, true, true);
 
     await Waiit(2000);
 
