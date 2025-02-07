@@ -13,12 +13,12 @@ RegisterCommand(
 
       ClearPedTasksImmediately(GetPlayerPed(playerIndex));
 
-      RequestAnimDict("mp_arresting");
-      if (!HasAnimDictLoaded("mp_arresting")) {
+      RequestAnimDict("mp_arrest_paired");
+      if (!HasAnimDictLoaded("mp_arrest_paired")) {
         await Waiit(1000);
       }
 
-      TaskPlayAnim(GetPlayerPed(playerIndex), "mp_arresting", args[0], 1.0, 1.0, 4000, 49, 1.0, true, true, true);
+      TaskPlayAnim(GetPlayerPed(playerIndex), "mp_arrest_paired", args[0], 1.0, 1.0, 4000, 49, 1.0, true, true, true);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);
