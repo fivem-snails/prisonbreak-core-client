@@ -1,4 +1,4 @@
-const CharacterArrest = async (authorIndex: number, targetIndex: number): Promise<void> => {
+const CharacterArrest = async (_unknownSrc: number, authorIndex: number, targetIndex: number): Promise<void> => {
   try {
     RequestAnimDict("mp_arrest_paired");
     if (!HasAnimDictLoaded("mp_arrest_paired")) {
