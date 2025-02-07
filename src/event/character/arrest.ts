@@ -1,4 +1,4 @@
-const PlayerArrest = async (authorPed: number, targetPed: number): Promise<void> => {
+const CharacterArrest = async (authorPed: number, targetPed: number): Promise<void> => {
   try {
     RequestAnimDict("mp_arrest_paired");
     if (!HasAnimDictLoaded("mp_arrest_paired")) {
@@ -42,4 +42,4 @@ const PlayerArrest = async (authorPed: number, targetPed: number): Promise<void>
   }
 };
 
-onNet("prisonbreak-core-client:event:player:arrest", PlayerArrest);
+onNet("prisonbreak-core-client:event:character:arrest", CharacterArrest);
