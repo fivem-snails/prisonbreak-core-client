@@ -86,7 +86,7 @@ RegisterCommand(
                 false,
               );
 
-              await Waiit(6000);
+              await Waiit(7000);
 
               emit(
                 "prisonbreak-core-client:event:player:message",
