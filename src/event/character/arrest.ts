@@ -1,7 +1,6 @@
-const CharacterArrest = async (_unknownSrc: number, authorIndex: number, targetIndex: number): Promise<void> => {
+const CharacterArrest = async (authorIndex: number, targetIndex: number): Promise<void> => {
   try {
     console.info("CharacterArrest:", {
-      _unknownSrc,
       authorIndex,
       targetIndex,
     });
