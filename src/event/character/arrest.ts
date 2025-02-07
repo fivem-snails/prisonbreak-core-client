@@ -1,7 +1,7 @@
 const CharacterArrest = async (authorIndex: number, targetIndex: number): Promise<void> => {
   try {
-    ClearPedTasksImmediately(GetPlayerPed(authorIndex));
-    ClearPedTasksImmediately(GetPlayerPed(targetIndex));
+    ClearPedTasks(GetPlayerPed(authorIndex));
+    ClearPedTasks(GetPlayerPed(targetIndex));
 
     RequestAnimDict("mp_arrest_paired");
     if (!HasAnimDictLoaded("mp_arrest_paired")) {
@@ -58,7 +58,7 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
     if (isDispatcherGroupOfPolice) {
       emit(
         "prisonbreak-core-client:event:player:message",
-        "~c~You just arrested a wanted criminal and received ~g~$200",
+        "~b~You just arrested a wanted criminal and received ~g~$200",
       );
     }
   } catch (error: unknown) {
