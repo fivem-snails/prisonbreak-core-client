@@ -2,6 +2,8 @@ RegisterCommand(
   "handcuff",
   async (): Promise<void> => {
     try {
+      const authorIndex: number = GetPlayerIndex();
+      const authorSrc: number = GetPlayerServerId(authorIndex);
       const authorPed: number = PlayerPedId();
       const authorCoords: number[] = GetEntityCoords(authorPed, false);
 
@@ -32,68 +34,7 @@ RegisterCommand(
             );
 
             if (distanceFromAuthorToTarget < 0.8) {
-              RequestAnimDict("mp_arrest_paired");
-              if (!HasAnimDictLoaded("mp_arrest_paired")) {
-                await Waiit(500);
-              }
-
-              ClearPedTasksImmediately(authorPed);
-              ClearPedTasksImmediately(targetPed);
-
-              TaskPlayAnim(
-                authorPed,
-                "mp_arrest_paired",
-                "cop_p2_back_left",
-                1.0,
-                1.0,
-                6000,
-                49,
-                1.0,
-                true,
-                true,
-                true,
-              );
-
-              TaskPlayAnim(
-                targetPed,
-                "mp_arrest_paired",
-                "crook_p2_back_left",
-                1.0,
-                1.0,
-                6000,
-                49,
-                1.0,
-                true,
-                true,
-                true,
-              );
-
-              AttachEntityToEntity(
-                targetPed,
-                GetPlayerPed(-1),
-                11816,
-                -0.1,
-                0.45,
-                0,
-                0,
-                0,
-                20,
-                false,
-                false,
-                false,
-                false,
-                20,
-                false,
-              );
-
-              await Waiit(7000);
-
-              emit(
-                "prisonbreak-core-client:event:player:message",
-                "~c~GG! You just arrested a criminal and received ~g~$200",
-              );
-
-              DetachEntity(GetPlayerPed(-1), true, false);
+              emitNet("prisonbreak-core-server:event:player:arrest", authorSrc, authorPed, targetSrc, targetPed);
             }
           }
         }
