@@ -22,7 +22,6 @@ RegisterCommand(
 
           if (targetPed !== authorPed) {
             const targetCoords: number[] = GetEntityCoords(targetPed, false);
-
             const distanceFromAuthorToTarget: number = GetDistanceBetweenCoords(
               authorCoords[0],
               authorCoords[1],
@@ -33,8 +32,10 @@ RegisterCommand(
               true,
             );
 
-            if (distanceFromAuthorToTarget < 0.8) {
+            if (distanceFromAuthorToTarget < 1.5) {
               emitNet("prisonbreak-core-server:event:character:arrest", authorSrc, authorIndex, targetSrc, targetIndex);
+            } else {
+              emit("prisonbreak-core-client:event:player:message", "~r~Nobody is close to arrest");
             }
           }
         }
