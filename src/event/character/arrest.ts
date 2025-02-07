@@ -1,7 +1,7 @@
 const CharacterArrest = async (
-  _authorSrc: number,
+  authorSrc: number,
   authorPed: number,
-  _targetSrc: number,
+  targetSrc: number,
   targetPed: number,
 ): Promise<void> => {
   try {
@@ -11,14 +11,39 @@ const CharacterArrest = async (
     }
 
     console.info("CharacterArrest", {
-      _authorSrc,
+      authorSrc,
       authorPed,
-      _targetSrc,
+      targetSrc,
       targetPed,
     });
 
-    TaskPlayAnim(authorPed, "mp_arrest_paired", "cop_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
-    TaskPlayAnim(targetPed, "mp_arrest_paired", "crook_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
+    TaskPlayAnim(
+      GetPlayerPed(NetworkGetPlayerIndex(authorSrc)),
+      "mp_arrest_paired",
+      "cop_p2_back_left",
+      1.0,
+      1.0,
+      6000,
+      49,
+      1.0,
+      true,
+      true,
+      true,
+    );
+
+    TaskPlayAnim(
+      GetPlayerPed(NetworkGetPlayerIndex(targetSrc)),
+      "mp_arrest_paired",
+      "crook_p2_back_left",
+      1.0,
+      1.0,
+      6000,
+      49,
+      1.0,
+      true,
+      true,
+      true,
+    );
 
     // AttachEntityToEntity(
     //   targetPed,
