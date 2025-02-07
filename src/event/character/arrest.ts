@@ -35,7 +35,7 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
 
     // Play sound effect
 
-    await Waiit(7000);
+    await Waiit(6000);
 
     RequestAnimDict("mp_arresting");
     if (!HasAnimDictLoaded("mp_arresting")) {
@@ -43,6 +43,9 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
     }
 
     TaskPlayAnim(GetPlayerPed(targetIndex), "mp_arresting", "idle", 1.0, 1.0, -1, 49, 1.0, true, true, true);
+    PlaySoundFrontend(-1, "Whistle", "DLC_TG_Running_Back_Sounds", false);
+
+    await Waiit(2000);
 
     const dispatcherRelationshipGroupHash: number = GetPedRelationshipGroupHash(PlayerPedId());
     const dispatcherRelationshipGroup: "CRIMINAL" | "POLICE" =
