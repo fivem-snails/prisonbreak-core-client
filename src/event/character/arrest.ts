@@ -45,6 +45,22 @@ const CharacterArrest = async (
       true,
     );
 
+    await Waiit(7000);
+
+    TaskPlayAnim(
+      GetPlayerPed(targetIndex),
+      "mp_arrest_paired",
+      "crook_p1_idle",
+      1.0,
+      1.0,
+      -1,
+      49,
+      1.0,
+      true,
+      true,
+      true,
+    );
+
     // AttachEntityToEntity(
     //   targetPed,
     //   GetPlayerPed(-1),
