@@ -1,5 +1,8 @@
 const CharacterArrest = async (authorIndex: number, targetIndex: number): Promise<void> => {
   try {
+    ClearPedTasksImmediately(GetPlayerPed(authorIndex));
+    ClearPedTasksImmediately(GetPlayerPed(targetIndex));
+
     RequestAnimDict("mp_arrest_paired");
     if (!HasAnimDictLoaded("mp_arrest_paired")) {
       await Waiit(500);
