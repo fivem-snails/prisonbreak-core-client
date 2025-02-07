@@ -7,6 +7,7 @@ const Waiit = async (ms: number): Promise<number> => {
 const spawn = async (): Promise<void> => {
   try {
     RegisterKeyMapping("scoreboard", "Scoreboard", "KEYBOARD", "Z");
+    RegisterKeyMapping("arrest", "Arrest", "KEYBOARD", "F11");
 
     const playerIndex: number = GetPlayerIndex();
     const playerSrc: number = GetPlayerServerId(playerIndex);

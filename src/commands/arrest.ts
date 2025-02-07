@@ -1,5 +1,5 @@
 RegisterCommand(
-  "handcuff",
+  "arrest",
   async (): Promise<void> => {
     try {
       const authorIndex: number = GetPlayerIndex();
