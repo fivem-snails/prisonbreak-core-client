@@ -1,10 +1,5 @@
 const CharacterArrest = async (authorIndex: number, targetIndex: number): Promise<void> => {
   try {
-    console.info("CharacterArrest:", {
-      authorIndex,
-      targetIndex,
-    });
-
     RequestAnimDict("mp_arrest_paired");
     if (!HasAnimDictLoaded("mp_arrest_paired")) {
       await Waiit(500);
@@ -50,7 +45,6 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
     const dispatcherRelationshipGroupHash: number = GetPedRelationshipGroupHash(PlayerPedId());
     const dispatcherRelationshipGroup: "CRIMINAL" | "POLICE" =
       dispatcherRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
-
     const isDispatcherGroupOfPolice: boolean = dispatcherRelationshipGroup === "POLICE";
 
     if (isDispatcherGroupOfPolice) {
