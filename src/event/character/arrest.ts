@@ -54,6 +54,16 @@ const CharacterArrest = async (
 
     TaskPlayAnim(GetPlayerPed(targetIndex), "mp_arresting", "idle", 1.0, 1.0, -1, 49, 1.0, true, true, true);
 
+    const dispatcherRelationshipGroupHash: number = GetPedRelationshipGroupHash(PlayerPedId());
+    const dispatcherRelationshipGroup: "CRIMINAL" | "POLICE" =
+      dispatcherRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
+
+    const isDispatcherGroupOfPolice: boolean = dispatcherRelationshipGroup === "POLICE";
+
+    if (isDispatcherGroupOfPolice) {
+      emit("prisonbreak-core-client:event:player:message", "~c~GG! You just arrested a criminal and received ~g~$200");
+    }
+
     // AttachEntityToEntity(
     //   targetPed,
     //   GetPlayerPed(-1),
@@ -73,8 +83,6 @@ const CharacterArrest = async (
     // );
 
     // await Waiit(7000);
-
-    // emit("prisonbreak-core-client:event:player:message", "~c~GG! You just arrested a criminal and received ~g~$200");
 
     // DetachEntity(GetPlayerPed(-1), true, false);
   } catch (error: unknown) {
