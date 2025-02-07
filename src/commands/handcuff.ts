@@ -88,7 +88,10 @@ RegisterCommand(
 
               await Waiit(6000);
 
-              emit("prisonbreak-core-client:event:player:message", "~b~GG! You just arrested a criminal");
+              emit(
+                "prisonbreak-core-client:event:player:message",
+                "~c~GG! You just arrested a criminal and received ~g~$200",
+              );
 
               DetachEntity(GetPlayerPed(-1), true, false);
             }
