@@ -53,7 +53,10 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
     const isDispatcherGroupOfPolice: boolean = dispatcherRelationshipGroup === "POLICE";
 
     if (isDispatcherGroupOfPolice) {
-      emit("prisonbreak-core-client:event:player:message", "~c~GG! You just arrested a criminal and received ~g~$200");
+      emit(
+        "prisonbreak-core-client:event:player:message",
+        "~c~You just arrested a wanted criminal and received ~g~$200",
+      );
     }
   } catch (error: unknown) {
     if (error instanceof Error) {
