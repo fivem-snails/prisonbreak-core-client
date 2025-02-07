@@ -1,8 +1,8 @@
 const CharacterArrest = async (
   authorSrc: number,
-  authorPed: number,
+  authorIndex: number,
   targetSrc: number,
-  targetPed: number,
+  targetIndex: number,
 ): Promise<void> => {
   try {
     RequestAnimDict("mp_arrest_paired");
@@ -12,13 +12,13 @@ const CharacterArrest = async (
 
     console.info("CharacterArrest", {
       authorSrc,
-      authorPed,
+      authorIndex,
       targetSrc,
-      targetPed,
+      targetIndex,
     });
 
     TaskPlayAnim(
-      GetPlayerPed(NetworkGetPlayerIndex(authorSrc)),
+      GetPlayerPed(authorIndex),
       "mp_arrest_paired",
       "cop_p2_back_left",
       1.0,
@@ -32,7 +32,7 @@ const CharacterArrest = async (
     );
 
     TaskPlayAnim(
-      GetPlayerPed(NetworkGetPlayerIndex(targetSrc)),
+      GetPlayerPed(targetIndex),
       "mp_arrest_paired",
       "crook_p2_back_left",
       1.0,

@@ -34,7 +34,7 @@ RegisterCommand(
             );
 
             if (distanceFromAuthorToTarget < 0.8) {
-              emitNet("prisonbreak-core-server:event:character:arrest", authorSrc, authorPed, targetSrc, targetPed);
+              emitNet("prisonbreak-core-server:event:character:arrest", authorSrc, authorIndex, targetSrc, targetIndex);
             }
           }
         }
