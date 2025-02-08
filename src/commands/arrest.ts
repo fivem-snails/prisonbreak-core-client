@@ -37,8 +37,12 @@ RegisterCommand(
             } else {
               emit("prisonbreak-core-client:event:player:message", "~r~Nobody is near you to arrest");
             }
+          } else {
+            emit("prisonbreak-core-client:event:player:message", "~r~Nobody is near you to arrest");
           }
         }
+      } else {
+        emit("prisonbreak-core-client:event:player:message", "~r~Not Permitted");
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
