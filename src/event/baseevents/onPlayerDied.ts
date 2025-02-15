@@ -22,9 +22,11 @@ on("baseevents:onPlayerDied", async (_killedBy: number, _position: []): Promise<
     BeginTextCommandThefeedPost("STRING");
     AddTextComponentSubstringPlayerName("You have been ~r~revived~s~");
     EndTextCommandThefeedPostTicker(true, true);
-  } catch (error: unknown) {
+  } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
+    } else {
+      console.error("Unknown:", error);
     }
   }
 });

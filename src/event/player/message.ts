@@ -4,9 +4,11 @@ onNet("prisonbreak-core-client:event:player:message", (message: string): void =>
     BeginTextCommandThefeedPost("STRING");
     AddTextComponentSubstringPlayerName(message);
     EndTextCommandThefeedPostTicker(true, true);
-  } catch (error: unknown) {
+  } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
+    } else {
+      console.error("Unknown:", error);
     }
   }
 });

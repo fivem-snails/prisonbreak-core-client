@@ -3,18 +3,18 @@ setTick(async (): Promise<void> => {
   SetFlyThroughWindscreenParams(30.0, 0.0, 0.0, 0.0);
   SetVehicleRadioLoud(GetVehiclePedIsIn(GetPlayerPed(-1), false), true);
 
-  const serverPlayerCoords: number[] = GetEntityCoords(PlayerPedId(), true);
-  const serverVehicles: number[] = GetGamePool("CVehicle");
+  const playerCoords = GetEntityCoords(PlayerPedId(), true);
+  const vehicles: number[] = GetGamePool("CVehicle");
 
-  serverVehicles.map(async (serverVehicle: number): Promise<void> => {
-    const serverVehicleCoords: number[] = GetEntityCoords(serverVehicle, true);
-    const distancefromPlayerToServerVehicle: number = GetDistanceBetweenCoords(
-      serverPlayerCoords[0],
-      serverPlayerCoords[1],
-      serverPlayerCoords[2],
-      serverVehicleCoords[0],
-      serverVehicleCoords[1],
-      serverVehicleCoords[2],
+  vehicles.map(async (serverVehicle: number): Promise<void> => {
+    const vehicleCoords = GetEntityCoords(serverVehicle, true);
+    const distancefromPlayerToVehicle = GetDistanceBetweenCoords(
+      playerCoords[0],
+      playerCoords[1],
+      playerCoords[2],
+      vehicleCoords[0],
+      vehicleCoords[1],
+      vehicleCoords[2],
       true,
     );
 
@@ -24,28 +24,16 @@ setTick(async (): Promise<void> => {
     //   distancefromPlayerToServerVehicle,
     // });
 
-    if (distancefromPlayerToServerVehicle < 2) {
-      const [_, serverVehicleScreenX, serverVehicleScreenY] = GetScreenCoordFromWorldCoord(
-        serverVehicleCoords[0],
-        serverVehicleCoords[1],
-        serverVehicleCoords[2] + 1.0,
-      );
+    if (distancefromPlayerToVehicle < 2) {
+      const [_, vehicleScreenX, vehicleScreenY] = GetScreenCoordFromWorldCoord(vehicleCoords[0], vehicleCoords[1], vehicleCoords[2] + 1.0);
+      const vehicleModel = GetEntityModel(serverVehicle);
+      const vehicleModelName = GetDisplayNameFromVehicleModel(vehicleModel).toLowerCase();
+      const rectHeight = 0.04;
 
-      const serverVehicleModel: number = GetEntityModel(serverVehicle);
-      const serverVehicleModelName: string = GetDisplayNameFromVehicleModel(serverVehicleModel).toLowerCase();
-      const rectHeight: number = 0.04;
+      const playerIndex = GetPlayerIndex();
+      const playerSrc = GetPlayerServerId(playerIndex);
 
-      const serverPlayerIndex: number = GetPlayerIndex();
-      const serverPlayerSID: number = GetPlayerServerId(serverPlayerIndex);
-
-      emitNet(
-        "Core/Server/Shared:GetVehicle",
-        serverPlayerSID,
-        serverVehicleModelName,
-        serverVehicleScreenX,
-        serverVehicleScreenY,
-        rectHeight,
-      );
+      emitNet("Core/Server/Shared:GetVehicle", playerSrc, vehicleModelName, vehicleScreenX, vehicleScreenY, rectHeight);
     }
   });
 });

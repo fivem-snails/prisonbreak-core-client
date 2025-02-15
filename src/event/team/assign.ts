@@ -1,31 +1,29 @@
 const TeamAssign = async (team: string): Promise<void> => {
   try {
-    const groupAlreadyExists: boolean = DoesRelationshipGroupExist(team.toUpperCase());
+    const groupAlreadyExists = DoesRelationshipGroupExist(team.toUpperCase());
     if (!groupAlreadyExists) throw new Error(`Relationship group ${team.toUpperCase()} does not exist`);
 
-    console.info("Setting player team to: ", team.toUpperCase());
     SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
-    console.info("Player team is now: ", GetPedRelationshipGroupHash(PlayerPedId()));
-
     DistantCopCarSirens(false);
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
 
-    const playerIndex: number = GetPlayerIndex();
-    const playerSrc: number = GetPlayerServerId(playerIndex);
+    const index = GetPlayerIndex();
+    const src = GetPlayerServerId(index);
 
-    emit("prisonbreak-nui-hud", true, playerSrc);
+    emit("prisonbreak-nui-hud", true, src);
     emit("prisonbreak-nui-welcome", true);
 
-    emitNet("prisonbreak-core-server:event:player:joined", playerSrc, team);
+    emitNet("prisonbreak-core-server:event:player:joined", src, team);
 
     await Waiit(35000);
 
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
-
     emit("prisonbreak-nui-feedback", true);
-  } catch (error: unknown) {
+  } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
+    } else {
+      console.error("Unknown:", error);
     }
   }
 };

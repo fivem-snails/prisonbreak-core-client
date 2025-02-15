@@ -8,35 +8,8 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
       await Waiit(500);
     }
 
-    TaskPlayAnim(
-      GetPlayerPed(authorIndex),
-      "mp_arrest_paired",
-      "cop_p2_back_left",
-      1.0,
-      1.0,
-      6000,
-      49,
-      1.0,
-      true,
-      true,
-      true,
-    );
-
-    TaskPlayAnim(
-      GetPlayerPed(targetIndex),
-      "mp_arrest_paired",
-      "crook_p2_back_left",
-      1.0,
-      1.0,
-      6000,
-      49,
-      1.0,
-      true,
-      true,
-      true,
-    );
-
-    // Play sound effect
+    TaskPlayAnim(GetPlayerPed(authorIndex), "mp_arrest_paired", "cop_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
+    TaskPlayAnim(GetPlayerPed(targetIndex), "mp_arrest_paired", "crook_p2_back_left", 1.0, 1.0, 6000, 49, 1.0, true, true, true);
 
     await Waiit(5000);
 
@@ -50,20 +23,18 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
 
     await Waiit(2000);
 
-    const dispatcherRelationshipGroupHash: number = GetPedRelationshipGroupHash(PlayerPedId());
-    const dispatcherRelationshipGroup: "CRIMINAL" | "POLICE" =
-      dispatcherRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
-    const isDispatcherGroupOfPolice: boolean = dispatcherRelationshipGroup === "POLICE";
+    const dispatcherRelationshipGroupHash = GetPedRelationshipGroupHash(PlayerPedId());
+    const dispatcherRelationshipGroup = dispatcherRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
+    const isDispatcherGroupOfPolice = dispatcherRelationshipGroup === "POLICE";
 
     if (isDispatcherGroupOfPolice) {
-      emit(
-        "prisonbreak-core-client:event:player:message",
-        "~b~You just arrested a wanted criminal and received ~g~$200",
-      );
+      emit("prisonbreak-core-client:event:player:message", "~b~You just arrested a wanted criminal and received ~g~$200");
     }
-  } catch (error: unknown) {
+  } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
+    } else {
+      console.error("Unknown:", error);
     }
   }
 };
