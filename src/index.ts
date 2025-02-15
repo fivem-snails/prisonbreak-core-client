@@ -23,10 +23,8 @@ const spawn = async (): Promise<void> => {
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
     SetEntityCoordsNoOffset(ped, 1714.04, 2523.2, 45.56, false, false, false);
-
     RemoveAllCoverBlockingAreas();
     RemoveAllPedWeapons(ped, false);
-
     DoScreenFadeOut(0);
 
     await Waiit(500);
@@ -39,13 +37,10 @@ const spawn = async (): Promise<void> => {
     SetPlayerModel(PlayerId(), prisonerPed);
     SetModelAsNoLongerNeeded(prisonerPed);
     SetCanAttackFriendly(ped, true, true);
-
     DoScreenFadeIn(500);
-
     DisableIdleCamera(true);
     DisplayRadar(false);
     DistantCopCarSirens(true);
-
     AddRelationshipGroup("CRIMINAL");
     AddRelationshipGroup("POLICE");
     SetRelationshipBetweenGroups(3, "CRIMINAL", "POLICE");
