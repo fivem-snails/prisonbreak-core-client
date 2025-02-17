@@ -8,8 +8,7 @@ RegisterCommand(
       const authorCoords: number[] = GetEntityCoords(authorPed, false);
 
       const authorRelationshipGroupHash: number = GetPedRelationshipGroupHash(authorPed);
-      const authorRelationshipGroup: "CRIMINAL" | "POLICE" =
-        authorRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
+      const authorRelationshipGroup: "CRIMINAL" | "POLICE" = authorRelationshipGroupHash === -1185955016 ? "CRIMINAL" : "POLICE";
 
       const isAuthorGroupOfPolice: boolean = authorRelationshipGroup === "POLICE";
 
@@ -33,16 +32,16 @@ RegisterCommand(
             );
 
             if (distanceFromAuthorToTarget < 1.5) {
-              emitNet("prisonbreak-core-server:event:character:arrest", authorSrc, authorIndex, targetSrc, targetIndex);
+              emitNet("SERVER_CHARACTER_ARREST", authorSrc, authorIndex, targetSrc, targetIndex);
             } else {
-              emit("prisonbreak-core-client:event:player:message", "~r~Nobody is near you to arrest");
+              emit("CLIENT_PLAYER_MESSAGE", "~r~Nobody is near you to arrest");
             }
           } else {
-            emit("prisonbreak-core-client:event:player:message", "~r~Nobody is near you to arrest");
+            emit("CLIENT_PLAYER_MESSAGE", "~r~Nobody is near you to arrest");
           }
         }
       } else {
-        emit("prisonbreak-core-client:event:player:message", "~r~Not Permitted");
+        emit("CLIENT_PLAYER_MESSAGE", "~r~Not Permitted");
       }
     } catch (error: unknown) {
       if (error instanceof Error) {

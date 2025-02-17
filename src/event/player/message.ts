@@ -1,4 +1,4 @@
-onNet("prisonbreak-core-client:event:player:message", (message: string): void => {
+onNet("CLIENT_PLAYER_MESSAGE", (message: string): void => {
   try {
     PlaySoundFrontend(-1, "INFO", "HUD_FRONTEND_DEFAULT_SOUNDSET", false);
     BeginTextCommandThefeedPost("STRING");

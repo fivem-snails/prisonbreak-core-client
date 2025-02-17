@@ -10,15 +10,14 @@ const TeamAssign = async (team: string): Promise<void> => {
     const index = GetPlayerIndex();
     const src = GetPlayerServerId(index);
 
-    emit("prisonbreak-nui-hud", true, src);
-    emit("prisonbreak-nui-welcome", true);
-
-    emitNet("prisonbreak-core-server:event:player:joined", src, team);
+    emit("NUI_HUD", true, src);
+    emit("NUI_WELCOME", true);
+    emitNet("SERVER_PLAYER_JOINED", src, team);
 
     await Waiit(35000);
 
+    emit("NUI_FEEDBACK", true);
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
-    emit("prisonbreak-nui-feedback", true);
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
@@ -28,4 +27,4 @@ const TeamAssign = async (team: string): Promise<void> => {
   }
 };
 
-onNet("prisonbreak-core-client:event:team:assign", TeamAssign);
+onNet("CLIENT_TEAM_SYNC", TeamAssign);

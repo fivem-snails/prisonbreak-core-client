@@ -5,7 +5,7 @@ RegisterCommand(
   (): void => {
     try {
       IsScoreboardOpen = !IsScoreboardOpen;
-      emit("prisonbreak-nui-scoreboard", IsScoreboardOpen);
+      emit("NUI_SCOREBOARD", IsScoreboardOpen);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);

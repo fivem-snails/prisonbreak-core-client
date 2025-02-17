@@ -14,12 +14,12 @@ const spawn = async (): Promise<void> => {
     const ped = PlayerPedId();
     const prisonerPed = GetHashKey("s_m_y_prisoner_01");
 
-    emit("prisonbreak-nui-hud", false, src);
-    emit("prisonbreak-nui-interact", false, "", 0, "");
-    emit("prisonbreak-nui-teamchoose", false, "");
-    emit("prisonbreak-nui-welcome", false);
-    emit("prisonbreak-nui-scoreboard", false);
-    emit("prisonbreak-nui-feedback", false);
+    emit("NUI_HUD", false, src);
+    emit("NUI_INTERACT", false, "", 0, "");
+    emit("NUI_TEAMCHOOSE", false, "");
+    emit("NUI_WELCOME", false);
+    emit("NUI_SCOREBOARD", false);
+    emit("NUI_FEEDBACK", false);
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
     SetEntityCoordsNoOffset(ped, 1714.04, 2523.2, 45.56, false, false, false);
@@ -83,7 +83,7 @@ const spawn = async (): Promise<void> => {
 
     await Waiit(500);
 
-    emitNet("prisonbreak-core-server:event:player:assign", src);
+    emitNet("SERVER_PLAYER_SYNC", src);
   } catch (error) {
     if (error instanceof Error) {
       console.error(error.message);
