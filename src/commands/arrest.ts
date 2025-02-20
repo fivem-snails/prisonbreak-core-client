@@ -43,10 +43,8 @@ RegisterCommand(
       } else {
         emit("CLIENT_PLAYER_MESSAGE", "~r~Not Permitted");
       }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
+    } catch (error) {
+      handleError(error);
     }
   },
   false,

@@ -1,14 +1,18 @@
 const TeamAssign = async (team: string): Promise<void> => {
   try {
     const groupAlreadyExists = DoesRelationshipGroupExist(team.toUpperCase());
-    if (!groupAlreadyExists) throw new Error(`Relationship group ${team.toUpperCase()} does not exist`);
+    if (!groupAlreadyExists) {
+      throw new Error(`Player relationshipGroup ${team.toUpperCase()} not found`);
+    }
 
     SetPedRelationshipGroupHash(PlayerPedId(), team.toUpperCase());
     DistantCopCarSirens(false);
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
 
-    const index = GetPlayerIndex();
-    const src = GetPlayerServerId(index);
+    const src = GetPlayerServerId(GetPlayerIndex());
+    if (!src) {
+      throw new Error(`Player src ${src} not found`);
+    }
 
     emit("NUI_HUD", true, src);
     emit("NUI_WELCOME", true);
@@ -19,11 +23,7 @@ const TeamAssign = async (team: string): Promise<void> => {
     emit("NUI_FEEDBACK", true);
     PlaySoundFrontend(-1, "Popup_Confirm_Success", "GTAO_Exec_SecuroServ_Computer_Sounds", false);
   } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    } else {
-      console.error("Unknown:", error);
-    }
+    handleError(error);
   }
 };
 

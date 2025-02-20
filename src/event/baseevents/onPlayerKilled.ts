@@ -4,11 +4,7 @@ on(
     try {
       emit("baseevents:onPlayerDied", killerId, []);
     } catch (error) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      } else {
-        console.error("Unknown:", error);
-      }
+      handleError(error);
     }
   },
 );

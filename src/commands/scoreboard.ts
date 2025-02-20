@@ -6,10 +6,8 @@ RegisterCommand(
     try {
       IsScoreboardOpen = !IsScoreboardOpen;
       emit("NUI_SCOREBOARD", IsScoreboardOpen);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
+    } catch (error) {
+      handleError(error);
     }
   },
   false,

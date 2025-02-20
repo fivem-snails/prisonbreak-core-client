@@ -6,10 +6,8 @@ RegisterCommand(
     try {
       isFeedbackOpen = !isFeedbackOpen;
       emit("NUI_FEEDBACK", isFeedbackOpen);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
+    } catch (error) {
+      handleError(error);
     }
   },
   false,

@@ -20,7 +20,6 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
 
     PlaySoundFrontend(-1, "Whistle", "DLC_TG_Running_Back_Sounds", false);
     TaskPlayAnim(GetPlayerPed(targetIndex), "mp_arresting", "idle", 1.0, 1.0, -1, 49, 1.0, true, true, true);
-
     await Waiit(2000);
 
     const dispatcherRelationshipGroupHash = GetPedRelationshipGroupHash(PlayerPedId());
@@ -31,11 +30,7 @@ const CharacterArrest = async (authorIndex: number, targetIndex: number): Promis
       emit("CLIENT_PLAYER_MESSAGE", "~b~You just arrested a wanted criminal and received ~g~$200");
     }
   } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    } else {
-      console.error("Unknown:", error);
-    }
+    handleError(error);
   }
 };
 

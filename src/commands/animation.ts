@@ -19,10 +19,8 @@ RegisterCommand(
       }
 
       TaskPlayAnim(GetPlayerPed(playerIndex), "mp_arresting", args[0], 1.0, 1.0, 4000, 49, 1.0, true, true, true);
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error(error.message);
-      }
+    } catch (error) {
+      handleError(error);
     }
   },
   false,

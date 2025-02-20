@@ -20,6 +20,7 @@ const spawn = async (): Promise<void> => {
     emit("NUI_WELCOME", false);
     emit("NUI_SCOREBOARD", false);
     emit("NUI_FEEDBACK", false);
+    emit("NUI_VEHICLEBUY", false, "");
 
     NetworkResurrectLocalPlayer(714.04, 2523.2, 45.56, 0, 1000, false);
     SetEntityCoordsNoOffset(ped, 1714.04, 2523.2, 45.56, false, false, false);
@@ -85,11 +86,7 @@ const spawn = async (): Promise<void> => {
 
     emitNet("SERVER_PLAYER_SYNC", src);
   } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    } else {
-      console.error("Unknown:", error);
-    }
+    handleError(error);
   }
 };
 
