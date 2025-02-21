@@ -18,7 +18,7 @@ setTick((): void => {
     50,
     0.8,
     false,
-    false,
+    true,
     2,
     false,
     // @ts-ignore
